@@ -72,7 +72,8 @@ size_t allocateNewObject(size_t objectSize, size_t startOfBlock) {
 		fprintf(stderr, "No memory for new object\n");
 		return 0;
 	} else {
-		*(size_t *)(startOfBlock) = firstFreeSpace + objectSize;
+		size_t addition =  (objectSize % 8 == 0) ? 0 : 8 - (objectSize % 8);
+		*(size_t *)(startOfBlock) = firstFreeSpace + objectSize + addition;
 		return firstFreeSpace;
 	}
 }
