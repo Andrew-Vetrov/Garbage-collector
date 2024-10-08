@@ -1,3 +1,4 @@
+#include <alloca.h>
 #include <sys/mman.h>
 #include <stdio.h>
 
@@ -8,10 +9,10 @@ static size_t START_ALLOCATOR_HEAP = 0;
 static size_t NEW_BLOCK_PTR = 0;
 
 void init_allocator() {
-	if (
-		(START_ALLOCATOR_HEAP = (size_t) mmap(NULL, HEAP_SIZE, PROT_WRITE | PROT_READ, \
-			MAP_PRIVATE | MAP_ANONYMOUS, 0, 0)) == MAP_FAILED
-	) {
+	START_ALLOCATOR_HEAP = (size_t) mmap(NULL, HEAP_SIZE, PROT_WRITE | PROT_READ, \
+		MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+	
+	if (START_ALLOCATOR_HEAP == MAP_FAILED) {
 		fprintf(stderr, "Can't allocate allocator's heap!\n");
 	} else {
 		NEW_BLOCK_PTR = START_ALLOCATOR_HEAP;
@@ -55,7 +56,8 @@ int main() {
 	for (int i = 0; i < HEAP_SIZE / BLOCK_SIZE; i++) {
 		allocate_new_block();
 	}
-	
+
+	allocate_new_block();
 
 	destroy_allocator();
 	return 0;
