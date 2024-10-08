@@ -62,6 +62,21 @@ void destroy_allocator() {
 	}
 }
 
+/* ultra test func!!!
+ * it has to work without address of block in the parameters(size_t startOfBlock),
+ * address of block should be calculated based on the size of the object.
+ */
+size_t allocateNewObject(size_t objectSize, size_t startOfBlock) {
+	size_t firstFreeSpace = *(size_t *)startOfBlock;
+	if (firstFreeSpace + objectSize > startOfBlock + BLOCK_SIZE) {
+		fprintf(stderr, "No memory for new object\n");
+		return 0;
+	} else {
+		*(size_t *)(startOfBlock) = firstFreeSpace + objectSize;
+		return firstFreeSpace;
+	}
+}
+
 int main() {
 	printf("%p\n", (size_t*) START_ALLOCATOR_HEAP);	
 
