@@ -110,7 +110,10 @@ void delete_block_hm(HashMap* table, void* block, TYPE key) {
 
 	while (ptr->next) {
 		if (ptr->next->elem.block == block) {
-			free(ptr->next);
+			hm_element* delete_ptr = ptr->next;
+			ptr->next = ptr->next->next;
+			
+			free(delete_ptr);
 			table->count--;
 
 			return;
