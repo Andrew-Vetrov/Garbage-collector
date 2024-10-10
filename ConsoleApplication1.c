@@ -6,8 +6,8 @@
 #define REGISTER_AMOUNT 9
 
 size_t RSP;
-size_t* heapStartAddress;
-size_t* heapEndAddress;
+size_t heapStartAddress;
+size_t heapEndAddress;
 size_t currentStackEnd;
 
 const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
@@ -19,7 +19,6 @@ void beforeMain(void) __attribute__((constructor));
 
 void beforeMain(void) {
     asm volatile("mov %%rsp, %0" : "=r" (RSP));
-    printf("RSP value: %lx\n", RSP);
 }
 
 void pushRegistersToStack() {
@@ -43,15 +42,15 @@ void popRegistersFromStack() {
     }
 }
 
-void stackTraverse(size_t* heapStartAddress, size_t* heapEndAddress) {
-    for (size_t i = RSP; i > currentStackEnd; i -= 8) {
+void stackTraverse(size_t heapStartAddress, size_t heapEndAddress) {
+    for (size_t i = RSP; i >= currentStackEnd; i -= 8) {
         if (*((size_t*)i) >= heapStartAddress && *((size_t*)i) <= heapEndAddress) {
             printf("Object is on heap\t\t\t%p\n", *((size_t*)i));
         }
     }
 }
 
-void createHeap(size_t length) {
+size_t createHeap(size_t length) {
     int prot = PROT_READ | PROT_WRITE;
     int flags = MAP_PRIVATE | MAP_ANONYMOUS;
     int fd = -1; // anonymous mapping
@@ -80,11 +79,13 @@ void testGC() {
 }
 
 int main() {
-    size_t heapLength = 1024 * 1024 * 512; //512 Mb
+    size_t heapLength = 1024*1024*1024; //512 Mb
     createHeap(heapLength);
     heapEndAddress = heapStartAddress + heapLength;
-    int* a = (int*)sillyAllocate(sizeof(int) * 5);
-    printf("a = %p\n", a);
+    int* a = (int*)sillyAllocate(sizeof(int));
+    printf("Адрес объекта = %p\n", a);
+    printf("Начало кучи = %p\n", heapStartAddress);
+    printf("Конец кучи = %p\n", heapEndAddress);
     testGC();
     
     return 0;
