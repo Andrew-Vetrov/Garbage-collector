@@ -1,6 +1,7 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
+#include "segment_traverse.h"
 
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 9
@@ -13,13 +14,11 @@ extern char __bss_start;
 extern char __data_start;
 extern char edata;
 extern char end;
-
+int heap_counter = 0; //have to delete
+int pseudo_heap_counter = 0; //have to delete
 const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
     "rax", "rcx", "rdx", "rsi", "rdi", "r8", "r9", "r10", "r11"
-};
-
-
-void before_main(void) __attribute__((constructor));
+};  
 
 void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (RSP));
@@ -48,9 +47,8 @@ void pop_registers_from_stack() {
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
     for (size_t i = segment_start; i <= segment_end; i += sizeof(size_t)) {
-        printf("Segemnt = %p\n", *((size_t*)i));
         if (*((size_t*)i) >= heap_start_address && *((size_t*)i) <= heap_end_address) {
-            printf("Object is on heap\t\t\t%p\n", *((size_t*)i));
+            heap_counter++;
         }
     }
 }
@@ -68,6 +66,7 @@ size_t createHeap(size_t length) {
 }
 
 void* silly_allocate(size_t size) {
+    pseudo_heap_counter++;
     asm volatile("mov %%rsp, %0" : "=r" (current_stack_end));
     static size_t offset = 0;
     void* ptr = offset + heap_start_address;
@@ -78,33 +77,35 @@ void* silly_allocate(size_t size) {
 void testGC() {
     push_registers_to_stack();
 
-    printf("Found on stack\n");
     //stack traversing
     //traversing stack from its end due to special structure
-    //segment_traverse(current_stack_end, RSP);
+    segment_traverse(current_stack_end, RSP);
 
-    printf("\n\nFound in .data\t\t%p %p\n", &__data_start, &edata - sizeof(size_t));
     //.data traversing
-    //segment_traverse(&__data_start, &edata - sizeof(size_t));
+    segment_traverse(&__data_start, &edata - sizeof(size_t));
 
-    printf("\n\nFound in .bss\t\t%p %p\n",&__bss_start, &end - sizeof(size_t));
     //.bss traversing
     segment_traverse(&__bss_start, &end - sizeof(size_t));
 
     pop_registers_from_stack();
 }
 
-//int* b = (int*)silly_allocate(sizeof(int));
+int* b;
+int* k = 12321421;
 
 int main() {
-    size_t heapLength = 1024*1024*1024; //512 Mb
+    size_t heapLength = 1024;
     createHeap(heapLength);
     heap_end_address = heap_start_address + heapLength;
     int* a = (int*)silly_allocate(sizeof(int));
-    printf("Адрес объекта = %p\n", a);
+    b = (int*)silly_allocate(sizeof(int));
+    k = (int*)silly_allocate(sizeof(int));
+    printf("Создано %d объекта на куче\n\n", pseudo_heap_counter);;
+    printf("Адрес объекта = %p\t%p\t%p\n", a, b, k);
     printf("Начало кучи = %p\n", heap_start_address);
     printf("Конец кучи = %p\n", heap_end_address);
     testGC();
+    printf("\nНайдено %d объектов на куче\n", heap_counter);
     return 0;
 }
 
