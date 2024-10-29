@@ -20,8 +20,13 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
     "rax", "rcx", "rdx", "rsi", "rdi", "r8", "r9", "r10", "r11"
 };  
 
+
+typedef struct A { int* ptr; char b; size_t c; }A;
+
+
 void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (RSP));
+    current_stack_end = RSP;
 }
 
 void push_registers_to_stack() {
@@ -46,8 +51,9 @@ void pop_registers_from_stack() {
 }
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
-    for (size_t i = segment_start; i <= segment_end; i += sizeof(size_t)) {
+    for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
         if (*((size_t*)i) >= heap_start_address && *((size_t*)i) <= heap_end_address) {
+            printf("FOUND\n");
             heap_counter++;
         }
     }
@@ -61,6 +67,7 @@ size_t createHeap(size_t length) {
     off_t offset = 0;
 
     heap_start_address = (size_t)mmap(NULL, length, prot, flags, fd, offset);
+    printf("HEAP START = %p\n", &heap_start_address);
 
     return heap_start_address;
 }
@@ -70,6 +77,9 @@ void* silly_allocate(size_t size) {
     asm volatile("mov %%rsp, %0" : "=r" (current_stack_end));
     static size_t offset = 0;
     void* ptr = offset + heap_start_address;
+    printf("ptr = %p\n", &ptr);
+
+
     offset += size;
     return ptr;
 }
@@ -82,9 +92,11 @@ void testGC() {
     segment_traverse(current_stack_end, RSP);
 
     //.data traversing
+    printf("\ndata\n");
     segment_traverse(&__data_start, &edata - sizeof(size_t));
 
     //.bss traversing
+    printf("\nbss\t%p\t%p\n",&__bss_start, &end);
     segment_traverse(&__bss_start, &end - sizeof(size_t));
 
     pop_registers_from_stack();
@@ -95,7 +107,7 @@ int* k = 12321421;
 
 int main() {
     size_t heapLength = 1024;
-    createHeap(heapLength);
+    heap_start_address = createHeap(heapLength);
     heap_end_address = heap_start_address + heapLength;
     int* a = (int*)silly_allocate(sizeof(int));
     b = (int*)silly_allocate(sizeof(int));
@@ -106,6 +118,10 @@ int main() {
     printf("Конец кучи = %p\n", heap_end_address);
     testGC();
     printf("\nНайдено %d объектов на куче\n", heap_counter);
+    printf("\n\n\n\n");
+    A* ptr1;
+    ptr1->ptr = malloc(100);
+    printf("\n\n\n\%p\n", ptr1->ptr);
     return 0;
 }
 
