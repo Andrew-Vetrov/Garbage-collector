@@ -62,20 +62,39 @@ void destroy_allocator() {
 	}
 }
 
-/* ultra test func!!!
- * it has to work without address of block in the parameters(size_t startOfBlock),
- * address of block should be calculated based on the size of the object.
- */
-size_t allocateNewObject(size_t objectSize, size_t startOfBlock) {
-	size_t firstFreeSpace = *(size_t *)startOfBlock;
-	if (firstFreeSpace + objectSize > startOfBlock + BLOCK_SIZE) {
-		fprintf(stderr, "No memory for new object\n");
-		return 0;
-	} else {
-		size_t addition =  (objectSize % 8 == 0) ? 0 : 8 - (objectSize % 8);
-		*(size_t *)(startOfBlock) = firstFreeSpace + objectSize + addition;
-		return firstFreeSpace;
+size_t allocate_new_object(size_t object_size) {
+	Node* current_entry = SEGREG_LIST[object_size];
+
+	if (current_entry = 0) {
+		if ((current_entry = allocate_new_block()) == NULL) {
+			fprintf(stderr, "Can't allocate new object!\n");
+			return 0;
+		}
 	}
+
+	while (current_entry->next_node != NULL) {
+		current_entry = current_entry->next_node;
+	}
+
+	size_t block_start = current_entry->start_allocator_ptr;
+	size_t first_free_space = *(size_t *)block_start;
+	size_t next_block_start = block_start + BLOCK_SIZE;
+	size_t addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
+
+	if (first_free_space + object_size > next_block_start) {
+		if ((current_entry->next_node = allocate_new_block()) == NULL) {
+			fprintf(stderr, "Can't allocate new object!\n");
+			return 0;
+		}
+		
+		current_entry = current_entry->next_node;
+
+		block_start = current_entry->start_allocator_ptr;
+		first_free_space = *(size_t *)block_start;
+	}
+
+	*(size_t *)block_start = first_free_space + object_size + addition;
+	return first_free_space;
 }
 
 int main() {
