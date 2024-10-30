@@ -65,8 +65,8 @@ void destroy_allocator() {
 size_t allocate_new_object(size_t object_size) {
 	Node* current_entry = SEGREG_LIST[object_size];
 
-	if (current_entry = 0) {
-		if ((current_entry = allocate_new_block()) == NULL) {
+	if (current_entry == 0) {
+		if ((current_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
 			fprintf(stderr, "Can't allocate new object!\n");
 			return 0;
 		}
@@ -81,7 +81,7 @@ size_t allocate_new_object(size_t object_size) {
 	size_t next_block_start = block_start + BLOCK_SIZE;
 	size_t addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
 
-	if (first_free_space + object_size > next_block_start) {
+	if (first_free_space + object_size + addition > next_block_start) {
 		if ((current_entry->next_node = allocate_new_block()) == NULL) {
 			fprintf(stderr, "Can't allocate new object!\n");
 			return 0;
