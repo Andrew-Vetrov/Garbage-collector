@@ -1,16 +1,17 @@
 #include <sys/mman.h>
 #include <stdio.h>
 
-#define HEAP_SIZE (513 * 1024 * (size_t) 1024)
-#define BLOCK_SIZE (5 * (size_t) 1024)
-#define MAX_OBJECT_SIZE (2 * 1024)
+#define HEAP_SIZE (512 * 1024 * (size_t) 1024)
+#define BLOCK_SIZE (4 * (size_t) 1024)
+#define BLOCK_HEADER_SIZE (8)
+#define MAX_OBJECT_SIZE (2040)
 
 typedef struct Node_t {
 	size_t start_allocator_ptr;
 	struct Node_t* next_node;
 } Node;
 
-static size_t START_ALLOCATOR_HEAP = 0;
+size_t START_ALLOCATOR_HEAP = 0;
 static Node NODES_LIST[HEAP_SIZE / BLOCK_SIZE];
 static Node* SEGREG_LIST[MAX_OBJECT_SIZE] = {0};
 static Node* EMPTY_LIST_HEAD = 0;
@@ -32,7 +33,7 @@ void init_allocator() {
 		NODES_LIST[i].start_allocator_ptr = 
 			START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
 		*(size_t*)NODES_LIST[i].start_allocator_ptr = 
-			NODES_LIST[i].start_allocator_ptr + 8;
+			NODES_LIST[i].start_allocator_ptr + BLOCK_HEADER_SIZE;
 		if (i != nodes_count - 1) {
 			NODES_LIST[i].next_node = &NODES_LIST[i + 1];
 		} else {
@@ -49,8 +50,8 @@ Node* allocate_new_block() {
 		return NULL;
 	} else {
 		Node* result = EMPTY_LIST_HEAD;
-		result->next_node = NULL;
 		EMPTY_LIST_HEAD = EMPTY_LIST_HEAD->next_node;
+		result->next_node = NULL;
 		return result;
 	}
 }
@@ -63,12 +64,17 @@ void destroy_allocator() {
 }
 
 size_t allocate_new_object(size_t object_size) {
+	if (object_size > MAX_OBJECT_SIZE) {
+		fprintf(stderr, "Size of object is too large\n");
+		return NULL;
+	}
+
 	Node* current_entry = SEGREG_LIST[object_size];
 
-	if (current_entry == 0) {
+	if (current_entry == NULL) {
 		if ((current_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
 			fprintf(stderr, "Can't allocate new object!\n");
-			return 0;
+			return NULL;
 		}
 	}
 
@@ -84,7 +90,7 @@ size_t allocate_new_object(size_t object_size) {
 	if (first_free_space + object_size + addition > next_block_start) {
 		if ((current_entry->next_node = allocate_new_block()) == NULL) {
 			fprintf(stderr, "Can't allocate new object!\n");
-			return 0;
+			return NULL;
 		}
 		
 		current_entry = current_entry->next_node;
@@ -97,24 +103,3 @@ size_t allocate_new_object(size_t object_size) {
 	return first_free_space;
 }
 
-int main() {
-	printf("%p\n", (size_t*) START_ALLOCATOR_HEAP);	
-
-	for (
-		size_t ptr = START_ALLOCATOR_HEAP;
-		ptr - START_ALLOCATOR_HEAP < HEAP_SIZE; 
-		ptr += 8
-	) {
-		*(size_t*)ptr = 0;
-	}
-	
-	printf("Heap is reacheable\n");
-
-	for (int i = 0; i < HEAP_SIZE / BLOCK_SIZE; i++) {
-		allocate_new_block();
-	}
-
-	allocate_new_block();
-
-	return 0;
-}
