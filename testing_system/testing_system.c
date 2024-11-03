@@ -7,9 +7,9 @@
 int main() {
 	DIR* directory;
 	struct dirent* inp;
-	char command[BUFSIZ] = "gcc ";
 	char* matched_names[BUFSIZ];
 	int match_counter = 0;
+	int compilation_result;
 	directory = opendir(".");
 
 	while (1) {
@@ -22,14 +22,17 @@ int main() {
 		}
 	}
 	for (int i = 0; i < match_counter; i++) {
-
-		printf("Testing %s\n", matched_names[i]);
+		char command[BUFSIZ] = "gcc ";
+		printf("\nTesting %s\n", matched_names[i]);
 		strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
 		strncat(command, " -o test", 9);
+		compilation_result = system(command);
+		if (compilation_result == 256) { 
+			printf("\033[1;41mCompilation failed\033[0m\n");
+			continue;
+		}
 		printf("\033[1;42mCompiled successfuly\033[0m\n");
-		system(command);
 		system("valgrind --leak-check=full --leak-resolution=med ./test");
-		
 	}
 	return 0;
 }
