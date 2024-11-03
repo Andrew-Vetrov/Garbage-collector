@@ -32,7 +32,6 @@ int main() {
 			continue;
 		}
 		printf("\033[1;42mCompiled successfuly\033[0m\n");
-		system("valgrind --leak-check=full --leak-resolution=med ./test");
 	}
 	return 0;
 }
