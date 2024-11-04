@@ -5,7 +5,8 @@
 #include <fnmatch.h>
 #include <signal.h>
 #include <unistd.h>
-
+#include <sys/types.h>
+#include <sys/wait.h>
 
 int main() {
 	DIR* directory;
@@ -28,22 +29,37 @@ int main() {
 	for (int i = 0; i < match_counter; i++) {
 		char command[BUFSIZ] = "gcc ";
 		printf("\nTesting %s\n", matched_names[i]);
-		strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
-		strncat(command, " -o test *.o -L../ -l:testlib.a", 123);
-		compilation_result = system(command);
-		if (compilation_result == 256) { 
-			printf("\033[1;41mCompilation failed\033[0m\n");
-			continue;
+		pid_t pid = fork();
+		if (pid == 0) {
+			char command[BUFSIZ] = "gcc ";
+			strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
+			strncat(command, " -o test *.o -L../ -l:testlib.a", 123);
+			compilation_result = system(command);
+			if (compilation_result == 256) {
+				printf("\033[1;41mCompilation failed\033[0m\n");
+				continue;
+			}
+			printf("\033[1;42mCompiled successfuly\033[0m\n");
+			alarm(3);
+			execl("./test", "./test", (char*)NULL);
+			alarm(0);
+			return 0;
 		}
-		printf("\033[1;42mCompiled successfuly\033[0m\n");
-		runtime_result = system("./test");
-		if (runtime_result == 0) {
-			printf("\033[1;42mExecuted successfuly\033[0m\n");
-			continue;
+		else {
+			int status;
+			waitpid(pid, &status, 0);
+			if (WEXITSTATUS(status) == 0) {
+				printf("\033[1;42mExecuted successfuly\033[0m\n");
+				continue;
+			}
+			if (status == 14) {
+				printf("\033[1;43mTime limit exceed\033[0m\n");
+				continue;
+			}
+			printf("\033[1;41mAn error occured while runtime\033[0m\n");
 		}
-		printf("\033[1;41mAn error occured while runtime\033[0m\n");
 	}
-
+	system("rm test");
 	closedir(directory);
 	return 0;
 }
