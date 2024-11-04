@@ -42,8 +42,6 @@ int main() {
 			printf("\033[1;42mCompiled successfuly\033[0m\n");
 			alarm(1);
 			execl("./test", "./test", (char*)NULL);
-			alarm(0);
-			return 0;
 		}
 		else {
 			int status;

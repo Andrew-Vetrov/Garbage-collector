@@ -7,5 +7,4 @@ int main() {
 	allocate_new_object(1000);
 	allocate_new_object(1000);
 	return 3;
-	return 0;
 }
