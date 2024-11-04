@@ -1,3 +1,4 @@
+#include <stddef.h>
 #pragma once
 
 void before_main(void) __attribute__((constructor));
