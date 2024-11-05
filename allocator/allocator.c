@@ -3,8 +3,8 @@
 
 #define HEAP_SIZE (512 * 1024 * (size_t) 1024)
 #define BLOCK_SIZE (4 * (size_t) 1024)
-#define BLOCK_HEADER_SIZE (8)
-#define MAX_OBJECT_SIZE (2040)
+#define BLOCK_HEADER_SIZE (80)
+#define MAX_OBJECT_SIZE (2008)
 
 typedef struct Node_t {
 	size_t start_allocator_ptr;
@@ -15,6 +15,76 @@ size_t START_ALLOCATOR_HEAP = 0;
 static Node NODES_LIST[HEAP_SIZE / BLOCK_SIZE];
 static Node* SEGREG_LIST[MAX_OBJECT_SIZE] = {0};
 static Node* EMPTY_LIST_HEAD = 0;
+
+void init_header(Node* entry, size_t object_size) {
+	size_t object_size_header = entry->start_allocator_ptr + 8;
+	*(size_t *)object_size_header = object_size;
+	
+	size_t bitmap_start = object_size_header + 8;
+	*(size_t *)bitmap_start = 0;
+	for (int j = 0; j < 7; j++) {
+		bitmap_start += 8;
+		*(size_t *)bitmap_start = 0;
+	}
+}
+
+void fill_all_bitmaps_with_zeros() {
+	Node* current_entry;
+	for (int i = 0; i < MAX_OBJECT_SIZE; i++) {
+		current_entry = SEGREG_LIST[i];
+		while (current_entry != NULL) {
+			size_t bitmap_start = current_entry->start_allocator_ptr + 16;
+			
+			*(size_t *)bitmap_start = 0;
+			for (int j = 0; j < 7; j++) {
+				bitmap_start += 8;
+				*(size_t *)bitmap_start = 0;
+			}
+
+			current_entry = current_entry->next_node;
+		}
+	}
+}
+
+int get_bit_by_address(size_t object_address) {
+	size_t relative_address = object_address - START_ALLOCATOR_HEAP;
+
+	size_t block_start = relative_address - (relative_address % BLOCK_SIZE);
+	size_t objects_start = block_start + BLOCK_HEADER_SIZE;
+	size_t bitmap_start = block_start + 16;
+
+	int object_size = *(size_t *)(block_start + 8);
+	int addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
+	object_size += addition;
+
+	int object_index = (object_address - objects_start) / object_size;
+
+	size_t byte_position = bitmap_start + (object_index / 8);
+	int bit_position = object_index % 8;
+
+	return ((*(unsigned char *)byte_position) >> bit_position) & 1;
+}
+
+void set_bit_by_address(size_t object_address, int bit) {
+	size_t relative_address = object_address - START_ALLOCATOR_HEAP;
+
+	size_t block_start = relative_address - (relative_address % BLOCK_SIZE);
+	size_t objects_start = block_start + BLOCK_HEADER_SIZE;
+	size_t bitmap_start = block_start + 16;
+
+	int object_size = *(size_t *)(block_start + 8);
+	int addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
+	object_size += addition;
+
+	int object_index = (object_address - objects_start) / object_size;
+
+	size_t byte_position = bitmap_start + (object_index / 8);
+	int bit_position = object_index % 8;
+
+	if ((((*(unsigned char *)byte_position) >> bit_position) & 1) != bit) {
+		*(unsigned char *)byte_position = (*(unsigned char *)byte_position) ^ (1 << bit_position);
+	}
+}
 
 __attribute__((constructor))
 void init_allocator() {
@@ -70,36 +140,65 @@ size_t allocate_new_object(size_t object_size) {
 	}
 
 	Node* current_entry = SEGREG_LIST[object_size];
+	Node *prev_entry;
+
+	size_t addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
+	size_t block_start;
+	size_t free_space_address;
+	size_t next_block_start;
 
 	if (current_entry == NULL) {
 		if ((current_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
-			fprintf(stderr, "Can't allocate new object!\n");
-			return NULL;
+			fill_all_bitmaps_with_zeros();
+			// call GC and then try again to allocate new object?
+			// if couldn't allocate - error
+
+			// put your code here :))
+
+		} else {
+			init_header(current_entry, object_size);
 		}
 	}
 
-	while (current_entry->next_node != NULL) {
-		current_entry = current_entry->next_node;
+	while (current_entry != NULL) {
+		block_start = current_entry->start_allocator_ptr;
+		free_space_address = *(size_t *)block_start;
+		next_block_start = block_start + BLOCK_SIZE;
+
+		while (free_space_address + object_size + addition <= next_block_start) {
+			if (get_bit_by_address(free_space_address) == 0) {
+				*(size_t *)block_start = free_space_address + object_size + addition;
+				return free_space_address;
+			} else {
+				set_bit_by_address(free_space_address, 0);
+				free_space_address = free_space_address + object_size + addition;
+			}
+		}
+
+		*(size_t *)block_start = free_space_address;
+
+		prev_entry = current_entry;
+		current_entry->next_node;
 	}
 
-	size_t block_start = current_entry->start_allocator_ptr;
-	size_t first_free_space = *(size_t *)block_start;
-	size_t next_block_start = block_start + BLOCK_SIZE;
-	size_t addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
+	current_entry = prev_entry;
 
-	if (first_free_space + object_size + addition > next_block_start) {
-		if ((current_entry->next_node = allocate_new_block()) == NULL) {
-			fprintf(stderr, "Can't allocate new object!\n");
-			return NULL;
-		}
-		
+	if ((current_entry->next_node = allocate_new_block()) == NULL) {
+		fill_all_bitmaps_with_zeros();
+		// call GC and then try again to allocate new object?
+		// if couldn't allocate - error
+
+		// put your code here :))
+
+	} else {
 		current_entry = current_entry->next_node;
+
+		init_header(current_entry, object_size);
 
 		block_start = current_entry->start_allocator_ptr;
-		first_free_space = *(size_t *)block_start;
+		free_space_address = *(size_t *)block_start;
+
+		*(size_t *)block_start = free_space_address + object_size + addition;
+		return free_space_address;
 	}
-
-	*(size_t *)block_start = first_free_space + object_size + addition;
-	return first_free_space;
 }
-
