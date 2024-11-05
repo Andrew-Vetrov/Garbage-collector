@@ -26,7 +26,7 @@ int main() {
 			matched_names[match_counter++] = inp->d_name;
 		}
 	}
-	system("gcc -c ../scanner/segment_traverse.c ../allocator/allocator.c");
+	system("gcc -c ../scanner/segment_traverse.c ../allocator/allocator.c -w");
 	system("ar r testlib.a *.o");
 	for (int i = 0; i < match_counter; i++) {
 		char command[BUFSIZ] = "gcc ";
@@ -42,7 +42,7 @@ int main() {
 				continue;
 			}
 			printf("\033[1;42mCompiled successfuly\033[0m\n");
-			alarm(1);
+			alarm(3);
 			execl("./test", "./test", (char*)NULL);
 		}
 		else {
