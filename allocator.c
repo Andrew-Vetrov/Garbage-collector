@@ -86,6 +86,15 @@ void set_bit_by_address(size_t object_address, int bit) {
 	}
 }
 
+size_t get_object_size_by_address(size_t object_address) {
+    size_t relative_address = object_address - START_ALLOCATOR_HEAP;
+    size_t block_start = relative_address - (relative_address % BLOCK_SIZE);
+    
+    size_t object_size = *(size_t *)(block_start + 8);
+    
+    return object_size;
+}
+
 __attribute__((constructor))
 void init_allocator() {
 	START_ALLOCATOR_HEAP =
