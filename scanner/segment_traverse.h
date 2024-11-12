@@ -1,4 +1,7 @@
+#include <stddef.h>
 #pragma once
+
+extern size_t start_rsp_value;
 
 void before_main(void) __attribute__((constructor));
 void push_registers_to_stack();

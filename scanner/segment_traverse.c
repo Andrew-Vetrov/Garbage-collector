@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 #include "segment_traverse.h"
+#include "../allocator/allocator.h"
 
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 13
 
-size_t RSP;
+size_t start_rsp_value;
 size_t heap_start_address;
 size_t heap_end_address;
 size_t current_stack_end;
@@ -20,8 +21,7 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
 };  
 
 void before_main(void) {
-    asm volatile("mov %%rsp, %0" : "=r" (RSP));
-    current_stack_end = RSP;
+    asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
 void push_registers_to_stack() {
@@ -47,8 +47,10 @@ void pop_registers_from_stack() {
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
     for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
-        if (*((size_t*)i) >= heap_start_address && *((size_t*)i) <= heap_end_address) {
-            printf("FOUND\n");
+        if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) <= END_ALLOCATOR_HEAP) {
+            //printf("FOUND obj on heap %p\n", *((size_t*)i));
+            size_t size = get_object_size_by_address(*((size_t*)i));
+            printf("%llu\n", size);
         }
     }
 }
