@@ -17,8 +17,6 @@ extern char __data_start;
 extern char edata;
 extern char end;
 
-Stack* stack;
-
 const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
     "rax", "rcx", "rdx", "rsi", "rdi", "r8", "r9", "r10", "r11",
     "r12", "r13", "r14", "r15"
@@ -39,6 +37,9 @@ typedef struct {
     int capacity;
 } Stack;
 
+Stack* stack;
+size_t* cur_elem;
+
 Stack* create_stack() {
     Stack* stack = (Stack*)malloc(sizeof(Stack));
     stack->data = (size_t**)malloc(STACK_INIT_CAPACITY * sizeof(size_t*));
@@ -47,24 +48,24 @@ Stack* create_stack() {
     return stack;
 }
 
-int is_empty(Stack* stack) {
+int is_empty() {
     return stack->top == -1;
 }
 
-void resize(Stack* stack) {
+void resize() {
     stack->capacity *= 2;
     stack->data = (size_t**)realloc(stack->data, stack->capacity * sizeof(size_t*));
 }
 
-void push(Stack* stack, int value) {
+void push(size_t* value) {
     if (stack->top == stack->capacity - 1) {
-        resize(stack);
+        resize();
     }
     stack->data[++stack->top] = value;
 }
 
-int pop(Stack* stack) {
-    if (is_empty(stack)) {
+int pop() {
+    if (is_empty()) {
         fprintf(stderr, "Ошибка: попытка pop из пустого стека\n");
         exit(EXIT_FAILURE);
     }
@@ -77,9 +78,22 @@ void free_stack(Stack* stack) {
 }
 // Stack structure and methods
 
-void clojure(size_t* elem) {
-    
-    while(s)
+void scan(size_t* elem) {
+    size_t size = get_object_size_by_address(elem);
+    for (int i = 0; i < size; i += sizeof(size_t)) {
+        if (*(elem + i) >= START_ALLOCATOR_HEAP && *(elem + i) < END_ALLOCATOR_HEAP) {
+            push(elem + i);
+            set_bit_by_address(elem + i, 1);
+        }
+    }
+}
+
+void closure(size_t* elem) {
+    push(elem);
+    while (!is_empty()) {
+        cur_elem = pop();
+        scan(elem);
+    }
 }
 
 
@@ -112,9 +126,7 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
             if (size == 0) { // heap_start and heap_end cases
                 continue;
             }
-            for (int j = 0; j < size; j += sizeof(size_t)) {
-                clojure(j + i);
-            }
+            
         }
     }
 }
