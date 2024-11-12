@@ -6,6 +6,7 @@
 
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 13
+#define STACK_INIT_CAPACITY 10
 
 size_t start_rsp_value;
 size_t heap_start_address;
@@ -15,6 +16,9 @@ extern char __bss_start;
 extern char __data_start;
 extern char edata;
 extern char end;
+
+Stack* stack;
+
 const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
     "rax", "rcx", "rdx", "rsi", "rdi", "r8", "r9", "r10", "r11",
     "r12", "r13", "r14", "r15"
@@ -23,6 +27,61 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
 void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
+
+
+
+
+// Stack structure and methods
+
+typedef struct {
+    size_t** data;       
+    int top;          
+    int capacity;
+} Stack;
+
+Stack* create_stack() {
+    Stack* stack = (Stack*)malloc(sizeof(Stack));
+    stack->data = (size_t**)malloc(STACK_INIT_CAPACITY * sizeof(size_t*));
+    stack->top = -1;
+    stack->capacity = STACK_INIT_CAPACITY;
+    return stack;
+}
+
+int is_empty(Stack* stack) {
+    return stack->top == -1;
+}
+
+void resize(Stack* stack) {
+    stack->capacity *= 2;
+    stack->data = (size_t**)realloc(stack->data, stack->capacity * sizeof(size_t*));
+}
+
+void push(Stack* stack, int value) {
+    if (stack->top == stack->capacity - 1) {
+        resize(stack);
+    }
+    stack->data[++stack->top] = value;
+}
+
+int pop(Stack* stack) {
+    if (is_empty(stack)) {
+        fprintf(stderr, "Ошибка: попытка pop из пустого стека\n");
+        exit(EXIT_FAILURE);
+    }
+    return stack->data[stack->top--];
+}
+
+void free_stack(Stack* stack) {
+    free(stack->data);
+    free(stack);
+}
+// Stack structure and methods
+
+void clojure(size_t* elem) {
+    
+    while(s)
+}
+
 
 void push_registers_to_stack() {
     char reg[REGISTER_NAME_SIZE];
@@ -46,11 +105,16 @@ void pop_registers_from_stack() {
 }
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
+    stack = create_stack();
     for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
         if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) <= END_ALLOCATOR_HEAP) {
-            //printf("FOUND obj on heap %p\n", *((size_t*)i));
             size_t size = get_object_size_by_address(*((size_t*)i));
-            printf("%llu\n", size);
+            if (size == 0) { // heap_start and heap_end cases
+                continue;
+            }
+            for (int j = 0; j < size; j += sizeof(size_t)) {
+                clojure(j + i);
+            }
         }
     }
 }
