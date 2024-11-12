@@ -48,13 +48,12 @@ void fill_all_bitmaps_with_zeros() {
 
 int get_bit_by_address(size_t object_address) {
 	size_t relative_address = object_address - START_ALLOCATOR_HEAP;
-
-	size_t block_start = relative_address - (relative_address % BLOCK_SIZE);
+	size_t block_start = object_address - (relative_address % BLOCK_SIZE);
 	size_t objects_start = block_start + BLOCK_HEADER_SIZE;
 	size_t bitmap_start = block_start + 16;
 
-	int object_size = *(size_t *)(block_start + 8);
-	int addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
+	size_t object_size = *(size_t *)(block_start + 8);
+	size_t addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
 	object_size += addition;
 
 	int object_index = (object_address - objects_start) / object_size;
@@ -67,13 +66,12 @@ int get_bit_by_address(size_t object_address) {
 
 void set_bit_by_address(size_t object_address, int bit) {
 	size_t relative_address = object_address - START_ALLOCATOR_HEAP;
-
-	size_t block_start = relative_address - (relative_address % BLOCK_SIZE);
+	size_t block_start = object_address - (relative_address % BLOCK_SIZE);
 	size_t objects_start = block_start + BLOCK_HEADER_SIZE;
 	size_t bitmap_start = block_start + 16;
 
-	int object_size = *(size_t *)(block_start + 8);
-	int addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
+	size_t object_size = *(size_t *)(block_start + 8);
+	size_t addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
 	object_size += addition;
 
 	int object_index = (object_address - objects_start) / object_size;
@@ -87,10 +85,9 @@ void set_bit_by_address(size_t object_address, int bit) {
 }
 
 size_t get_object_size_by_address(size_t object_address) {
-    size_t relative_address = object_address - START_ALLOCATOR_HEAP;
-    size_t block_start = relative_address - (relative_address % BLOCK_SIZE);
-    
-    size_t object_size = *(size_t *)(block_start + 8);
+	size_t relative_address = object_address - START_ALLOCATOR_HEAP;
+	size_t block_start = object_address - (relative_address % BLOCK_SIZE);
+	size_t object_size = *(size_t *)(block_start + 8);
     
     return object_size;
 }
