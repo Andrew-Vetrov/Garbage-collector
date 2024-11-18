@@ -1,8 +1,8 @@
-ï»¿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
-#include "segment_traverse.h"
 #include "../allocator/allocator.h"
+#include "../scanner/segment_traverse.h"
 
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 13
@@ -20,7 +20,7 @@ extern char end;
 const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
     "rax", "rcx", "rdx", "rsi", "rdi", "r8", "r9", "r10", "r11",
     "r12", "r13", "r14", "r15"
-};  
+};
 
 void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
@@ -32,13 +32,12 @@ void before_main(void) {
 // Stack structure and methods
 
 typedef struct {
-    size_t** data;       
-    int top;          
+    size_t** data;
+    int top;
     int capacity;
 } Stack;
 
 Stack* stack;
-size_t* cur_elem;
 
 Stack* create_stack() {
     Stack* stack = (Stack*)malloc(sizeof(Stack));
@@ -64,11 +63,12 @@ void push(size_t* value) {
     stack->data[++stack->top] = value;
 }
 
-int pop() {
+size_t pop() {
     if (is_empty()) {
-        fprintf(stderr, "ÐžÑˆÐ¸Ð±ÐºÐ°: Ð¿Ð¾Ð¿Ñ‹Ñ‚ÐºÐ° pop Ð¸Ð· Ð¿ÑƒÑÑ‚Ð¾Ð³Ð¾ ÑÑ‚ÐµÐºÐ°\n");
+        fprintf(stderr, "Îøèáêà: ïîïûòêà pop èç ïóñòîãî ñòåêà\n");
         exit(EXIT_FAILURE);
     }
+    //printf("in pop  %llu\n", stack->data[stack->top--]);
     return stack->data[stack->top--];
 }
 
@@ -78,21 +78,30 @@ void free_stack(Stack* stack) {
 }
 // Stack structure and methods
 
+void mark(size_t* elem) {
+
+    if (!get_bit_by_address(elem)) {
+        set_bit_by_address(elem, 1);
+        push(elem);
+    }
+}
+
 void scan(size_t* elem) {
     size_t size = get_object_size_by_address(elem);
+
     for (int i = 0; i < size; i += sizeof(size_t)) {
         if (*(elem + i) >= START_ALLOCATOR_HEAP && *(elem + i) < END_ALLOCATOR_HEAP) {
-            push(elem + i);
-            set_bit_by_address(elem + i, 1);
+            mark(elem + i);
+            show_bitmap(elem);
         }
     }
 }
 
-void closure(size_t* elem) {
-    push(elem);
+void closure() {
+    size_t cur_elem;
     while (!is_empty()) {
         cur_elem = pop();
-        scan(elem);
+        scan(cur_elem);
     }
 }
 
@@ -101,8 +110,8 @@ void push_registers_to_stack() {
     char reg[REGISTER_NAME_SIZE];
     for (int i = 0; i < REGISTER_AMOUNT; i++) {
         asm volatile(
-            "push %[reg]\n" 
-            : 
+            "push %[reg]\n"
+            :
             : [reg] "r" (REGISTERS[i])
             );
     }
@@ -112,22 +121,24 @@ void pop_registers_from_stack() {
     char reg[REGISTER_NAME_SIZE];
     for (int i = REGISTER_AMOUNT - 1; i >= 0; i--) {
         asm volatile(
-            "pop %[reg]\n" 
+            "pop %[reg]\n"
             :
             : [reg] "r" (REGISTERS[i]));
     }
 }
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
+    size_t size;
     stack = create_stack();
     for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
-        if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) <= END_ALLOCATOR_HEAP) {
-            size_t size = get_object_size_by_address(*((size_t*)i));
-            if (size == 0) { // heap_start and heap_end cases
-                continue;
+        if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) < END_ALLOCATOR_HEAP) {
+            size = get_object_size_by_address(*((size_t*)i));
+            printf("size %d\n", size);
+            if (size > 0) {
+                mark(*((size_t*)i));
+                show_bitmap(*((size_t*)i));
             }
-            
         }
     }
+    closure();
 }
-
