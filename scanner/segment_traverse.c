@@ -79,20 +79,21 @@ void free_stack(Stack* stack) {
 // Stack structure and methods
 
 void mark(size_t* elem) {
-
     if (!get_bit_by_address(elem)) {
         set_bit_by_address(elem, 1);
         push(elem);
     }
 }
 
-void scan(size_t* elem) {
+void scan(size_t elem) {
     size_t size = get_object_size_by_address(elem);
 
     for (int i = 0; i < size; i += sizeof(size_t)) {
-        if (*(elem + i) >= START_ALLOCATOR_HEAP && *(elem + i) < END_ALLOCATOR_HEAP) {
-            mark(elem + i);
-            show_bitmap(elem);
+        if (*((size_t*)(elem + i)) >= START_ALLOCATOR_HEAP && *((size_t*)(elem + i)) < END_ALLOCATOR_HEAP) {
+            printf("size during scan %d\n", get_object_size_by_address(*((size_t*)(elem + i))));
+            if (get_object_size_by_address(elem + i) == 0) { continue; }
+            mark(*((size_t*)(elem + i)));
+            show_bitmap(*((size_t*)(elem + i)));
         }
     }
 }
@@ -133,10 +134,10 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
     for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
         if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) < END_ALLOCATOR_HEAP) {
             size = get_object_size_by_address(*((size_t*)i));
-            printf("size %d\n", size);
+            
             if (size > 0) {
                 mark(*((size_t*)i));
-                show_bitmap(*((size_t*)i));
+                printf("size %d\n", size);
             }
         }
     }
