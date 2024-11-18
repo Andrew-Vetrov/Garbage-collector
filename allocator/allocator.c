@@ -18,6 +18,23 @@ static Node NODES_LIST[HEAP_SIZE / BLOCK_SIZE];
 static Node* SEGREG_LIST[MAX_OBJECT_SIZE] = {0};
 static Node* EMPTY_LIST_HEAD = 0;
 
+void show_bitmap(size_t object_address) {
+	size_t relative_address = object_address - START_ALLOCATOR_HEAP;
+	size_t block_start = object_address - (relative_address % BLOCK_SIZE);
+	size_t bitmap = block_start + 16;
+
+	unsigned char curr_byte;
+
+	for (int i = 0; i < 64; i++) {
+		printf("byte's index = %2d. bits: ", i);
+		curr_byte = *(unsigned char *)(bitmap + i);
+		for (int j = 0; j < 8; j++) {
+			putchar(((curr_byte >> j) & 1) == 1 ? '1' : '0');
+		}
+		putchar('\n');
+	}
+}
+
 void init_header(Node* entry, size_t object_size) {
 	size_t object_size_header = entry->start_allocator_ptr + 8;
 	*(size_t *)object_size_header = object_size;
