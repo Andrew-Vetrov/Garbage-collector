@@ -15,3 +15,5 @@ void destroy_allocator();
 size_t allocate_new_object(size_t object_size);
 
 size_t get_object_size_by_address(size_t object_address);
+
+void show_bitmap(size_t object_address);

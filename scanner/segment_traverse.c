@@ -26,9 +26,6 @@ void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
-
-
-
 // Stack structure and methods
 
 typedef struct {
@@ -90,10 +87,10 @@ void scan(size_t elem) {
 
     for (int i = 0; i < size; i += sizeof(size_t)) {
         if (*((size_t*)(elem + i)) >= START_ALLOCATOR_HEAP && *((size_t*)(elem + i)) < END_ALLOCATOR_HEAP) {
-            printf("size during scan %d\n", get_object_size_by_address(*((size_t*)(elem + i))));
-            if (get_object_size_by_address(elem + i) == 0) { continue; }
+            if (get_object_size_by_address(elem + i) == 0) { 
+                continue;
+            }
             mark(*((size_t*)(elem + i)));
-            show_bitmap(*((size_t*)(elem + i)));
         }
     }
 }
@@ -137,7 +134,6 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
             
             if (size > 0) {
                 mark(*((size_t*)i));
-                printf("size %d\n", size);
             }
         }
     }
