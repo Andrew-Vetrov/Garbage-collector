@@ -101,6 +101,17 @@ void set_bit_by_address(size_t object_address, int bit) {
 	}
 }
 
+unsigned char is_bitmap_empty(size_t block_address) {
+    size_t bitmap_addr = block_address + 16;
+    for (int i = 0; i < 7; i++) { // TODO: make a define for 7
+        if (*(size_t*) bitmap_addr != 0) {
+            return 1;
+        }
+        bitmap_addr += 8;
+    }
+    return 0;
+}
+
 size_t get_object_size_by_address(size_t object_address) {
 	size_t relative_address = object_address - START_ALLOCATOR_HEAP;
 	size_t block_start = object_address - (relative_address % BLOCK_SIZE);
