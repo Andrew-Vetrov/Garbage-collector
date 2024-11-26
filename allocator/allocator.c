@@ -13,7 +13,7 @@ typedef struct Node_t {
 
 size_t START_ALLOCATOR_HEAP = 0;
 static Node NODES_LIST[HEAP_SIZE / BLOCK_SIZE];
-static Node* SEGREG_LIST[MAX_OBJECT_SIZE] = {0};
+static Node* SEGREG_LIST[MAX_OBJECT_SIZE + 1] = {0};
 static Node* EMPTY_LIST_HEAD = 0;
 
 void show_bitmap(size_t object_address) {
@@ -174,25 +174,11 @@ size_t allocate_new_object(size_t object_size) {
 	}
 
 	Node* current_entry = SEGREG_LIST[object_size];
-	Node *prev_entry;
 
 	size_t addition = (object_size % 8 == 0) ? 0 : 8 - (object_size % 8);
 	size_t block_start;
 	size_t free_space_address;
 	size_t next_block_start;
-
-	if (current_entry == NULL) {
-		if ((current_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
-			fill_all_bitmaps_with_zeros();
-			// call GC and then try again to allocate new object?
-			// if couldn't allocate - error
-
-			// put your code here :))
-
-		} else {
-			init_header(current_entry, object_size);
-		}
-	}
 
 	while (current_entry != NULL) {
 		block_start = current_entry->start_allocator_ptr;
@@ -211,13 +197,10 @@ size_t allocate_new_object(size_t object_size) {
 
 		*(size_t *)block_start = free_space_address;
 
-		prev_entry = current_entry;
-		current_entry->next_node;
+		current_entry = SEGREG_LIST[object_size] = current_entry->next_node;
 	}
 
-	current_entry = prev_entry;
-
-	if ((current_entry->next_node = allocate_new_block()) == NULL) {
+	if ((current_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
 		fill_all_bitmaps_with_zeros();
 		// call GC and then try again to allocate new object?
 		// if couldn't allocate - error
@@ -225,8 +208,6 @@ size_t allocate_new_object(size_t object_size) {
 		// put your code here :))
 
 	} else {
-		current_entry = current_entry->next_node;
-
 		init_header(current_entry, object_size);
 
 		block_start = current_entry->start_allocator_ptr;
