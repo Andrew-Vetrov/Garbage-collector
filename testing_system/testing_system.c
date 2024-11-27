@@ -26,7 +26,7 @@ int main() {
 			matched_names[match_counter++] = inp->d_name;
 		}
 	}
-	system("gcc -c ../scanner/segment_traverse.c ../scanner/stack.c ../allocator/allocator.c -w");
+	system("gcc -c ../scanner/marking.c ../scanner/stack.c ../allocator/allocator.c -w");
 	system("ar r testlib.a *.o");
 	for (int i = 0; i < match_counter; i++) {
 		char command[BUFSIZ] = "gcc ";

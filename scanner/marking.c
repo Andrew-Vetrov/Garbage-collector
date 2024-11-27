@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 #include "../allocator/allocator.h"
-#include "segment_traverse.h"
+#include "marking.h"
 #include "stack.h"
 
 #define REGISTER_NAME_SIZE 10
