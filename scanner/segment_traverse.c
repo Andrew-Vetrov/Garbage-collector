@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 #include "../allocator/allocator.h"
-#include "../scanner/segment_traverse.h"
+#include "segment_traverse.h"
+#include "stack.h"
 
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 13
@@ -17,6 +18,8 @@ extern char __data_start;
 extern char edata;
 extern char end;
 
+Stack* stack;
+
 const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
     "rax", "rcx", "rdx", "rsi", "rdi", "r8", "r9", "r10", "r11",
     "r12", "r13", "r14", "r15"
@@ -26,59 +29,11 @@ void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
-// Stack structure and methods
-
-typedef struct {
-    size_t** data;
-    int top;
-    int capacity;
-} Stack;
-
-Stack* stack;
-
-Stack* create_stack() {
-    Stack* stack = (Stack*)malloc(sizeof(Stack));
-    stack->data = (size_t**)malloc(STACK_INIT_CAPACITY * sizeof(size_t*));
-    stack->top = -1;
-    stack->capacity = STACK_INIT_CAPACITY;
-    return stack;
-}
-
-int is_empty() {
-    return stack->top == -1;
-}
-
-void resize() {
-    stack->capacity *= 2;
-    stack->data = (size_t**)realloc(stack->data, stack->capacity * sizeof(size_t*));
-}
-
-void push(size_t* value) {
-    if (stack->top == stack->capacity - 1) {
-        resize();
-    }
-    stack->data[++stack->top] = value;
-}
-
-size_t pop() {
-    if (is_empty()) {
-        fprintf(stderr, "Ошибка: попытка pop из пустого стека\n");
-        exit(EXIT_FAILURE);
-    }
-    //printf("in pop  %llu\n", stack->data[stack->top--]);
-    return stack->data[stack->top--];
-}
-
-void free_stack(Stack* stack) {
-    free(stack->data);
-    free(stack);
-}
-// Stack structure and methods
 
 void mark(size_t* elem) {
     if (!get_bit_by_address(elem)) {
         set_bit_by_address(elem, 1);
-        push(elem);
+        push(stack, elem);
     }
 }
 
@@ -97,8 +52,8 @@ void scan(size_t elem) {
 
 void closure() {
     size_t cur_elem;
-    while (!is_empty()) {
-        cur_elem = pop();
+    while (!is_empty(stack)) {
+        cur_elem = pop(stack);
         scan(cur_elem);
     }
 }
