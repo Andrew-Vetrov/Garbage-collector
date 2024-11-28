@@ -178,6 +178,7 @@ void init_allocator() {
         (size_t)mmap(NULL, HEAP_SIZE,
             PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 
+<<<<<<< HEAD
     if (START_ALLOCATOR_HEAP == MAP_FAILED) {
         fprintf(stderr, "Can't allocate allocator's heap!\n");
         return;
@@ -186,6 +187,33 @@ void init_allocator() {
     START_BIG_ALLOCATOR_HEAP =
         (size_t)mmap(NULL, HEAP_SIZE,
             PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+=======
+	if (START_ALLOCATOR_HEAP == MAP_FAILED) {
+		fprintf(stderr, "Can't allocate allocator's heap!\n");
+		return;
+	}
+<<<<<<< HEAD
+	END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
+	int nodes_count = HEAP_SIZE / BLOCK_SIZE;
+
+	for (int i = 0; i < nodes_count; i++) {
+		NODES_LIST[i].block_addr =
+=======
+
+	for (int i = 0; i < BLOCKS_COUNT; i++) {
+		NODES_LIST[i].block_addr = 
+>>>>>>> 755f1cc (sweep-phase: optimized linked lists and added test)
+			START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
+		*(size_t*)NODES_LIST[i].block_addr =
+			NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
+		if (i != BLOCKS_COUNT - 1) {
+			NODES_LIST[i].next_node = &NODES_LIST[i + 1];
+		}
+		else {
+			NODES_LIST[i].next_node = 0;
+		}
+	}
+>>>>>>> 402fb6b (sweep-phase: optimized linked lists and added test)
 
     if (START_BIG_ALLOCATOR_HEAP == MAP_FAILED) {
         fprintf(stderr, "Can't allocate BIG_allocator's heap!\n");
@@ -253,16 +281,28 @@ void destroy_allocator() {
 }
 
 void sweep() {
+<<<<<<< HEAD
     // start of sweeping small objects
+=======
+>>>>>>> 402fb6b (sweep-phase: optimized linked lists and added test)
 #ifdef DEBUG
     int empty_nodes_count = 0;
     int segreg_list_nodes_count = 0;
 #endif
     EMPTY_LIST_HEAD = NULL;
+<<<<<<< HEAD
     for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
         SEGREG_LIST[i] = NULL;
     }
 
+=======
+    for (int i = 0; i < MAX_OBJECT_SIZE + 1; i++) {
+        SEGREG_LIST[i] = NULL;
+    }
+    Node* last_empty_list_node = NULL;
+    Node* segreg_list_last_nodes[MAX_OBJECT_SIZE + 1] = {NULL};
+    
+>>>>>>> 402fb6b (sweep-phase: optimized linked lists and added test)
     for (int i = 0; i < BLOCKS_COUNT; i++) {
         *(size_t*) GET_SLIDER_POSITION_ADDR(NODES_LIST[i].block_addr) =
             NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
@@ -285,10 +325,16 @@ void sweep() {
             size_t object_size = 
                 *(size_t*) GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr);
             if (SEGREG_LIST[object_size] == NULL) {
-                SEGREG_LIST[object_size] = &NODES_LIST[i];
+                segreg_list_last_nodes[object_size]
+                    = SEGREG_LIST[object_size] = &NODES_LIST[i];
             } else {
+<<<<<<< HEAD
                 NODES_LIST[i].next_node = SEGREG_LIST[object_size];
                 SEGREG_LIST[object_size] = &NODES_LIST[i];
+=======
+                segreg_list_last_nodes[object_size]->next_node = &NODES_LIST[i];
+                segreg_list_last_nodes[object_size] = &NODES_LIST[i];
+>>>>>>> 402fb6b (sweep-phase: optimized linked lists and added test)
             }
         }
     }
@@ -296,6 +342,7 @@ void sweep() {
     printf("empty_nodes_count = %d\nsegreg_list_nodes_count = %d\n", 
             empty_nodes_count, segreg_list_nodes_count);
 #endif
+<<<<<<< HEAD
 
     // start of sweeping BIG objects
     if (!occupied_p)
@@ -363,6 +410,8 @@ void sweep() {
             }
         }
     }
+=======
+>>>>>>> 402fb6b (sweep-phase: optimized linked lists and added test)
 }
 
 size_t allocate_new_object(size_t object_size) {
