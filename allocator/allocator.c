@@ -65,7 +65,7 @@ void init_header(Node* entry, size_t object_size) {
 
 void fill_all_bitmaps_with_zeros() {
 	Node* curr_entry;
-	for (int i = 1; i <= MAX_OBJECT_SIZE; i++) {
+	for (int i = 1; i <= MAX_OBJECT_SIZE + 1; i++) {
 		curr_entry = SEGREG_LIST[i];
 		while (curr_entry != NULL) {
 			size_t bitmap_addr = GET_BITMAP_ADDR(curr_entry->block_addr);
@@ -159,15 +159,21 @@ void init_allocator() {
 		fprintf(stderr, "Can't allocate allocator's heap!\n");
 		return;
 	}
+<<<<<<< HEAD
 	END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
 	int nodes_count = HEAP_SIZE / BLOCK_SIZE;
 
 	for (int i = 0; i < nodes_count; i++) {
 		NODES_LIST[i].block_addr =
+=======
+
+	for (int i = 0; i < BLOCKS_COUNT; i++) {
+		NODES_LIST[i].block_addr = 
+>>>>>>> 755f1cc (sweep-phase: optimized linked lists and added test)
 			START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
 		*(size_t*)NODES_LIST[i].block_addr =
 			NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
-		if (i != nodes_count - 1) {
+		if (i != BLOCKS_COUNT - 1) {
 			NODES_LIST[i].next_node = &NODES_LIST[i + 1];
 		}
 		else {
@@ -199,15 +205,26 @@ void destroy_allocator() {
 }
 
 void sweep() {
+#ifdef DEBUG
+    int empty_nodes_count = 0;
+    int segreg_list_nodes_count = 0;
+#endif
     EMPTY_LIST_HEAD = NULL;
-    for (int i = 0; i < MAX_OBJECT_SIZE; i++) {
+    for (int i = 0; i < MAX_OBJECT_SIZE + 1; i++) {
         SEGREG_LIST[i] = NULL;
     }
     Node* last_empty_list_node = NULL;
+    Node* segreg_list_last_nodes[MAX_OBJECT_SIZE + 1] = {NULL};
     
     for (int i = 0; i < BLOCKS_COUNT; i++) {
+        *(size_t*) GET_SLIDER_POSITION_ADDR(NODES_LIST[i].block_addr) =
+            NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
         NODES_LIST[i].next_node = NULL;
         if (is_bitmap_empty(NODES_LIST[i].block_addr)) {
+#ifdef DEBUG
+            empty_nodes_count++;
+#endif
+            *(size_t*) GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr) = 0;
             if (EMPTY_LIST_HEAD == NULL) {
                 last_empty_list_node = EMPTY_LIST_HEAD = &NODES_LIST[i];
             } else {
@@ -215,19 +232,24 @@ void sweep() {
                 last_empty_list_node = &NODES_LIST[i];
             }
         } else {
+#ifdef DEBUG
+            segreg_list_nodes_count++;
+#endif
             size_t object_size = 
                 *(size_t*) GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr);
             if (SEGREG_LIST[object_size] == NULL) {
-                SEGREG_LIST[object_size] = &NODES_LIST[i];
+                segreg_list_last_nodes[object_size]
+                    = SEGREG_LIST[object_size] = &NODES_LIST[i];
             } else {
-                Node* curr_node = SEGREG_LIST[object_size];
-                while (curr_node->next_node != NULL) {
-                    curr_node = curr_node->next_node;
-                }
-                curr_node->next_node = &NODES_LIST[i];
+                segreg_list_last_nodes[object_size]->next_node = &NODES_LIST[i];
+                segreg_list_last_nodes[object_size] = &NODES_LIST[i];
             }
         }
-    } 
+    }
+#ifdef DEBUG
+    printf("empty_nodes_count = %d\nsegreg_list_nodes_count = %d\n", 
+            empty_nodes_count, segreg_list_nodes_count);
+#endif
 }
 
 
