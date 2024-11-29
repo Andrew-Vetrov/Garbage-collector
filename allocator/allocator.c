@@ -18,7 +18,7 @@ typedef struct Node_t {
 } Node;
 
 size_t START_ALLOCATOR_HEAP = 0;
-size_t END_ALLOCATOR_HEAP;
+size_t END_ALLOCATOR_HEAP = 0;
 static Node NODES_LIST[HEAP_SIZE / BLOCK_SIZE];
 static Node* SEGREG_LIST[MAX_OBJECT_SIZE + 1] = { 0 };
 static Node* EMPTY_LIST_HEAD = 0;
@@ -75,6 +75,7 @@ void fill_all_bitmaps_with_zeros() {
 }
 
 unsigned char get_bit_by_address(size_t object_addr) {
+
 	size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
 	size_t block_addr = object_addr - (object_relative_addr % BLOCK_SIZE);
 	size_t objects_addr = block_addr + BLOCK_HEADER_SIZE;

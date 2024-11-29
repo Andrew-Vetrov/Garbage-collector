@@ -1,7 +1,6 @@
 #pragma once
 #include <stdio.h>
 
-extern size_t START_ALLOCATOR_HEAP;
 extern size_t end_rsp_value;
 extern size_t START_ALLOCATOR_HEAP;
 extern size_t END_ALLOCATOR_HEAP;

@@ -16,6 +16,10 @@ int is_empty(Stack *stack) {
 void resize(Stack* stack) {
     stack->capacity *= 2;
     stack->data = (size_t**)realloc(stack->data, stack->capacity * sizeof(size_t*));
+    if (stack->data == NULL) {
+        perror("realloc");
+        exit(EXIT_FAILURE);
+    }
 }
 
 void push(Stack* stack, size_t* value) {

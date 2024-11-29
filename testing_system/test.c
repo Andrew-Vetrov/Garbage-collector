@@ -1,7 +1,7 @@
 #include "../scanner/marking.h"
 #include "../allocator/allocator.h"
 #include <stdio.h>
-
+#define GET_SIZE_WITH_ALIGNMENT(size) ((((size) % (8) == (0)) ? (0) : (8) - ((size) % (8))) + (size))
 typedef struct A { int* a1; int* a2; int* a3; int* a4; }A;
 
 int main() {
@@ -13,7 +13,7 @@ int main() {
 		}
 		a[i] = (A*)allocate_new_object(32);
 	}
-	segment_traverse(end_rsp_value, start_rsp_value);
-	show_bitmap((size_t*)*a);
+	full_marking();
+	show_bitmap((size_t)a[0]);
 	return 0;
 }

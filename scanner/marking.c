@@ -10,9 +10,6 @@
 #define STACK_INIT_CAPACITY 10
 
 size_t start_rsp_value;
-size_t heap_start_address;
-size_t heap_end_address;
-size_t current_stack_end;
 extern char __bss_start;
 extern char __data_start;
 extern char edata;
@@ -31,7 +28,7 @@ void before_main(void) {
 
 
 void mark(size_t* elem) {
-    if (!get_bit_by_address(elem)) {
+    if (elem != START_ALLOCATOR_HEAP && !get_bit_by_address(elem)) {
         set_bit_by_address(elem, 1);
         push(stack, elem);
     }
@@ -86,11 +83,17 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
     for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
         if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) < END_ALLOCATOR_HEAP) {
             size = get_object_size_by_address(*((size_t*)i));
-            
             if (size > 0) {
+                printf("Started marking\n");
                 mark(*((size_t*)i));
             }
         }
     }
     closure();
+}
+
+void full_marking() {
+    segment_traverse(end_rsp_value, start_rsp_value);
+    segment_traverse(&__data_start, &edata);
+    segment_traverse(&__bss_start, &end); //264166
 }
