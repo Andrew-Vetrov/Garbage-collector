@@ -213,9 +213,7 @@ void sweep() {
     for (int i = 0; i < MAX_OBJECT_SIZE + 1; i++) {
         SEGREG_LIST[i] = NULL;
     }
-    Node* last_empty_list_node = NULL;
-    Node* segreg_list_last_nodes[MAX_OBJECT_SIZE + 1] = {NULL};
-    
+ 
     for (int i = 0; i < BLOCKS_COUNT; i++) {
         *(size_t*) GET_SLIDER_POSITION_ADDR(NODES_LIST[i].block_addr) =
             NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
@@ -226,10 +224,10 @@ void sweep() {
 #endif
             *(size_t*) GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr) = 0;
             if (EMPTY_LIST_HEAD == NULL) {
-                last_empty_list_node = EMPTY_LIST_HEAD = &NODES_LIST[i];
+                EMPTY_LIST_HEAD = &NODES_LIST[i];
             } else {
-                last_empty_list_node->next_node = &NODES_LIST[i];
-                last_empty_list_node = &NODES_LIST[i];
+                NODES_LIST[i].next_node = EMPTY_LIST_HEAD;
+                EMPTY_LIST_HEAD = &NODES_LIST[i];
             }
         } else {
 #ifdef DEBUG
@@ -238,11 +236,10 @@ void sweep() {
             size_t object_size = 
                 *(size_t*) GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr);
             if (SEGREG_LIST[object_size] == NULL) {
-                segreg_list_last_nodes[object_size]
-                    = SEGREG_LIST[object_size] = &NODES_LIST[i];
+                SEGREG_LIST[object_size] = &NODES_LIST[i];
             } else {
-                segreg_list_last_nodes[object_size]->next_node = &NODES_LIST[i];
-                segreg_list_last_nodes[object_size] = &NODES_LIST[i];
+                NODES_LIST[i].next_node = SEGREG_LIST[object_size];
+                SEGREG_LIST[object_size] = &NODES_LIST[i];
             }
         }
     }
