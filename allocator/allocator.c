@@ -68,6 +68,11 @@ size_t get_block_addr(size_t object_addr) {
     return (object_addr - (object_relative_addr % BLOCK_SIZE));
 }
 
+size_t get_block_addr(size_t object_addr) {
+	size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
+	return (object_addr - (object_relative_addr % BLOCK_SIZE));
+}
+
 void init_header(Node* entry, size_t object_size) {
     size_t block_addr = entry->block_addr;
 
