@@ -20,14 +20,9 @@ typedef struct Node_t {
 } Node;
 
 size_t START_ALLOCATOR_HEAP = 0;
-<<<<<<< HEAD
 size_t END_ALLOCATOR_HEAP = 0;
-static Node NODES_LIST[HEAP_SIZE / BLOCK_SIZE];
 static Node* SEGREG_LIST[MAX_OBJECT_SIZE + 1] = { 0 };
-=======
 static Node NODES_LIST[BLOCKS_COUNT];
-static Node* SEGREG_LIST[MAX_OBJECT_SIZE + 1] = {0};
->>>>>>> 2d81817 (sweep-phase: sweeping implementation)
 static Node* EMPTY_LIST_HEAD = 0;
 size_t end_rsp_value;
 
@@ -125,21 +120,12 @@ unsigned char is_bitmap_empty(size_t block_addr) {
 
 	for (int j = 0; j < BITMAP_BYTES_COUNT / sizeof(size_t); j++) {
 		if (*(size_t*)curr_bytes_addr != 0) {
-<<<<<<< HEAD
-			return 1;
-		}
-		curr_bytes_addr += sizeof(size_t);
-	}
-
-	return 0;
-=======
             return 0;
         }
 		curr_bytes_addr += sizeof(size_t);
 	}
 
     return 1;
->>>>>>> 2d81817 (sweep-phase: sweeping implementation)
 }
 
 size_t get_object_size_by_address(size_t object_addr) {
@@ -160,17 +146,11 @@ void init_allocator() {
 		fprintf(stderr, "Can't allocate allocator's heap!\n");
 		return;
 	}
-<<<<<<< HEAD
-	END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
-	int nodes_count = HEAP_SIZE / BLOCK_SIZE;
 
-	for (int i = 0; i < nodes_count; i++) {
-		NODES_LIST[i].block_addr =
-=======
+    END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
 
 	for (int i = 0; i < BLOCKS_COUNT; i++) {
 		NODES_LIST[i].block_addr = 
->>>>>>> 755f1cc (sweep-phase: optimized linked lists and added test)
 			START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
 		*(size_t*)NODES_LIST[i].block_addr =
 			NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
