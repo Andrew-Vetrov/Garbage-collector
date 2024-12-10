@@ -28,7 +28,8 @@ void before_main(void) {
 
 
 void mark(size_t* elem) {
-    if (elem != START_ALLOCATOR_HEAP && !get_bit_by_address(elem)) {
+    //if (elem != START_ALLOCATOR_HEAP && !get_bit_by_address(elem)) {
+    if (get_bit_by_address(elem)) {
         set_bit_by_address(elem, 1);
         push(stack, elem);
     }

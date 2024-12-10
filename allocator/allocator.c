@@ -88,6 +88,7 @@ unsigned char get_bit_by_address(size_t object_addr) {
 
 	size_t byte_position = bitmap_addr + (object_index / (sizeof(unsigned char) * 8));
 	size_t bit_position = object_index % (sizeof(unsigned char) * 8);
+	printf("BIT = %d\n", (unsigned char)(((*(unsigned char*)byte_position) >> bit_position) & 1));
 
 	return (unsigned char)(((*(unsigned char*)byte_position) >> bit_position) & 1);
 }
