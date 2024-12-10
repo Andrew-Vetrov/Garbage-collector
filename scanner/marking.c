@@ -85,7 +85,7 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
         if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) < END_ALLOCATOR_HEAP) {
             size = get_object_size_by_address(*((size_t*)i));
             if (size > 0) {
-                printf("Started marking\n");
+                //printf("Started marking\n");
                 mark(*((size_t*)i));
             }
         }
