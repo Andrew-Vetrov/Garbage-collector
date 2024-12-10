@@ -1,16 +1,20 @@
 #include <sys/mman.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #define GET_BITMAP_ADDR(block_addr) ((block_addr) + (16))
 #define GET_OBJECT_SIZE_ADDR(block_addr) ((block_addr) + (8))
 #define GET_SLIDER_POSITION_ADDR(block_addr) ((block_addr) + (0))
-#define GET_SIZE_WITH_ALIGNMENT(size) ((((size) % (8) == (0)) ? (0) : (8) - ((size) % (8))) + (size))
+#define GET_SIZE_WITH_ALIGNMENT(size) \
+    ((((size) % (8) == (0)) ? (0) : (8) - ((size) % (8))) + (size))
 
 #define HEAP_SIZE (512 * 1024 * (size_t) 1024)
 #define BLOCK_SIZE (4 * (size_t) 1024)
 #define BLOCK_HEADER_SIZE (80)
 #define MAX_OBJECT_SIZE (2008)
+#define OBJECT_SIZE_UPPER_BOUND (MAX_OBJECT_SIZE + 1)
 #define BITMAP_BYTES_COUNT (64)
+#define BLOCKS_COUNT (HEAP_SIZE / BLOCK_SIZE)
 
 typedef struct Node_t {
 	size_t block_addr;
@@ -19,8 +23,8 @@ typedef struct Node_t {
 
 size_t START_ALLOCATOR_HEAP = 0;
 size_t END_ALLOCATOR_HEAP = 0;
-static Node NODES_LIST[HEAP_SIZE / BLOCK_SIZE];
-static Node* SEGREG_LIST[MAX_OBJECT_SIZE + 1] = { 0 };
+static Node* SEGREG_LIST[OBJECT_SIZE_UPPER_BOUND] = { 0 };
+static Node NODES_LIST[BLOCKS_COUNT];
 static Node* EMPTY_LIST_HEAD = 0;
 size_t end_rsp_value;
 
@@ -41,6 +45,11 @@ void show_bitmap(size_t object_addr) {
 	}
 }
 
+size_t get_block_addr(size_t object_addr) {
+	size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
+	return (object_addr - (object_relative_addr % BLOCK_SIZE));
+}
+
 void init_header(Node* entry, size_t object_size) {
 	size_t block_addr = entry->block_addr;
 
@@ -58,7 +67,7 @@ void init_header(Node* entry, size_t object_size) {
 
 void fill_all_bitmaps_with_zeros() {
 	Node* curr_entry;
-	for (int i = 1; i <= MAX_OBJECT_SIZE; i++) {
+	for (int i = 1; i < OBJECT_SIZE_UPPER_BOUND; i++) {
 		curr_entry = SEGREG_LIST[i];
 		while (curr_entry != NULL) {
 			size_t bitmap_addr = GET_BITMAP_ADDR(curr_entry->block_addr);
@@ -112,18 +121,18 @@ void set_bit_by_address(size_t object_addr, unsigned char bit) {
 	}
 }
 
-unsigned char is_bitmap_empty(size_t block_addr) {
+bool is_bitmap_empty(size_t block_addr) {
 	size_t bitmap_addr = GET_BITMAP_ADDR(block_addr);
 	size_t curr_bytes_addr = bitmap_addr;
 
 	for (int j = 0; j < BITMAP_BYTES_COUNT / sizeof(size_t); j++) {
 		if (*(size_t*)curr_bytes_addr != 0) {
-			return 1;
-		}
+            return false;
+        }
 		curr_bytes_addr += sizeof(size_t);
 	}
 
-	return 0;
+    return true;
 }
 
 size_t get_object_size_by_address(size_t object_addr) {
@@ -144,15 +153,15 @@ void init_allocator() {
 		fprintf(stderr, "Can't allocate allocator's heap!\n");
 		return;
 	}
-	END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
-	int nodes_count = HEAP_SIZE / BLOCK_SIZE;
 
-	for (int i = 0; i < nodes_count; i++) {
-		NODES_LIST[i].block_addr =
+    END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
+
+	for (int i = 0; i < BLOCKS_COUNT; i++) {
+		NODES_LIST[i].block_addr = 
 			START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
 		*(size_t*)NODES_LIST[i].block_addr =
 			NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
-		if (i != nodes_count - 1) {
+		if (i != BLOCKS_COUNT - 1) {
 			NODES_LIST[i].next_node = &NODES_LIST[i + 1];
 		}
 		else {
@@ -182,6 +191,52 @@ void destroy_allocator() {
 		fprintf(stderr, "Can't unmap heap!\n");
 	}
 }
+
+void sweep() {
+#ifdef DEBUG
+    int empty_nodes_count = 0;
+    int segreg_list_nodes_count = 0;
+#endif
+    EMPTY_LIST_HEAD = NULL;
+    for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
+        SEGREG_LIST[i] = NULL;
+    }
+ 
+    for (int i = 0; i < BLOCKS_COUNT; i++) {
+        *(size_t*) GET_SLIDER_POSITION_ADDR(NODES_LIST[i].block_addr) =
+            NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
+        NODES_LIST[i].next_node = NULL;
+        if (is_bitmap_empty(NODES_LIST[i].block_addr)) {
+#ifdef DEBUG
+            empty_nodes_count++;
+#endif
+            *(size_t*) GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr) = 0;
+            if (EMPTY_LIST_HEAD == NULL) {
+                EMPTY_LIST_HEAD = &NODES_LIST[i];
+            } else {
+                NODES_LIST[i].next_node = EMPTY_LIST_HEAD;
+                EMPTY_LIST_HEAD = &NODES_LIST[i];
+            }
+        } else {
+#ifdef DEBUG
+            segreg_list_nodes_count++;
+#endif
+            size_t object_size = 
+                *(size_t*) GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr);
+            if (SEGREG_LIST[object_size] == NULL) {
+                SEGREG_LIST[object_size] = &NODES_LIST[i];
+            } else {
+                NODES_LIST[i].next_node = SEGREG_LIST[object_size];
+                SEGREG_LIST[object_size] = &NODES_LIST[i];
+            }
+        }
+    }
+#ifdef DEBUG
+    printf("empty_nodes_count = %d\nsegreg_list_nodes_count = %d\n", 
+            empty_nodes_count, segreg_list_nodes_count);
+#endif
+}
+
 
 size_t allocate_new_object(size_t object_size) {
 	if (object_size > MAX_OBJECT_SIZE) {
