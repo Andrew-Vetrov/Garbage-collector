@@ -1,11 +1,13 @@
 #include "../allocator/allocator.h"
 #include <time.h>
 #include <stdio.h>
+#include <assert.h>
 
 void sweep();
 void set_bit_by_address(size_t object_addr, unsigned char bit);
+size_t get_block_addr(size_t object_address);
 
-int main() {
+void test_placing_after_sweeping() {
     clock_t start, stop;
     size_t objs[6];
     set_bit_by_address(objs[0] = allocate_new_object(8), 1);
@@ -22,11 +24,13 @@ int main() {
         printf("%d: %p\n", i, objs[i]);
     }
 #endif
-    if (((objs[3] - objs[0]) != 8) || ((objs[4] - objs[1]) != 32)
-            || ((objs[5] - objs[2]) != 1024)) {
-        fprintf(stderr, "objects was placed in different blocks after sweep()");
-        return 1;
-    }
-    printf("sweep completed in %ldms\n", (stop - start) / (CLOCKS_PER_SEC / 1000));
-    return 0;
+    assert(get_block_addr(objs[0]) == get_block_addr(objs[3]));
+    assert(get_block_addr(objs[1]) == get_block_addr(objs[4]));
+    assert(get_block_addr(objs[2]) == get_block_addr(objs[5]));
+    printf("sweep completed in %ldms\n", 
+            (stop - start) / (CLOCKS_PER_SEC / 1000));
+}
+
+int main() {
+    test_placing_after_sweeping();
 }
