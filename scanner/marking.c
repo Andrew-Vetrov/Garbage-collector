@@ -59,7 +59,7 @@ void mark(size_t* elem) {
     }
 }
 
-void scan(size_t elem) {
+void scan1(size_t elem) {
     size_t size = get_object_size_by_address(elem);
 
     for (int i = 0; i < size; i += sizeof(size_t)) {
@@ -72,11 +72,11 @@ void scan(size_t elem) {
     }
 }
 
-void closure() {
+void closure1() {
     size_t cur_elem;
     while (!is_empty(stack)) {
         cur_elem = pop(stack);
-        scan(cur_elem);
+        scan1(cur_elem);
     }
 }
 
@@ -115,7 +115,7 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
             }
         }
     }
-    closure();
+    closure1();
 }
 
 void full_marking() {

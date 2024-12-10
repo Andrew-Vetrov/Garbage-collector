@@ -15,7 +15,7 @@
 #define OBJECT_SIZE_UPPER_BOUND (MAX_OBJECT_SIZE + 1)
 #define BITMAP_BYTES_COUNT (64)
 #define BLOCKS_COUNT (HEAP_SIZE / BLOCK_SIZE)
-
+int counter = 0;//
 typedef struct Node_t {
 	size_t block_addr;
 	struct Node_t* next_node;
@@ -277,7 +277,10 @@ size_t allocate_new_object(size_t object_size) {
 		// if couldn't allocate - error
 
 		// put your code here :))
-		printf("Start GC marking\n");
+		counter++;
+		if (counter > 1000) {
+			printf("Start GC marking %d\n", counter);
+		}
 		full_marking();
 
 		sweep();
