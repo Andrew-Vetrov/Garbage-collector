@@ -29,11 +29,24 @@ void before_main(void) {
 
 
 bool is_pointer_valid(size_t object_addr) {
-    if (object_addr < START_ALLOCATOR_HEAP || object_addr >= END_ALLOCATOR_HEAP) {
+    if (object_addr < START_ALLOCATOR_HEAP || object_addr >= END_ALLOCATOR_HEAP) {              //pointer isn't in heap
         return false;
     }
 
-    //....
+    size_t block_addr = get_block_addr(object_addr);
+    size_t object_addr_in_block = object_addr - block_addr;
+
+    if (object_addr_in_block >= 0 && object_addr_in_block < BLOCK_HEADER_SIZE) {                //pointer to header
+        return false;
+    }
+
+    size_t object_size = GET_SIZE_WITH_ALIGNMENT(get_object_size_by_address(object_addr));      
+
+    if ((object_addr_in_block - BLOCK_HEADER_SIZE) % object_size != 0) {                        //pointer to wrong position in block
+        return false;
+    }
+
+    return true;
 }
 
 void mark(size_t* elem) {
