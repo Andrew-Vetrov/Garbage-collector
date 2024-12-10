@@ -174,7 +174,7 @@ void init_allocator() {
 
 Node* allocate_new_block() {
 	if (EMPTY_LIST_HEAD == NULL) {
-		fprintf(stderr, "No empty blocks in garbage collector!\n");
+		//fprintf(stderr, "No empty blocks in garbage collector!\n");
 		return NULL;
 	}
 	else {
@@ -271,15 +271,16 @@ size_t allocate_new_object(size_t object_size) {
 
 		curr_entry = SEGREG_LIST[object_size] = curr_entry->next_node;
 	}
-
 	if ((curr_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
 		fill_all_bitmaps_with_zeros();
 		// call GC and then try to allocate new object again?
 		// if couldn't allocate - error
 
 		// put your code here :))
+		printf("Start GC marking\n");
 		full_marking();
-		printf("Did marking\n");
+
+		sweep();
 
 	}
 	else {

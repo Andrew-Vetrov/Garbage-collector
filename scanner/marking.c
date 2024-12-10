@@ -51,7 +51,9 @@ bool is_pointer_valid(size_t object_addr) {
 
 void mark(size_t* elem) {
     //if (elem != START_ALLOCATOR_HEAP && !get_bit_by_address(elem)) {
-    if (get_bit_by_address(elem)) {
+    printf("%p\n", elem);
+    printf("BIT = %d\n", get_bit_by_address(elem));
+    if (!get_bit_by_address(elem)) {
         set_bit_by_address(elem, 1);
         push(stack, elem);
     }
@@ -104,7 +106,8 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
     size_t size;
     stack = create_stack();
     for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
-        if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) < END_ALLOCATOR_HEAP) {
+        if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) < END_ALLOCATOR_HEAP
+            && is_pointer_valid(i)) {
             size = get_object_size_by_address(*((size_t*)i));
             if (size > 0) {
                 //printf("Started marking\n");
@@ -118,5 +121,5 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
 void full_marking() {
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);
-    segment_traverse(&__bss_start, &end); //264166
+    segment_traverse(&__bss_start, &end);
 }

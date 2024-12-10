@@ -42,7 +42,7 @@ int main() {
 				continue;
 			}
 			printf("\033[1;42mCompiled successfuly\033[0m\n");
-			alarm(10);
+			//alarm(10);
 			execl("./test", "./test", (char*)NULL);
 		}
 		else {

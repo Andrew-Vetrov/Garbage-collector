@@ -3,10 +3,13 @@
 #include <stdio.h>
 
 int main() {
-	for (int i = 0; i < 10000000; i++) {
-		allocate_new_object(10);
+	const int size = 10000;
+	void* a[size];
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			a[j] = allocate_new_object(16);
+		}
 	}
-	//full_marking();
 
 	return 0;
 }
