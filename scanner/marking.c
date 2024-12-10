@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -26,6 +27,14 @@ void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
+
+bool is_pointer_valid(size_t object_addr) {
+    if (object_addr < START_ALLOCATOR_HEAP || object_addr >= END_ALLOCATOR_HEAP) {
+        return false;
+    }
+
+    //....
+}
 
 void mark(size_t* elem) {
     //if (elem != START_ALLOCATOR_HEAP && !get_bit_by_address(elem)) {
