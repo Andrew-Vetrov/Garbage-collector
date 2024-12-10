@@ -400,11 +400,17 @@ size_t allocate_new_object(size_t object_size) {
         curr_entry = SEGREG_LIST[object_size] = curr_entry->next_node;
     }
 
+<<<<<<< HEAD
     if ((curr_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
         fill_all_bitmaps_with_zeros();
         return NULL;
     } else {
         init_header(curr_entry, object_size);
+=======
+		// put your code here :))
+		full_marking();
+		printf("Did marking\n");
+>>>>>>> 6f820c4 (Commit small changes to pull)
 
         block_addr = curr_entry->block_addr;
         slider_position = *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr);
