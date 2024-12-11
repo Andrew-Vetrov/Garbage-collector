@@ -271,16 +271,15 @@ size_t allocate_new_object(size_t object_size) {
 
 		curr_entry = SEGREG_LIST[object_size] = curr_entry->next_node;
 	}
+	counter++;
+	printf("Allocated %d\n", counter);
 	if ((curr_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
 		fill_all_bitmaps_with_zeros();
 		// call GC and then try to allocate new object again?
 		// if couldn't allocate - error
 
 		// put your code here :))
-		counter++;
-		if (counter > 1000) {
-			printf("Start GC marking %d\n", counter);
-		}
+		
 		full_marking();
 
 		sweep();
