@@ -35,7 +35,7 @@ int main() {
 		if (pid == 0) {
 			char command[BUFSIZ] = "gcc ";
 			strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
-			strncat(command, " -o test *.o -L./ -l:testlib.a", 31);
+			strncat(command, " -o test *.o -L./ -l:testlib.a -w", 34);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
 				printf("\033[1;41mCompilation failed\033[0m\n");

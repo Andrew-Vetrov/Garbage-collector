@@ -10,6 +10,6 @@ int main() {
 			a[j] = allocate_new_object(16);
 		}
 	}
-
+	printf("GC amount = %d\n", counter);
 	return 0;
 }
