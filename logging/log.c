@@ -52,7 +52,7 @@ void log(log_t type, log_t result) {
 					}
 
 					if (!file_size) {
-						fprintf(build_count, "1");
+						fprintf(build_count, "1\n");
 						log_file_name[0] = '1';
 						log_file_name[1] = '.', log_file_name[2] = 'l', log_file_name[3] = 'o', log_file_name[4] = 'g';
 						log_file_name[5] = 0;
@@ -68,7 +68,7 @@ void log(log_t type, log_t result) {
 							perror("Error opening the file \"build_count.log\".\n");
 						}
 
-						fprintf(build_count, "%d", ++last_build_number);
+						fprintf(build_count, "%d\n", ++last_build_number);
 						fclose(build_count);
 
 						int last_build_number_copy = last_build_number;
@@ -79,7 +79,7 @@ void log(log_t type, log_t result) {
 						}
 
 						while (last_build_number) {
-							log_file_name[number_len - 1 - indx_in_name] = last_build_number % 10;
+							log_file_name[number_len - 1 - indx_in_name] = (last_build_number % 10) + '0';
 							last_build_number /= 10;
 							indx_in_name++;
 						}
@@ -88,7 +88,7 @@ void log(log_t type, log_t result) {
 						log_file_name[number_len++] = 0;
 					}
 
-					log_file = fopen(log_file_name, "a");
+					log_file = fopen(log_file_name, "a+");
 					if (!log_file) {
 						perror("Error opening log_file.\n");
 					}
