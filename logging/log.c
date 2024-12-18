@@ -1,9 +1,9 @@
 #include "log.h"
 
 FILE* log_file = NULL;
-size_t last_object_size = 0, memory_limit = 0, memory_used = 0, object_count = 0;
+size_t last_object_size = 0, memory_limit = 0, memory_used = 0, object_count = 0, marked_objects = 0;
 clock_t start_time = 0, end_time = 0;
-char log_file_name[] = "x.log";
+char log_file_name[20];
 
 static double log_time() {
 	end_time = clock();
@@ -24,7 +24,7 @@ static void add_log_line(const FILE* file, const char* format, ...) {
 }
 
 void set_memory_limit(size_t heap_size, size_t percent) {
-	memory_limit = (size_t) (heap_size * (double)percent / 100);
+	memory_limit = heap_size * percent / 100;
 	add_log_line(log_file, "[%09.4lf] User memory limit set: %lu bytes.\n", log_time(), memory_limit);
 }
 
@@ -54,10 +54,12 @@ void log(log_t type, log_t result) {
 					if (!file_size) {
 						fprintf(build_count, "1");
 						log_file_name[0] = '1';
+						log_file_name[1] = '.', log_file_name[2] = 'l', log_file_name[3] = 'o', log_file_name[4] = 'g';
+						log_file_name[5] = 0;
 					}
 
 					else {
-						int last_build_number;
+						int last_build_number, indx_in_name = 0, number_len = 0;
 						fscanf(build_count, "%d", &last_build_number);
 						fclose(build_count);
 
@@ -69,7 +71,21 @@ void log(log_t type, log_t result) {
 						fprintf(build_count, "%d", ++last_build_number);
 						fclose(build_count);
 
-						log_file_name[0] = last_build_number + '0';
+						int last_build_number_copy = last_build_number;
+
+						while (last_build_number_copy) {
+							last_build_number_copy /= 10;
+							number_len++;
+						}
+
+						while (last_build_number) {
+							log_file_name[number_len - 1 - indx_in_name] = last_build_number % 10;
+							last_build_number /= 10;
+							indx_in_name++;
+						}
+
+						log_file_name[number_len++] = '.', log_file_name[number_len++] = 'l', log_file_name[number_len++] = 'o', log_file_name[number_len++] = 'g';
+						log_file_name[number_len++] = 0;
 					}
 
 					log_file = fopen(log_file_name, "a");
@@ -117,13 +133,22 @@ void log(log_t type, log_t result) {
 
 					break;
 
-				case EMPTY_LIST_HEAD_IS_NULL:
-					add_log_line(log_file, "[%09.4lf] Denied: empty list head is NULL.\n", log_time());
+				case OK:
+					add_log_line(log_file, "[%09.4lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used += last_object_size, memory_limit, ++object_count, memory_limit - memory_used, memory_limit);
+
+					break;
+			}
+
+		case MARK:
+			switch (result) {
+				case START:
+					add_log_line(log_file, "[%09.4lf] The Mark stage started.\n", log_time());
+					marked_objects = 0;
 
 					break;
 
 				case OK:
-					add_log_line(log_file, "[%09.4lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), memory_used += last_object_size, memory_limit, ++object_count, memory_limit - memory_used, memory_limit);
+					add_log_line(log_file, "[%09.4lf] A new object marked. Total marked objects: %lu.\n", log_time(), ++marked_objects);
 
 					break;
 			}

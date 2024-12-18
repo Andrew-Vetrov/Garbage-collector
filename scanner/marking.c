@@ -32,6 +32,8 @@ void mark(size_t* elem) {
     if (elem != START_ALLOCATOR_HEAP && !get_bit_by_address(elem)) {
         set_bit_by_address(elem, 1);
         push(stack, elem);
+
+        log(MARK, OK);
     }
 }
 
@@ -94,6 +96,8 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
 }
 
 void full_marking() {
+    log(MARK, START);
+
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);
     segment_traverse(&__bss_start, &end); //264166
