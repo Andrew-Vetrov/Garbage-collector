@@ -8,7 +8,7 @@
 #define INIT_ALLOCATOR 0
 #define DESTROY_ALLOCATOR 1
 #define ALLOCATE_NEW_OBJECT 2
-#define EMPTY_LIST_HEAD_IS_NULL 3
+#define MARK 3
 
 #define START 0
 #define OK 1
