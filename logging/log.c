@@ -37,17 +37,17 @@ void log(log_t type, log_t result) {
 				case START:
 					build_count = fopen("build_count.log", "a+");
 					if (!build_count) {
-						perror("Error opening the file \"build_count.log\".\n");
+						perror("Error opening the file \"build_count.log\".");
 					}
 
 					if (fseek(build_count, 0, SEEK_END)) {
-						perror("Error: fseek.\n");
+						perror("Error: fseek.");
 						fclose(build_count);
 					}
 
 					long file_size = ftell(build_count);
 					if (file_size == -1L) {
-						perror("Error: ftell.\n");
+						perror("Error: ftell.");
 						fclose(build_count);
 					}
 
@@ -60,12 +60,17 @@ void log(log_t type, log_t result) {
 
 					else {
 						int last_build_number, indx_in_name = 0, number_len = 0;
+						if (fseek(build_count, 0, SEEK_SET) != 0) {
+							perror("Error: fseek.");
+							fclose(last_build_number);
+						}
+
 						fscanf(build_count, "%d", &last_build_number);
 						fclose(build_count);
 
 						build_count = fopen("build_count.log", "w");
 						if (!build_count) {
-							perror("Error opening the file \"build_count.log\".\n");
+							perror("Error opening the file \"build_count.log\".");
 						}
 
 						fprintf(build_count, "%d\n", ++last_build_number);
@@ -90,7 +95,7 @@ void log(log_t type, log_t result) {
 
 					log_file = fopen(log_file_name, "a+");
 					if (!log_file) {
-						perror("Error opening log_file.\n");
+						perror("Error opening log_file.");
 					}
 
 					add_log_line(log_file, "[0000.0000] Start of allocator initialization.\n");
@@ -134,7 +139,9 @@ void log(log_t type, log_t result) {
 					break;
 
 				case OK:
-					add_log_line(log_file, "[%09.4lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used += last_object_size, memory_limit, ++object_count, memory_limit - memory_used, memory_limit);
+					object_count;
+					memory_used += last_object_size;
+					add_log_line(log_file, "[%09.4lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
 
 					break;
 			}
@@ -148,7 +155,8 @@ void log(log_t type, log_t result) {
 					break;
 
 				case OK:
-					add_log_line(log_file, "[%09.4lf] A new object marked. Total marked objects: %lu.\n", log_time(), ++marked_objects);
+					marked_objects++;
+					add_log_line(log_file, "[%09.4lf] A new object marked. Total marked objects: %lu.\n", log_time(), marked_objects);
 
 					break;
 			}
