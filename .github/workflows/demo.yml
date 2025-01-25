@@ -1,0 +1,10 @@
+name: Demo
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Make library
+        run: make
