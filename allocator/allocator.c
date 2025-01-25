@@ -15,7 +15,7 @@
 #define OBJECT_SIZE_UPPER_BOUND (MAX_OBJECT_SIZE + 1)
 #define BITMAP_BYTES_COUNT (64)
 #define BLOCKS_COUNT (HEAP_SIZE / BLOCK_SIZE)
-int counter = 0;//
+int counter = 0;
 typedef struct Node_t {
 	size_t block_addr;
 	struct Node_t* next_node;
@@ -237,7 +237,7 @@ void sweep() {
 #endif
 }
 
-
+int cnt = 0;
 size_t allocate_new_object(size_t object_size) {
 	if (object_size > MAX_OBJECT_SIZE) {
 		fprintf(stderr, "Size of object is too large\n");
@@ -271,23 +271,22 @@ size_t allocate_new_object(size_t object_size) {
 
 		curr_entry = SEGREG_LIST[object_size] = curr_entry->next_node;
 	}
-	//if (counter) { printf("did something\n"); }
-	//printf("Allocated %d\n", counter);
 	if ((curr_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
+		printf("GC\n");
 		fill_all_bitmaps_with_zeros();
-		// call GC and then try to allocate new object again?
-		// if couldn't allocate - error
-
-		// put your code here :))
-		//printf("Marking\n");
+		
+		if (cnt == 1) {
+			printf("Gone wrong\n");
+		}
+		cnt = 1;
 		full_marking();
-		//printf("Sweeping\n");
 		sweep();
-		//printf("End sweep\n");
 		counter++;
+		return allocate_new_object(object_size);
 
 	}
 	else {
+		cnt = 0;
 		init_header(curr_entry, object_size);
 
 		block_addr = curr_entry->block_addr;

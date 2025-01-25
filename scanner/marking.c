@@ -61,7 +61,7 @@ void mark(size_t* elem) {
 
 void scan(size_t elem) {
     size_t size = get_object_size_by_address(elem);
-
+    printf("Haha\n");
     for (int i = 0; i < size; i += sizeof(size_t)) {
         if (*((size_t*)(elem + i)) >= START_ALLOCATOR_HEAP && *((size_t*)(elem + i)) < END_ALLOCATOR_HEAP) {
             if (get_object_size_by_address(elem + i) == 0) { 
