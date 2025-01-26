@@ -10,6 +10,7 @@ jobs:
         run: make
   test:
     needs: [compile]
+    runs-on: ubuntu-latest
     steps:
      - name: Checkout
        uses: actions/checkout@v3
