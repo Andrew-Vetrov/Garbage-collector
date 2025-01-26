@@ -14,6 +14,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Run tests
-        run: gcc testing_system/testing_system.c -o run
-        run: ./run
+      - name: Compile testing system
+        run: gcc testing_system/testing_system.c -o ./testing_system/run
+      - name: Execute tests
+        run: ./testyng_system/run
