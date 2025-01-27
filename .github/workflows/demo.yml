@@ -1,0 +1,22 @@
+name: Demo
+on:
+  push: {}
+  pull_request: {}
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Make library
+        run: make
+  test:
+    needs: [compile]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Compile testing system
+        run: gcc testing_system/testing_system.c -o testing_system/run
+      - name: Execute tests
+        run: ./testing_system/run
