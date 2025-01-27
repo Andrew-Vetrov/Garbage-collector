@@ -16,7 +16,5 @@ jobs:
         uses: actions/checkout@v3
       - name: Compile testing system
         run: gcc testing_system/testing_system.c -o testing_system/run
-      - name: Change dir
-        run: cd testing_system
-      - name: Execute
+      - name: Execute tests
         run: ./run
