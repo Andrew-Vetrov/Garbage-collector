@@ -4,9 +4,11 @@ CC = gcc
 
 CFLAGS = -w
 
-SRC = ./allocator/allocator.c ./scanner/marking.c ./scanner/stack.c
+SRC = allocator/allocator.c scanner/marking.c scanner/stack.c
 
 OBJ = $(SRC:.c=.o)
+
+BUILD_DIR = build
 
 all: $(LIB_NAME)
 

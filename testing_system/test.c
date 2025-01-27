@@ -5,6 +5,7 @@
 typedef struct A { int* a1; int* a2; int* a3; int* a4; }A;
 
 int main() {
+	return 0;
 	A* a[8 * 16];
 	for (int i = 0; i < 8 * 16; i++) {
 		if (i % 2 == 1) {

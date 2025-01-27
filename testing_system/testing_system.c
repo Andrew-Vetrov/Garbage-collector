@@ -16,7 +16,7 @@ int main() {
 	int compilation_result;
 	int runtime_result;
 	directory = opendir(".");
-
+	char OBJ[] = "../allocator/allocator.o ../scanner/marking.o ../scanner/stack.o";
 	while (1) {
 		inp = readdir(directory);
 		if (inp == NULL) {
@@ -26,8 +26,6 @@ int main() {
 			matched_names[match_counter++] = inp->d_name;
 		}
 	}
-	system("gcc -c ../scanner/marking.c ../scanner/stack.c ../allocator/allocator.c -w");
-	system("ar r testlib.a *.o");
 	for (int i = 0; i < match_counter; i++) {
 		char command[BUFSIZ] = "gcc ";
 		printf("\nTesting %s\n", matched_names[i]);
@@ -35,7 +33,9 @@ int main() {
 		if (pid == 0) {
 			char command[BUFSIZ] = "gcc ";
 			strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
-			strncat(command, " -o test *.o -L./ -l:testlib.a", 30);
+			strncat(command, " -o test ", 9);
+			strncat(command, OBJ, strlen(OBJ));
+			strncat(command, " -L./ -l:../lib.a", 22);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
 				printf("\033[1;41mCompilation failed\033[0m\n");
