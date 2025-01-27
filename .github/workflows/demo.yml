@@ -17,4 +17,5 @@ jobs:
       - name: Compile testing system
         run: gcc testing_system/testing_system.c -o testing_system/run
       - name: Execute tests
-        run: ./testing_system/run
+         run: cd testing_system
+         run: ./run
