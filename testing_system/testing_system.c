@@ -59,9 +59,7 @@ int main() {
 			printf("\033[1;41mAn error occured while runtime\033[0m\n");
 		}
 	}
-	system("rm test");
-	system("rm *.o");
-	system("rm testlib.a");
+	system("rm testing_system/test");
 	closedir(directory);
 	return 0;
 }
