@@ -1,6 +1,7 @@
 name: Demo
-on: push:
-    pull_request:
+on:
+  push: {}
+  pull_request: {}
 jobs:
   compile:
     runs-on: ubuntu-latest
