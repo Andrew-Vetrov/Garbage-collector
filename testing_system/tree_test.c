@@ -26,7 +26,7 @@ Node* build_tree(int depth) {
 }
 
 int main() {
-    const int depth = 30;
+    const int depth = 20;
     const int size = 10;
     Node* array[size];
     for (int i = 0; i < size; i++) {
