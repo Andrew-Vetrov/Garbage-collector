@@ -26,13 +26,7 @@ Node* build_tree(int depth) {
 }
 
 int main() {
-    int size1 = 10000000;
-    void* test_arr[size1];
-    for (int i = 0; i < size1; i++) {
-        test_arr[i] = allocate_new_object(16);
-    }
-    return 0;
-    const int depth = 40;
+    const int depth = 30;
     const int size = 10;
     Node* array[size];
     for (int i = 0; i < size; i++) {
