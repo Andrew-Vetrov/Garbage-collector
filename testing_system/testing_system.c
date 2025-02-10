@@ -41,7 +41,7 @@ int main() {
 			strncat(command, " -o test ", 9);
 			strncat(command, OBJ, strlen(OBJ));
 			strncat(command, " -L./ -l:./lib.a", 22);
-
+			printf("%s\n", command);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
 				printf("\033[1;41mCompilation failed\033[0m\n");
