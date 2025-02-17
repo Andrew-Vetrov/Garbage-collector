@@ -56,16 +56,16 @@ int main() {
 			waitpid(pid, &status, 0);
 			if (WIFSIGNALED(status)) {
 				printf("\033[1;43mTime limit exceed\033[0m\n");
-				continue;
 			}
 			if (WEXITSTATUS(status) == 0) {
 				printf("\033[1;42mExecuted successfuly\033[0m\n");
 				continue;
 			}
 			printf("\033[1;41mAn error occured while runtime\033[0m\n");
+			return 1;
 		}
 	}
-	//system("rm ./testing_system/test");
+	system("rm test");
 	closedir(directory);
 	printf("ENDED SUCCESSFULLY\n");
 	return 0;
