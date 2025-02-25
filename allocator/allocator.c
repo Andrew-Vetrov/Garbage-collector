@@ -404,7 +404,7 @@ size_t gc_malloc(size_t size) {
 	if (size >= 1 && size <= MAX_OBJECT_SIZE) {
 		res = allocate_new_object(size);
 		if (res == NULL) {
-			// collect();
+			collect();
 			res = allocate_new_object(size);
 			if (res == NULL) {
 				fprintf(stderr, "No memory in small heap!\n");
@@ -413,7 +413,7 @@ size_t gc_malloc(size_t size) {
 	} else if (size > MAX_OBJECT_SIZE && size <= HEAP_SIZE) {
 		res = allocate_new_BIG_object(size);
 		if (res == NULL) {
-			// collect();
+			collect();
 			res = allocate_new_BIG_object(size);
 			if (res == NULL) {
 				fprintf(stderr, "No memory in BIG heap!\n");
