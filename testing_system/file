@@ -1,0 +1,1 @@
+(defun SQ (x y) (+ (* x x) (* y y)))
