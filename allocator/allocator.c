@@ -18,7 +18,7 @@
 #define OBJECT_SIZE_UPPER_BOUND (MAX_OBJECT_SIZE + 1)
 #define BITMAP_BYTES_COUNT (64)
 #define BLOCKS_COUNT (HEAP_SIZE / BLOCK_SIZE)
-int counter = 0;
+
 typedef struct Node_t {
 	size_t block_addr;
 	struct Node_t* next_node;
@@ -100,7 +100,6 @@ unsigned char get_bit_by_address(size_t object_addr) {
 
 	size_t byte_position = bitmap_addr + (object_index / (sizeof(unsigned char) * 8));
 	size_t bit_position = object_index % (sizeof(unsigned char) * 8);
-	//printf("BIT = %d\n", (unsigned char)(((*(unsigned char*)byte_position) >> bit_position) & 1));
 
 	return (unsigned char)(((*(unsigned char*)byte_position) >> bit_position) & 1);
 }
@@ -178,7 +177,7 @@ size_t get_object_size_by_address(size_t object_addr) {
 
 Node* allocate_new_block() {
 	if (EMPTY_LIST_HEAD == NULL) {
-		//fprintf(stderr, "No empty blocks in garbage collector!\n");
+		fprintf(stderr, "No empty blocks in garbage collector!\n");
 		return NULL;
 	}
 	else {
@@ -276,13 +275,8 @@ size_t allocate_new_object(size_t object_size) {
 		curr_entry = SEGREG_LIST[object_size] = curr_entry->next_node;
 	}
 	if ((curr_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
-		printf("GC\n");
 		fill_all_bitmaps_with_zeros();
-		
-		full_marking();
-		sweep();
-		counter++;
-		return allocate_new_object(object_size);
+		return NULL;
 	}
 	else {
 		init_header(curr_entry, object_size);
