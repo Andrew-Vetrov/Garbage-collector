@@ -118,6 +118,11 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
     closure();
 }
 
+void collect() {
+    full_marking();
+    sweep();
+}
+
 void full_marking() {
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);

@@ -1,6 +1,7 @@
 #include <sys/mman.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "../scanner/marking.h"
 
 #define GET_BITMAP_ADDR(block_addr) ((block_addr) + (16))
 #define GET_OBJECT_SIZE_ADDR(block_addr) ((block_addr) + (8))
