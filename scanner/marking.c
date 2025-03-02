@@ -7,6 +7,8 @@
 #include "stack.h"
 #include <assert.h>
 
+#include "../logging/log.h"
+
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 13
 #define STACK_INIT_CAPACITY 10
