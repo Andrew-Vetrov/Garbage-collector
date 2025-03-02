@@ -6,6 +6,8 @@
 #include "marking.h"
 #include "stack.h"
 
+#include "../logging/log.h"
+
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 13
 #define STACK_INIT_CAPACITY 10
@@ -56,6 +58,8 @@ void mark(size_t* elem) {
     if (!get_bit_by_address(elem)) {
         set_bit_by_address(elem, 1);
         push(stack, elem);
+
+        log(MARK, OK);
     }
 }
 
@@ -124,6 +128,8 @@ void collect() {
 }
 
 void full_marking() {
+    log(MARK, START);
+
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);
     segment_traverse(&__bss_start, &end);

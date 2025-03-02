@@ -10,10 +10,11 @@
 #define DESTROY_ALLOCATOR 1
 #define ALLOCATE_NEW_OBJECT 2
 #define MARK 3
+#define SWEEP 4
 
-#define START 0
-#define OK 1
 #define ERROR -1
+#define OK 0
+#define START 1
 
 typedef int8_t log_t;
 
@@ -25,6 +26,6 @@ void set_memory_limit(size_t heap_size, size_t percent);
 
 void log(log_t type, log_t result);
 
-int check_the_space(size_t object_size);
+log_t check_the_space(size_t object_size);
 
 #endif

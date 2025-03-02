@@ -3,7 +3,7 @@
 FILE* log_file = NULL;
 size_t last_object_size = 0, memory_limit = 0, memory_used = 0, object_count = 0, marked_objects = 0;
 clock_t start_time = 0, end_time = 0;
-char log_file_name[20];
+char log_file_name[25];
 
 static double log_time() {
 	end_time = clock();
@@ -59,8 +59,8 @@ void log(log_t type, log_t result) {
 			}
 
 			else {
-				int last_build_number, indx_in_name = 0, number_len = 0;
-				if (fseek(build_count, 0, SEEK_SET) != 0) {
+				int last_build_number, indx_in_name = 0, string_len = 0;
+				if (fseek(build_count, 0, SEEK_SET)) {
 					perror("Error: fseek.");
 					fclose(last_build_number);
 				}
@@ -80,17 +80,17 @@ void log(log_t type, log_t result) {
 
 				while (last_build_number_copy) {
 					last_build_number_copy /= 10;
-					number_len++;
+					string_len++;
 				}
 
 				while (last_build_number) {
-					log_file_name[number_len - 1 - indx_in_name] = (last_build_number % 10) + '0';
+					log_file_name[string_len - 1 - indx_in_name] = (last_build_number % 10) + '0';
 					last_build_number /= 10;
 					indx_in_name++;
 				}
 
-				log_file_name[number_len++] = '.', log_file_name[number_len++] = 'l', log_file_name[number_len++] = 'o', log_file_name[number_len++] = 'g';
-				log_file_name[number_len++] = 0;
+				log_file_name[string_len++] = '.', log_file_name[string_len++] = 'l', log_file_name[string_len++] = 'o', log_file_name[string_len++] = 'g';
+				log_file_name[string_len++] = 0;
 			}
 
 			log_file = fopen(log_file_name, "a+");
@@ -139,7 +139,7 @@ void log(log_t type, log_t result) {
 			break;
 
 		case OK:
-			object_count;
+			object_count++;
 			memory_used += last_object_size;
 			add_log_line(log_file, "[%09.4lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
 
@@ -160,18 +160,31 @@ void log(log_t type, log_t result) {
 
 			break;
 		}
+
+	case SWEEP:
+		switch (result) {
+		case START:
+			add_log_line(log_file, "[%09.4lf] The Sweep stage started.\n", log_time());
+
+			break;
+
+		case OK:
+			add_log_line(log_file, "[%09.4lf] Sweep stage completed.\n", log_time());
+
+			break;
+		}
 	}
 }
 
-int check_the_space(size_t object_size) {
+log_t check_the_space(size_t object_size) {
 	last_object_size = object_size;
 	add_log_line(log_file, "[%09.4lf] Request for space for a new object of %lu bytes in size.\n", log_time(), object_size);
 
 	if (memory_used + object_size > memory_limit) {
 		add_log_line(log_file, "[%09.4lf] Denied: memory limit exceeded. Free space: %lu/%lu bytes.\n", log_time(), memory_limit - memory_used, memory_limit);
 
-		return -1;
+		return ERROR;
 	}
 
-	return 0;
+	return OK;
 }
