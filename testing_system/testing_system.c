@@ -45,7 +45,7 @@ int main() {
 			compilation_result = system(command);
 			if (compilation_result == 256) {
 				printf("\033[1;41mCompilation failed\033[0m\n");
-				continue;
+				return 1;
 			}
 			printf("\033[1;42mCompiled successfuly\033[0m\n");
 			//alarm(10);
