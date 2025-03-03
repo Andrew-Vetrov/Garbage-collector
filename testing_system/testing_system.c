@@ -56,6 +56,7 @@ int main() {
 			waitpid(pid, &status, 0);
 			if (WIFSIGNALED(status)) {
 				printf("\033[1;43mTime limit exceed\033[0m\n");
+				return 1;
 			}
 			if (WEXITSTATUS(status) == 0) {
 				printf("\033[1;42mExecuted successfuly\033[0m\n");
