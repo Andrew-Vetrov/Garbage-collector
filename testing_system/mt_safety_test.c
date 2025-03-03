@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #define THREADS_COUNT 1000
-#include "../mt-safety/mt-safety-testing.h"
 #include "../mt-safety/mt-safety.h"
+#include "../mt-safety/threads-storage.h"
 
 void* thread_routine() { return NULL; }
 
