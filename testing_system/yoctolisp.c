@@ -769,7 +769,7 @@ static char *read_file(char *filename)
 	unsigned int file_size;
 
 
-	FILE *fs = fopen("file", "r");
+	FILE *fs = fopen("./testing_system/file", "r");
 	if (fs == NULL) {
 		perror("fopen");
 		exit(-1);
@@ -804,14 +804,14 @@ static void process_file(char *filename)
 int main(int argc, char *argv[])
 {
 	if (argc < 2) {
-		printf("Usage: %s <filename>\n", argv[0]);
-		exit(-1);
+		//printf("Usage: %s <filename>\n", argv[0]);
+		//exit(-1);
 	}
 
 	ylisp_init();
 
 	process_file("stdlib.l");
-	process_file(argv[1]);
+	process_file("file");
 
 	return 0;
 }
