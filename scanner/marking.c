@@ -59,7 +59,7 @@ void mark(size_t* elem) {
         set_bit_by_address(elem, 1);
         push(stack, elem);
 
-        log(MARK, OK);
+        log(MARK, ALIVE);
     }
 }
 
@@ -133,4 +133,6 @@ void full_marking() {
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);
     segment_traverse(&__bss_start, &end);
+
+    log(MARK, OK);
 }

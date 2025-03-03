@@ -16,7 +16,7 @@ int main() {
 	int compilation_result;
 	int runtime_result;
 	directory = opendir("./testing_system");
-	char OBJ[] = " ./allocator/allocator.o ./scanner/marking.o ./scanner/stack.o";
+	char OBJ[] = " ./allocator/allocator.o ./scanner/marking.o ./scanner/stack.o ./logging/log.o";
 	while (1) {
 		inp = readdir(directory);
 		if (inp == NULL) {

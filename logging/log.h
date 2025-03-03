@@ -15,6 +15,7 @@
 #define ERROR -1
 #define OK 0
 #define START 1
+#define ALIVE 2
 
 typedef int8_t log_t;
 
