@@ -151,7 +151,7 @@ void log(log_t type, log_t result) {
 		case OK:
 			object_count++;
 			memory_used += last_object_size;
-			add_log_line(log_file, "[%010.6lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
+			//add_log_line(log_file, "[%010.6lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
 
 			break;
 		}
@@ -169,12 +169,13 @@ void log(log_t type, log_t result) {
 
 		case ALIVE:
 			marked_objects++;
-			add_log_line(log_file, "[%010.6lf] A new object marked. Total marked objects: %lu.\n", log_time(), marked_objects);
+			//add_log_line(log_file, "[%010.6lf] A new object marked. Total marked objects: %lu.\n", log_time(), marked_objects);
 
 			break;
 
 		case OK:
-			add_log_line(log_file, "[%010.6lf] Mark stage %d completed.\n", log_time(), mark_stage_count);
+			add_log_line(log_file, "[%010.6lf] Mark stage %d completed. Objects collected: %lu.\n", log_time(), mark_stage_count, object_count - marked_objects);
+			object_count = marked_objects;
 
 			break;
 		}
@@ -201,7 +202,7 @@ void log(log_t type, log_t result) {
 
 log_t check_the_space(size_t object_size) {
 	last_object_size = object_size;
-	add_log_line(log_file, "[%010.6lf] Request for space for a new object of %lu bytes in size.\n", log_time(), object_size);
+	//add_log_line(log_file, "[%010.6lf] Request for space for a new object of %lu bytes in size.\n", log_time(), object_size);
 
 	if (memory_used + object_size > memory_limit) {
 		add_log_line(log_file, "[%010.6lf] Denied: memory limit exceeded. Free space: %lu/%lu bytes.\n", log_time(), memory_limit - memory_used, memory_limit);
