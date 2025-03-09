@@ -1,12 +1,1 @@
-;; Создаем функцию create-huge-list с помощью лямбда-функции
-(setq create-huge-list
-      (lambda (size)
-        (labels ((helper (n acc)
-                   (if (<= n 0)
-                       acc
-                       (helper (1- n) (cons n acc)))))
-          (helper size nil))))
-
-;; Пример использования
-(let ((huge-list (funcall create-huge-list 1000000)))  ;; Создаем список из 1 000 000 элементов
-  (format t "Список создан! Первые 10 элементов: ~a~%" (subseq huge-list 0 10)))
+(cons 1 (cons 2 ((cons 4 5)))

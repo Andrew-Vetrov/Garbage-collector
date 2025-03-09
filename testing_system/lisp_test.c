@@ -780,6 +780,11 @@ static char *read_file(char *filename)
 	result = allocate_new_object(file_size + 1); assert(result != NULL);
 	fread(result, 1, file_size, fs);
 	result[file_size] = '\0';
+	
+	if (fclose(fs) == EOF) {
+		perror("fclose");
+	}
+
 	return result;
 }
 
@@ -803,6 +808,7 @@ static void process_file(char *filename)
 
 int main(int argc, char *argv[])
 {
+	int size = (int)1e4;
 	if (argc < 2) {
 		//printf("Usage: %s <filename>\n", argv[0]);
 		//exit(-1);
@@ -811,8 +817,11 @@ int main(int argc, char *argv[])
 	ylisp_init();
 
 	process_file("stdlib.l");
-	process_file("file");
-
+	for (int i = 0; i < size; i++) {
+		process_file("file");
+		//printf("loop %d\n", i);
+	}
+	printf("%d\n", cnt1);
 	return 0;
 }
 
