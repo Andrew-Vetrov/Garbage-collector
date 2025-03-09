@@ -224,7 +224,7 @@ void init_allocator() {
     free_p = get_new_header();
 
     free_p->isMarked = false;
-    free_p->next_header = free_p;
+    free_p->next_header = NULL;
     free_p->size = HEAP_SIZE;
     free_p->addr = START_BIG_ALLOCATOR_HEAP;
 }
@@ -253,6 +253,7 @@ void destroy_allocator() {
 }
 
 void sweep() {
+    // start of sweeping small objects
 #ifdef DEBUG
     int empty_nodes_count = 0;
     int segreg_list_nodes_count = 0;
@@ -295,6 +296,73 @@ void sweep() {
     printf("empty_nodes_count = %d\nsegreg_list_nodes_count = %d\n", 
             empty_nodes_count, segreg_list_nodes_count);
 #endif
+
+    // start of sweeping BIG objects
+    if (!occupied_p)
+        return;
+
+    Header *prev = NULL, *curr = occupied_p, *move;
+
+    while (curr != NULL) {
+        if (curr->isMarked == true) {
+            curr->isMarked = false;
+            prev = curr;
+            curr = curr->next_header;
+        } else {
+            move = curr;
+
+            if (prev == NULL && curr->next_header == NULL) {
+                curr = occupied_p = NULL;
+            } else {
+                if (prev) {
+                    prev->next_header = curr->next_header;
+                    curr = curr->next_header;
+                } else {
+                    curr = occupied_p = curr->next_header;
+                }
+            }
+
+            move->next_header = NULL;
+
+            // find correct position for this header in free list
+
+            if (free_p == NULL) {
+                free_p = move;
+                free_p->next_header = NULL;
+            } else if (move->addr < free_p->addr) {
+                if (move->addr + move->size < free_p->addr) {
+                    move->next_header = free_p;
+                } else {
+                    move->size += free_p->size;
+                    move->next_header = free_p->next_header;
+                }
+                free_p = move;
+            } else {
+                Header *prev_free_p = free_p, *curr_free_p = free_p->next_header;
+            
+                while (curr_free_p && !(prev_free_p->addr < move->addr && move->addr < curr_free_p->addr)) {
+                    prev_free_p = curr_free_p;
+                    curr_free_p = curr_free_p->next_header;
+                }
+
+                if (curr_free_p) {
+                    if (move->addr + move->size < curr_free_p->addr)
+                        move->next_header = curr_free_p;
+                    else {
+                        move->size += curr_free_p->size;
+                        move->next_header = curr_free_p->next_header;
+                    }
+                }
+
+                if (prev_free_p->addr + prev_free_p->size < move->addr)
+                    prev_free_p->next_header = move;
+                else {
+                    prev_free_p->size += move->size;
+                    prev_free_p->next_header = move->next_header;
+                }
+            }
+        }
+    }
 }
 
 size_t allocate_new_object(size_t object_size) {
@@ -302,6 +370,7 @@ size_t allocate_new_object(size_t object_size) {
         fprintf(stderr, "Size of object is too large\n");
         return NULL;
     }
+
     asm volatile("mov %%rsp, %0" : "=r" (end_rsp_value));
     Node* curr_entry = SEGREG_LIST[object_size];
 
@@ -330,6 +399,7 @@ size_t allocate_new_object(size_t object_size) {
 
         curr_entry = SEGREG_LIST[object_size] = curr_entry->next_node;
     }
+
     if ((curr_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
         fill_all_bitmaps_with_zeros();
         return NULL;
@@ -345,7 +415,7 @@ size_t allocate_new_object(size_t object_size) {
 }
 
 size_t allocate_new_BIG_object(size_t object_size) {
-    Header *p, *prev;
+    Header *p, *prev = NULL;
 
     object_size = GET_SIZE_WITH_ALIGNMENT(object_size);
 
@@ -353,17 +423,20 @@ size_t allocate_new_BIG_object(size_t object_size) {
         return NULL;
     }
 
-    for (prev = free_p, p = free_p->next_header; ; prev = p, p = p->next_header) {
+    for (p = free_p; p != NULL; prev = p, p = p->next_header) {
         if (p->size >= object_size) {
 
             Header *new_header;
 
-            if (p->size == object_size || (p->size - object_size) < sizeof(Header)) {
-                // move entire block to the occupied blocks
-                if (prev == p) {
+            if (p->size == object_size) {
+                // move entire header to the occupied headers
+                if (prev == NULL && p->next_header == NULL) {
                     free_p = NULL;
                 } else {
-                    prev->next_header = p->next_header;
+                    if (prev)
+                        prev->next_header = p->next_header;
+                    else
+                       free_p = p->next_header; 
                 }
                 new_header = p;
             } else {
@@ -383,20 +456,17 @@ size_t allocate_new_BIG_object(size_t object_size) {
 
             if (occupied_p == NULL) {
                 occupied_p = new_header;
-                occupied_p->next_header = occupied_p;
+                occupied_p->next_header = NULL;
             } else {
-                Header *helper = occupied_p->next_header;
-                occupied_p->next_header = new_header;
-                new_header->next_header = helper;
+                new_header->next_header = occupied_p;
+                occupied_p = new_header;
             }
 
             return new_header->addr;
         }
-
-        if (p == free_p) {         // made a loop and didn't find enough memory
-            return NULL;
-        }
     }
+
+    return NULL;
 }
 
 size_t gc_malloc(size_t size) {
@@ -420,6 +490,6 @@ size_t gc_malloc(size_t size) {
             }
         }
     }
-    
+
     return res;
 }
