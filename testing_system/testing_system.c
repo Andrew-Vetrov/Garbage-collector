@@ -34,7 +34,7 @@ int main() {
 	for (int i = 0; i < match_counter; i++) {
 		int flag = 0;
 		char command[BUFSIZ] = "gcc ";
-		printf("\nTesting %s\n", matched_names[i]);
+		fprintf(stderr, "\nTesting %s\n", matched_names[i]);
 		pid_t pid = fork();
 		if (pid == 0) {
 			char command[BUFSIZ] = "gcc ";
@@ -52,10 +52,10 @@ int main() {
 			printf("Command %s\n", command);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
-				printf("\033[1;41mCompilation failed\033[0m\n");
+				fprintf(stderr, "\033[1;41mCompilation failed\033[0m\n");
 				return 1;
 			}
-			printf("\033[1;42mCompiled successfuly\033[0m\n");
+			fprintf(stderr, "\033[1;42mCompiled successfuly\033[0m\n");
 			//alarm(10);
 			if (flag) {
 				system("make clean");
@@ -67,15 +67,15 @@ int main() {
 			int status;
 			waitpid(pid, &status, 0);
 			if (WEXITSTATUS(status) == 0) {
-				printf("\033[1;42mExecuted successfuly\033[0m\n");
+				fprintf(stderr, "\n\033[1;42mExecuted successfuly\033[0m\n");
 				continue;
 			}
-			printf("\033[1;41mAn error occured while runtime\033[0m\n");
+			fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
 			return 1;
 		}
 	}
 	system("rm test");
 	closedir(directory);
-	printf("ENDED SUCCESSFULLY\n");
+	fprintf(stderr, "\nENDED SUCCESSFULLY\n");
 	return 0;
 }
