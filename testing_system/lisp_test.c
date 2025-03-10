@@ -821,7 +821,6 @@ int main(int argc, char *argv[])
 		process_file("file");
 		//printf("loop %d\n", i);
 	}
-	printf("%d\n", cnt1);
 	return 0;
 }
 
