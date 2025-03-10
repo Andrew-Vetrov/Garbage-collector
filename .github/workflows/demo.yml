@@ -18,6 +18,6 @@ jobs:
       - name: Make library
         run: make
       - name: Compile testing system
-        run: gcc testing_system/testing_system.c -o testing_system/run -w
+        run: gcc testing_system/testing_system.c -o testing_system/run
       - name: Execute tests
-        run: ./testing_system/run 1>/dev/null
+        run: ./testing_system/run

@@ -36,5 +36,3 @@ void show_bitmap(size_t object_address);
 
 extern int counter;
 
-extern int cnt;
-extern int cnt1;

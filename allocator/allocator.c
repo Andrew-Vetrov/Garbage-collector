@@ -175,6 +175,7 @@ size_t get_object_size_by_address(size_t object_addr) {
 		EMPTY_LIST_HEAD = &NODES_LIST[0];
 	}
 
+
 Node* allocate_new_block() {
 	if (EMPTY_LIST_HEAD == NULL) {
 		//fprintf(stderr, "No empty blocks in garbage collector!\n");
@@ -240,14 +241,12 @@ void sweep() {
 #endif
 }
 
-int cnt = 0;
-int cnt1 = 0;
 size_t allocate_new_object(size_t object_size) {
 	if (object_size > MAX_OBJECT_SIZE) {
 		fprintf(stderr, "Size of object is too large\n");
 		return NULL;
 	}
-	cnt1++;
+
 	asm volatile("mov %%rsp, %0" : "=r" (end_rsp_value));
 	Node* curr_entry = SEGREG_LIST[object_size];
 
@@ -280,17 +279,12 @@ size_t allocate_new_object(size_t object_size) {
 		printf("GC\n");
 		fill_all_bitmaps_with_zeros();
 		
-		if (cnt == 1) {
-			printf("Gone wrong\n");
-		}
-		cnt = 1;
 		full_marking();
 		sweep();
 		counter++;
 		return allocate_new_object(object_size);
 	}
 	else {
-		cnt = 0;
 		init_header(curr_entry, object_size);
 
 		block_addr = curr_entry->block_addr;
@@ -300,4 +294,3 @@ size_t allocate_new_object(size_t object_size) {
 		return slider_position;
 	}
 }
-	
