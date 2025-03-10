@@ -35,7 +35,6 @@ int main() {
 		int flag = 0;
 		char command[BUFSIZ] = "gcc ";
 		fprintf(stderr, "\nTesting %s\n", matched_names[i]);
-
 		pid_t pid = fork();
 		if (pid == 0) {
 			char command[BUFSIZ] = "gcc ";
@@ -72,7 +71,6 @@ int main() {
 				continue;
 			}
 			fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
-
 			return 1;
 		}
 	}
