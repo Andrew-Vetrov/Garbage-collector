@@ -19,8 +19,8 @@ void *wrap_user_routine(void *arg) {
 
     void *result = args->user_routine(args->arg);
 
-    free(args);
     destroy_cell(args->thread_node);
+    free(args);
 
     return result;
 }

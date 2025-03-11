@@ -4,6 +4,7 @@
 typedef struct StorageCell_t {
     pthread_t thread;
     struct StorageCell_t *next, *prev;
+    pthread_mutex_t lock;
 } StorageCell;
 
 StorageCell* create_cell_for_thread();

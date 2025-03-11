@@ -7,10 +7,10 @@
 
 static StorageCell *created_threads_list = NULL;
 
-pthread_mutex_t storage_lock = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t storage_lock =
+    PTHREAD_MUTEX_INITIALIZER;  // lock for work with created_threads_list
 
 StorageCell *create_cell_for_thread() {
-    pthread_mutex_lock(&storage_lock);
     StorageCell *new_node = (StorageCell *)calloc(1, sizeof(StorageCell));
 
     if (new_node == NULL) {
@@ -21,20 +21,22 @@ StorageCell *create_cell_for_thread() {
         exit(EXIT_FAILURE);
     }
 
-    new_node->prev = NULL;
+    pthread_mutex_init(&new_node->lock, NULL);
+
+    pthread_mutex_lock(&new_node->lock);
+    pthread_mutex_lock(&storage_lock);
 
     if (created_threads_list != NULL) {
         created_threads_list->prev = new_node;
-        new_node->next = created_threads_list;
-    } else {
-        new_node->next = NULL;
     }
 
+    new_node->next = created_threads_list;
     created_threads_list = new_node;
 #ifdef DEBUG
     fprintf(stderr, "Thread %lld was stored\n", thread);
 #endif
     pthread_mutex_unlock(&storage_lock);
+    pthread_mutex_unlock(&new_node->lock);
     return new_node;
 }
 
@@ -50,14 +52,18 @@ void destroy_cell(StorageCell *cell) {
     if (created_threads_list == cell) {
         created_threads_list = cell->next;
     }
+    free(cell);
 
     pthread_mutex_unlock(&storage_lock);
 }
 
 __attribute__((destructor)) void destroy_storage() {
+    StorageCell *prev = NULL;
     for (StorageCell *node = created_threads_list; node; node = node->next) {
-        free(node->prev);
+        free(prev);
+        prev = node;
     }
+    free(prev);
     created_threads_list = NULL;
 }
 
