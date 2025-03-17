@@ -6,6 +6,9 @@
 #ifndef LOG_H_
 #define LOG_H_
 
+#define BUFFER_SIZE 100000
+#define BUFFER_DEAD_NUMBER 200
+
 #define INIT_ALLOCATOR 0
 #define DESTROY_ALLOCATOR 1
 #define ALLOCATE_NEW_OBJECT 2
@@ -21,7 +24,9 @@ typedef int8_t log_t;
 
 static double log_time();
 
-static void add_log_line(const FILE* file, const char* format, ...);
+static void printf_in_file();
+
+static void add_log_line(const char* format, ...);
 
 void set_memory_limit(size_t heap_size, size_t percent);
 

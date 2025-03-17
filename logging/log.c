@@ -7,21 +7,33 @@ int mark_stage_count = 0, sweep_stage_count = 0;
 
 char log_file_name[25];
 
+char log_buffer[BUFFER_SIZE];
+char* buf_pos = log_buffer;
+
 static double log_time() {
 	end_time = clock();
 	return ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 }
 
-static void add_log_line(const FILE* file, const char* format, ...) {
-	va_list args;
-	va_start(args, format);
-
-	if (file) {
-		vfprintf(file, format, args);
+static void printf_in_file() {
+	if (log_file) {
+		fprintf(log_file, "%s", log_buffer);
+		buf_pos = log_buffer;
 	}
 
 	else {
 		perror("log_file is NULL.");
+	}
+}
+
+static void add_log_line(const char* format, ...) {
+	va_list args;
+	va_start(args, format);
+
+	buf_pos += vsprintf(buf_pos, format, args);
+	
+	if (log_buffer + BUFFER_SIZE - buf_pos <= BUFFER_DEAD_NUMBER) {
+		printf_in_file();
 	}
 
 #ifdef DEBUG
@@ -33,11 +45,14 @@ static void add_log_line(const FILE* file, const char* format, ...) {
 
 void set_memory_limit(size_t heap_size, size_t percent) {
 	memory_limit = heap_size * percent / 100;
-	add_log_line(log_file, "[%010.6lf] User memory limit set: %lu bytes.\n", log_time(), memory_limit);
+#ifdef LOG
+	add_log_line("[%010.6lf] User memory limit set: %lu bytes.\n", log_time(), memory_limit);
+#endif
 }
 
 void log(log_t type, log_t result) {
 	switch (type) {
+#ifdef LOG
 	case INIT_ALLOCATOR:
 		switch (result) {
 			FILE* build_count;
@@ -108,18 +123,18 @@ void log(log_t type, log_t result) {
 				perror("Error opening log_file.");
 			}
 			
-			add_log_line(log_file, "[000.000000] Start of allocator initialization.\n");
+			add_log_line("[000.000000] Start of allocator initialization.\n");
 			start_time = clock();
 
 			break;
 
 		case ERROR:
-			add_log_line(log_file, "[%010.6lf] Error initializing allocator: mmap() function returned MAP_FAILED.\n", log_time());
+			add_log_line("[%010.6lf] Error initializing allocator: mmap() function returned MAP_FAILED.\n", log_time());
 
 			break;
 
 		case OK:
-			add_log_line(log_file, "[%010.6lf] Allocator initialized.\n", log_time());
+			add_log_line("[%010.6lf] Allocator initialized.\n", log_time());
 
 			break;
 		}
@@ -129,52 +144,60 @@ void log(log_t type, log_t result) {
 	case DESTROY_ALLOCATOR:
 		switch (result) {
 		case ERROR:
-			add_log_line(log_file, "[%010.6lf] Error destroying allocator: munmap() function returned -1.\n", log_time());
+			add_log_line("[%010.6lf] Error destroying allocator: munmap() function returned -1.\n", log_time());
 
 			break;
 
 		case OK:
-			add_log_line(log_file, "[%010.6lf] Allocator destroyed.\n", log_time());
+			add_log_line("[%010.6lf] Allocator destroyed.\n", log_time());
+
+			if (buf_pos != log_file) {
+				printf_in_file();
+			}
 
 			break;
 		}
 
 		break;
+#endif
 
 	case ALLOCATE_NEW_OBJECT:
 		switch (result) {
+#ifdef LOG
 		case ERROR:
-			add_log_line(log_file, "[%010.6lf] Denied: size of object is too large.\n", log_time());
+			add_log_line("[%010.6lf] Denied: size of object is too large.\n", log_time());
 
 			break;
+#endif
 
 		case OK:
 			object_count++;
 			memory_used += last_object_size;
-			//add_log_line(log_file, "[%010.6lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
-
+#ifdef LOG
+			add_log_line("[%010.6lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
+#endif
 			break;
 		}
 
 		break;
 
+#ifdef LOG
 	case MARK:
 		switch (result) {
 		case START:
 			mark_stage_count++;
-			add_log_line(log_file, "[%010.6lf] Mark stage %d started.\n", log_time(), mark_stage_count);
+			add_log_line("[%010.6lf] Mark stage %d started.\n", log_time(), mark_stage_count);
 			marked_objects = 0;
 
 			break;
 
 		case ALIVE:
 			marked_objects++;
-			//add_log_line(log_file, "[%010.6lf] A new object marked. Total marked objects: %lu.\n", log_time(), marked_objects);
-
+			
 			break;
 
 		case OK:
-			add_log_line(log_file, "[%010.6lf] Mark stage %d completed. Objects collected: %lu.\n", log_time(), mark_stage_count, object_count - marked_objects);
+			add_log_line("[%010.6lf] Mark stage %d completed. Objects collected: %lu.\n", log_time(), mark_stage_count, object_count - marked_objects);
 			object_count = marked_objects;
 
 			break;
@@ -186,27 +209,28 @@ void log(log_t type, log_t result) {
 		switch (result) {
 		case START:
 			sweep_stage_count++;
-			add_log_line(log_file, "[%010.6lf] Sweep stage %d started.\n", log_time(), sweep_stage_count);
+			add_log_line("[%010.6lf] Sweep stage %d started.\n", log_time(), sweep_stage_count);
 
 			break;
 
 		case OK:
-			add_log_line(log_file, "[%010.6lf] Sweep stage %d completed.\n", log_time(), sweep_stage_count);
+			add_log_line("[%010.6lf] Sweep stage %d completed.\n", log_time(), sweep_stage_count);
 
 			break;
 		}
 
 		break;
+#endif
 	}
 }
 
 log_t check_the_space(size_t object_size) {
 	last_object_size = object_size;
-	//add_log_line(log_file, "[%010.6lf] Request for space for a new object of %lu bytes in size.\n", log_time(), object_size);
-
+	
 	if (memory_used + object_size > memory_limit) {
-		add_log_line(log_file, "[%010.6lf] Denied: memory limit exceeded. Free space: %lu/%lu bytes.\n", log_time(), memory_limit - memory_used, memory_limit);
-
+#ifdef LOG
+		add_log_line("[%010.6lf] Denied: memory limit exceeded. Free space: %lu/%lu bytes.\n", log_time(), memory_limit - memory_used, memory_limit);
+#endif
 		return ERROR;
 	}
 
