@@ -6,7 +6,7 @@
 #ifndef LOG_H_
 #define LOG_H_
 
-#define BUFFER_SIZE 100000
+#define BUFFER_SIZE 500000
 #define BUFFER_DEAD_NUMBER 200
 
 #define INIT_ALLOCATOR 0
