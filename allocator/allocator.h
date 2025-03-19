@@ -33,6 +33,4 @@ size_t get_block_addr(size_t object_address);
 
 void show_bitmap(size_t object_address);
 
-
-extern int counter;
-
+size_t gc_malloc(size_t size);
