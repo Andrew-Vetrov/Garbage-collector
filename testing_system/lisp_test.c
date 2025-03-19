@@ -249,9 +249,9 @@ static void mark_value(YLispValue *value)
 
 static void pin_variable(YLispValue **variable)
 {
-	GCPinnedVariable *pinned_var = allocate_new_object(sizeof(GCPinnedVariable));
+	GCPinnedVariable *pinned_var = gc_malloc(sizeof(GCPinnedVariable));
 	assert(pinned_var != NULL);
-	pinned_var->variable = variable;                                     //тут ошибка
+	pinned_var->variable = variable;                                     //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	pinned_var->next = pinned_vars; pinned_vars = pinned_var;
 }
 
@@ -271,7 +271,7 @@ static void unpin_variable(YLispValue **variable)
 static YLispValue *string_from_data(const char *data, size_t data_len)
 {
 	YLispValue *value;
-	char *s = allocate_new_object(data_len + 1); assert(s != NULL);
+	char *s = gc_malloc(data_len + 1); assert(s != NULL);
 	memcpy(s, data, data_len); s[data_len] = '\0';
 
 	value = ylisp_value(YLISP_STRING);
@@ -777,7 +777,7 @@ static char *read_file(char *filename)
 	fseek(fs, 0, SEEK_END);
 	file_size = ftell(fs);
 	fseek(fs, 0, SEEK_SET);
-	result = allocate_new_object(file_size + 1); assert(result != NULL);
+	result = gc_malloc(file_size + 1); assert(result != NULL);
 	fread(result, 1, file_size, fs);
 	result[file_size] = '\0';
 	

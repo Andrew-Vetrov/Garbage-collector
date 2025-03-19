@@ -8,7 +8,7 @@ typedef struct Node {
 } Node;
 
 Node* create_node() {
-    Node* node = (Node*)allocate_new_object(sizeof(Node));
+    Node* node = (Node*)gc_malloc(sizeof(Node));
     node->left = NULL;
     node->right = NULL;
     return node;
@@ -34,6 +34,5 @@ int main() {
             array[j] = build_tree(depth);
         }
     }
-    printf("GC amount = %d\n", counter);
     return 0;
 }

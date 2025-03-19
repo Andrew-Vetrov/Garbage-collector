@@ -15,7 +15,7 @@ typedef struct Node {
 Node* bigGraph = NULL;
 
 Node* createNode(int id) {
-    Node* node = (Node*)allocate_new_object(sizeof(Node));
+    Node* node = (Node*)gc_malloc(sizeof(Node));
     if (node == NULL) {
         fprintf(stderr, "Failed to allocate memory for node\n");
         exit(1);
@@ -28,7 +28,7 @@ Node* createNode(int id) {
 
 void addNeighbor(Node* node, Node* neighbor) {
     node->neighbor_count++;
-    node->neighbors = (Node**)allocate_new_object(node->neighbor_count * sizeof(Node*));
+    node->neighbors = (Node**)gc_malloc(node->neighbor_count * sizeof(Node*));
     if (node->neighbors == NULL) {
         fprintf(stderr, "Failed to allocate memory for neighbors\n");
         exit(1);

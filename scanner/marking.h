@@ -8,3 +8,4 @@ void push_registers_to_stack();
 void pop_registers_from_stack();
 void segment_traverse(size_t segment_start, size_t segment_end);
 void full_marking();
+void collect();
