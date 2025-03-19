@@ -31,9 +31,6 @@ StorageCell *create_cell_for_thread() {
 
     new_node->next = created_threads_list;
     created_threads_list = new_node;
-#ifdef DEBUG
-    fprintf(stderr, "Thread %lld was stored\n", thread);
-#endif
     pthread_mutex_unlock(&storage_lock);
     pthread_mutex_unlock(&new_node->lock);
     return new_node;
