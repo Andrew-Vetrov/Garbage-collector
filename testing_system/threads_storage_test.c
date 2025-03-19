@@ -26,7 +26,7 @@ int main() {
 #endif
     }
 
-    start_created_threads_traverse();
+    start_threads_storage_traverse();
 
     int threads_processed = 0;
 

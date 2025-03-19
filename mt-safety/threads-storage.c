@@ -17,7 +17,6 @@ StorageCell *create_cell_for_thread() {
         fprintf(stderr,
                 "garbage-collector: mt-safety: store_thread: malloc() "
                 "ended with an error\n");
-        pthread_mutex_unlock(&storage_lock);
         exit(EXIT_FAILURE);
     }
 
@@ -58,6 +57,7 @@ void destroy_cell(StorageCell *cell) {
 }
 
 __attribute__((destructor)) void destroy_storage() {
+    pthread_mutex_lock(&storage_lock);
     StorageCell *prev = NULL;
     for (StorageCell *node = created_threads_list; node; node = node->next) {
         free(prev);
@@ -65,6 +65,7 @@ __attribute__((destructor)) void destroy_storage() {
     }
     free(prev);
     created_threads_list = NULL;
+    pthread_mutex_unlock(&storage_lock);
 }
 
 // Start of storage traversing API
