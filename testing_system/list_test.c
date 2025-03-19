@@ -43,7 +43,6 @@ void print_list(Node* head) {
 }
 
 int main() {
-    *(0) = 1;
     Node* head = NULL;
     int size = (int)1e7;
     printf("Usage: %d\n", 10 * size * sizeof(Node)/1024/1024);
