@@ -32,41 +32,54 @@ int main() {
 	}
 	printf("CONTER %d\n", match_counter);
 	for (int i = 0; i < match_counter; i++) {
+		int flag = 0;
 		char command[BUFSIZ] = "gcc ";
-		printf("\nTesting %s\n", matched_names[i]);
+		fprintf(stderr, "\nTesting %s\n", matched_names[i]);
+
 		pid_t pid = fork();
 		if (pid == 0) {
 			char command[BUFSIZ] = "gcc ";
 			strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
-			//strncat(command, OBJ, strlen(OBJ));
+			
+			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {
+				flag = 1;
+				system("make clean");
+				system("make -f Makefile1");
+				//strncat(command, " -DLISP=1 ", 9);
+			}
+
 			strncat(command, " -L./ -l:lib.a", 22);
-			strncat(command, " -o test ", 9);
+			strncat(command, " -o test -w", 13);
 			printf("Command %s\n", command);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
-				printf("\033[1;41mCompilation failed\033[0m\n");
-				continue;
+				fprintf(stderr, "\033[1;41mCompilation failed\033[0m\n");
+				return 1;
 			}
-			printf("\033[1;42mCompiled successfuly\033[0m\n");
+			fprintf(stderr, "\033[1;42mCompiled successfuly\033[0m\n");
 			//alarm(10);
+			if (flag) {
+				system("make clean");
+				system("make");
+			}
 			execl("./test", "./test", (char*)NULL);
 		}
 		else {
 			int status;
 			waitpid(pid, &status, 0);
-			if (WIFSIGNALED(status)) {
-				printf("\033[1;43mTime limit exceed\033[0m\n");
-			}
 			if (WEXITSTATUS(status) == 0) {
-				printf("\033[1;42mExecuted successfuly\033[0m\n");
+				fprintf(stderr, "\n\033[1;42mExecuted successfuly\033[0m\n");
 				continue;
 			}
-			printf("\033[1;41mAn error occured while runtime\033[0m\n");
+			fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
+
 			return 1;
 		}
 	}
 	system("rm test");
 	closedir(directory);
-	printf("ENDED SUCCESSFULLY\n");
+
+	fprintf(stderr, "\nENDED SUCCESSFULLY\n");
+
 	return 0;
 }

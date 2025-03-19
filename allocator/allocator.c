@@ -8,7 +8,10 @@
 #define GET_SIZE_WITH_ALIGNMENT(size) \
     ((((size) % (8) == (0)) ? (0) : (8) - ((size) % (8))) + (size))
 
-#define HEAP_SIZE (512 * 1024 * (size_t) 1024)
+#ifndef HEAP_SIZE
+#define HEAP_SIZE (512 * 1024 * (size_t)1024)
+#endif
+
 #define BLOCK_SIZE (4 * (size_t) 1024)
 #define BLOCK_HEADER_SIZE (80)
 #define MAX_OBJECT_SIZE (2008)
@@ -143,34 +146,35 @@ size_t get_object_size_by_address(size_t object_addr) {
 	return object_size;
 }
 
-__attribute__((constructor))
-void init_allocator() {
-	START_ALLOCATOR_HEAP =
-		(size_t)mmap(NULL, HEAP_SIZE,
-			PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+	__attribute__((constructor))
+	void init_allocator() {
+		START_ALLOCATOR_HEAP =
+			(size_t)mmap(NULL, HEAP_SIZE,
+				PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 
-	if (START_ALLOCATOR_HEAP == MAP_FAILED) {
-		fprintf(stderr, "Can't allocate allocator's heap!\n");
-		return;
+		if (START_ALLOCATOR_HEAP == MAP_FAILED) {
+			fprintf(stderr, "Can't allocate allocator's heap!\n");
+			return;
+		}
+
+		END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
+
+		for (int i = 0; i < BLOCKS_COUNT; i++) {
+			NODES_LIST[i].block_addr = 
+				START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
+			*(size_t*)NODES_LIST[i].block_addr =
+				NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
+			if (i != BLOCKS_COUNT - 1) {
+				NODES_LIST[i].next_node = &NODES_LIST[i + 1];
+			}
+			else {
+				NODES_LIST[i].next_node = 0;
+			}
+		}
+
+		EMPTY_LIST_HEAD = &NODES_LIST[0];
 	}
 
-    END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
-
-	for (int i = 0; i < BLOCKS_COUNT; i++) {
-		NODES_LIST[i].block_addr = 
-			START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
-		*(size_t*)NODES_LIST[i].block_addr =
-			NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
-		if (i != BLOCKS_COUNT - 1) {
-			NODES_LIST[i].next_node = &NODES_LIST[i + 1];
-		}
-		else {
-			NODES_LIST[i].next_node = 0;
-		}
-	}
-
-	EMPTY_LIST_HEAD = &NODES_LIST[0];
-}
 
 Node* allocate_new_block() {
 	if (EMPTY_LIST_HEAD == NULL) {
@@ -237,12 +241,12 @@ void sweep() {
 #endif
 }
 
-int cnt = 0;
 size_t allocate_new_object(size_t object_size) {
 	if (object_size > MAX_OBJECT_SIZE) {
 		fprintf(stderr, "Size of object is too large\n");
 		return NULL;
 	}
+
 	asm volatile("mov %%rsp, %0" : "=r" (end_rsp_value));
 	Node* curr_entry = SEGREG_LIST[object_size];
 
@@ -275,18 +279,12 @@ size_t allocate_new_object(size_t object_size) {
 		printf("GC\n");
 		fill_all_bitmaps_with_zeros();
 		
-		if (cnt == 1) {
-			printf("Gone wrong\n");
-		}
-		cnt = 1;
 		full_marking();
 		sweep();
 		counter++;
 		return allocate_new_object(object_size);
-
 	}
 	else {
-		cnt = 0;
 		init_header(curr_entry, object_size);
 
 		block_addr = curr_entry->block_addr;
