@@ -1,10 +1,11 @@
+
 LIB_NAME = lib.a
 
 CC = gcc
 
 CFLAGS = -w
 
-SRC = allocator/allocator.c scanner/marking.c scanner/stack.c logging/log.c
+SRC = allocator/allocator.c scanner/marking.c scanner/stack.c
 
 OBJ = $(SRC:.c=.o)
 
