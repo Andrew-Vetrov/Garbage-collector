@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../allocator/allocator.h"
-// Структура узла двусвязного списка
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 typedef struct Node {
     int data;
     struct Node* prev;
@@ -9,14 +9,14 @@ typedef struct Node {
 } Node;
 
 Node* create_node(int data) {
-    Node* new_node = (Node*)allocate_new_object(sizeof(Node));
+    Node* new_node = (Node*)gc_malloc(sizeof(Node));
     new_node->data = data;
     new_node->prev = NULL;
     new_node->next = NULL;
     return new_node;
 }
 
-// Функция для добавления узла в конец списка
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 void append(Node** head, int data) {
     Node* new_node = create_node(data);
     if (*head == NULL) {
@@ -31,7 +31,7 @@ void append(Node** head, int data) {
     new_node->prev = temp;
 }
 
-// Функция для вывода списка
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 void print_list(Node* head) {
     Node* temp = head;
     printf("List: ");
