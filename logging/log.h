@@ -7,7 +7,7 @@
 #define LOG_H_
 
 #define BUFFER_SIZE 500000
-#define BUFFER_DEAD_NUMBER 200
+#define BUFFER_DEAD_NUMBER 256
 
 #define INIT_ALLOCATOR 0
 #define DESTROY_ALLOCATOR 1
@@ -27,6 +27,8 @@ static double log_time();
 static void printf_in_file();
 
 static void add_log_line(const char* format, ...);
+
+static void log_new_object();
 
 void set_memory_limit(size_t heap_size, size_t percent);
 

@@ -1,9 +1,9 @@
 #include "log.h"
 
 FILE* log_file = NULL;
-size_t last_object_size = 0, memory_limit = 0, memory_used = 0, object_count = 0, marked_objects = 0;
+size_t prev_object_size = -1, last_object_size = 0, memory_limit = 0, memory_used = 0, object_count = 0, marked_objects = 0;
 clock_t start_time = 0, end_time = 0;
-int mark_stage_count = 0, sweep_stage_count = 0;
+int mark_stage_count = 0, sweep_stage_count = 0, new_objects_count = 0;
 
 char log_file_name[25];
 
@@ -27,6 +27,12 @@ static void printf_in_file() {
 }
 
 static void add_log_line(const char* format, ...) {
+	if (new_objects_count != 0) {
+		add_log_line("[%010.6lf] OK. New objects with total size %lu bytes (count: %d, size of one object: %lu).\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size * (size_t)new_objects_count, new_objects_count, last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
+		prev_object_size = -1;
+		new_objects_count = 0;
+	}
+
 	va_list args;
 	va_start(args, format);
 
@@ -41,6 +47,16 @@ static void add_log_line(const char* format, ...) {
 #endif
 
 	va_end(args);
+}
+
+static void log_new_object() {
+	if (last_object_size != prev_object_size && prev_object_size != -1) {
+		add_log_line("[%010.6lf] OK. New objects with total size %lu bytes (count: %d, size of one object: %lu).\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size * (size_t)new_objects_count, new_objects_count, last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
+		new_objects_count = 0;
+	}
+
+	new_objects_count++;
+	prev_object_size = last_object_size;
 }
 
 void set_memory_limit(size_t heap_size, size_t percent) {
@@ -174,7 +190,11 @@ void log(log_t type, log_t result) {
 			object_count++;
 			memory_used += last_object_size;
 #ifdef LOG
+#ifndef FL
+			log_new_object();
+#else
 			add_log_line("[%010.6lf] OK. New object of size %lu bytes.\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
+#endif
 #endif
 			break;
 		}
