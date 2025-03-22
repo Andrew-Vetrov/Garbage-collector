@@ -24,6 +24,7 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
 };
 
 void before_main(void) {
+    stack = create_stack()
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
@@ -104,7 +105,6 @@ void pop_registers_from_stack() {
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
     size_t size;
-    stack = create_stack();
     for (size_t i = segment_start; i < segment_end; i += sizeof(size_t)) {
         if (*((size_t*)i) >= START_ALLOCATOR_HEAP && *((size_t*)i) < END_ALLOCATOR_HEAP
             && is_pointer_valid(i)) {
@@ -124,6 +124,7 @@ void collect() {
 }
 
 void full_marking() {
+    push_registers_to_stack()
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);
     segment_traverse(&__bss_start, &end);
