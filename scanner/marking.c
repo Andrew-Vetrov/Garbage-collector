@@ -24,7 +24,7 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
 };
 
 void before_main(void) {
-    stack = create_stack()
+    stack = create_stack();
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
@@ -124,7 +124,7 @@ void collect() {
 }
 
 void full_marking() {
-    push_registers_to_stack()
+    push_registers_to_stack();
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);
     segment_traverse(&__bss_start, &end);
