@@ -1,3 +1,5 @@
+#include "allocator.h"
+#include <assert.h>
 #include <sys/mman.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -494,15 +496,12 @@ size_t gc_malloc(size_t size) {
     return res;
 }
 
-size_t get_valid_object(size_t object_addr) {
-
-    size_t res = 0;
-
+int get_object(size_t object_addr, Object* object) {
     if (object_addr >= START_BIG_ALLOCATOR_HEAP && object_addr < END_BIG_ALLOCATOR_HEAP) {
         Header *curr_header = occupied_p;
         while (curr_header != NULL) {
             if (curr_header->addr <= object_addr && object_addr < curr_header->addr + curr_header->size) {
-                res = curr_header->addr;
+                *object = curr_header->addr;
                 break;
             }
             curr_header = curr_header->next_header;
@@ -512,17 +511,63 @@ size_t get_valid_object(size_t object_addr) {
         size_t object_addr_in_block = object_addr - block_addr;
 
         if (object_addr_in_block >= 0 && object_addr_in_block < BLOCK_HEADER_SIZE) {                // pointer to header
-            return res;
+            return INVALID_ADDRESS;
         }
 
         size_t object_size = GET_SIZE_WITH_ALIGNMENT(get_object_size_by_address(object_addr));   
 
         if (object_size == 0) {                                                                     // uninitialized block
-            return res;
+            return INVALID_ADDRESS;
         }
 
-        res = object_addr - ((object_addr_in_block - BLOCK_HEADER_SIZE) % object_size);
+        *object = object_addr - ((object_addr_in_block - BLOCK_HEADER_SIZE) % object_size);
+    } else {
+        return INVALID_ADDRESS;
     }
 
-    return res;
+    return 0;
+}
+
+void mark_object(Object object) {
+    size_t object_addr = get_object_addr(object);
+    if (object_addr >= START_BIG_ALLOCATOR_HEAP && object_addr < END_BIG_ALLOCATOR_HEAP) {
+        Header *curr_header = occupied_p;
+        while (curr_header != NULL) {
+            if (curr_header->addr == object_addr) {
+                curr_header->isMarked = true;
+                return;
+            }
+            curr_header = curr_header->next_header;
+        }
+    } else if (object_addr >= START_ALLOCATOR_HEAP && object_addr < END_ALLOCATOR_HEAP) {
+        set_bit_by_address(object_addr, 1);
+    } else {
+        fprintf(stderr, "Invalid address was given in mark_object()\n");
+        assert(false);
+    }
+}
+
+bool is_marked(Object object) {
+    size_t object_addr = get_object_addr(object);
+    if (object_addr >= START_BIG_ALLOCATOR_HEAP &&  
+        object_addr < END_BIG_ALLOCATOR_HEAP) {
+        Header *object_header = 0;
+        for (Header *curr_header = occupied_p; curr_header != NULL; 
+            curr_header = curr_header->next_header) {
+            if (curr_header->addr == object_addr) {
+                object_header = curr_header;
+                break;
+            }
+        }
+
+        assert(object_addr != 0);
+
+        return object_header->isMarked;
+    } else if (object_addr >= START_ALLOCATOR_HEAP && 
+               object_addr < END_ALLOCATOR_HEAP) {
+        return get_bit_by_address(object_addr) ? true : false;
+    } else {
+        fprintf(stderr, "Invalid address %p was given in is_marked()\n", object_addr);
+        assert(false);
+    }
 }
