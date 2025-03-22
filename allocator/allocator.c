@@ -493,3 +493,36 @@ size_t gc_malloc(size_t size) {
 
     return res;
 }
+
+size_t get_valid_object(size_t object_addr) {
+
+    size_t res = 0;
+
+    if (object_addr >= START_BIG_ALLOCATOR_HEAP && object_addr < END_BIG_ALLOCATOR_HEAP) {
+        Header *curr_header = occupied_p;
+        while (curr_header != NULL) {
+            if (curr_header->addr <= object_addr && object_addr < curr_header->addr + curr_header->size) {
+                res = curr_header->addr;
+                break;
+            }
+            curr_header = curr_header->next_header;
+        }
+    } else if (object_addr >= START_ALLOCATOR_HEAP && object_addr < END_ALLOCATOR_HEAP) {
+        size_t block_addr = get_block_addr(object_addr);
+        size_t object_addr_in_block = object_addr - block_addr;
+
+        if (object_addr_in_block >= 0 && object_addr_in_block < BLOCK_HEADER_SIZE) {                // pointer to header
+            return res;
+        }
+
+        size_t object_size = GET_SIZE_WITH_ALIGNMENT(get_object_size_by_address(object_addr));   
+
+        if (object_size == 0) {                                                                     // uninitialized block
+            return res;
+        }
+
+        res = object_addr - ((object_addr_in_block - BLOCK_HEADER_SIZE) % object_size);
+    }
+
+    return res;
+}
