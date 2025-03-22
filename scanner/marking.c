@@ -29,22 +29,14 @@ void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
-<<<<<<< HEAD
 void mark(Object object) {
     if (!is_marked(object)) {
         mark_object(object);
         push(stack, get_object_addr(object));
-=======
-void mark(size_t* elem) {
-    if (!is_marked(elem)) {
-        mark_object(elem);
-        push(stack, elem);
->>>>>>> 266071b (inner_pointer_fix: done)
     }
 }
 
 void scan(size_t object_addr) {
-<<<<<<< HEAD
     Object object;
     if (get_object(object_addr, &object) == INVALID_ADDRESS) {
         return;
@@ -55,14 +47,6 @@ void scan(size_t object_addr) {
         Object inner_object;
         if (get_object(*(size_t*)inner_object_addr, &inner_object) == 0) {
             mark(inner_object);
-=======
-    size_t object_start_addr = get_valid_object(object_addr);
-    size_t object_end_addr = object_start_addr + get_object_size_by_address(object_start_addr);
-    for (size_t inner_object_addr = object_start_addr; inner_object_addr < object_end_addr; inner_object_addr += sizeof(size_t)) {
-        size_t valid_inner_object_addr = get_valid_object(inner_object_addr);
-        if (valid_inner_object_addr != 0) {
-            mark((size_t*) valid_inner_object_addr);
->>>>>>> 266071b (inner_pointer_fix: done)
         }
     }
 }

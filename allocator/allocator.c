@@ -571,7 +571,8 @@ bool is_marked(Object object) {
     }
 }
 
-void mark_object(size_t object_addr) {
+void mark_object(Object object) {
+    size_t object_addr = get_object_addr(object);
     if (object_addr >= START_BIG_ALLOCATOR_HEAP && object_addr < END_BIG_ALLOCATOR_HEAP) {
         Header *curr_header = occupied_p;
         while (curr_header != NULL) {
@@ -589,24 +590,25 @@ void mark_object(size_t object_addr) {
     }
 }
 
-bool is_marked(size_t valid_object_addr) {
-    if (valid_object_addr >= START_BIG_ALLOCATOR_HEAP &&  
-        valid_object_addr < END_BIG_ALLOCATOR_HEAP) {
+bool is_marked(Object object) {
+    size_t object_addr = get_object_addr(object);
+    if (object_addr >= START_BIG_ALLOCATOR_HEAP &&  
+        object_addr < END_BIG_ALLOCATOR_HEAP) {
         Header *object_header = 0;
         for (Header *curr_header = occupied_p; curr_header != NULL; 
             curr_header = curr_header->next_header) {
-            if (curr_header->addr == valid_object_addr) {
+            if (curr_header->addr == object_addr) {
                 object_header = curr_header;
                 break;
             }
         }
 
-        assert(valid_object_addr != 0);
+        assert(object_addr != 0);
 
         return object_header->isMarked;
-    } else if (valid_object_addr >= START_ALLOCATOR_HEAP && 
-               valid_object_addr < END_ALLOCATOR_HEAP) {
-        return get_bit_by_address(valid_object_addr) ? true : false;
+    } else if (object_addr >= START_ALLOCATOR_HEAP && 
+               object_addr < END_ALLOCATOR_HEAP) {
+        return get_bit_by_address(object_addr) ? true : false;
     } else {
         fprintf(stderr, "Invalid address was given in is_marked()\n");
         assert(false);
