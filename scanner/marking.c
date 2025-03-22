@@ -124,7 +124,6 @@ void collect() {
 }
 
 void full_marking() {
-    push_registers_to_stack();
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse(&__data_start, &edata);
     segment_traverse(&__bss_start, &end);
