@@ -610,7 +610,7 @@ bool is_marked(Object object) {
                object_addr < END_ALLOCATOR_HEAP) {
         return get_bit_by_address(object_addr) ? true : false;
     } else {
-        fprintf(stderr, "Invalid address was given in is_marked()\n");
+        fprintf(stderr, "Invalid address %p was given in is_marked()\n", object_addr);
         assert(false);
     }
 }

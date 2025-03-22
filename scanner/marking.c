@@ -32,7 +32,7 @@ void before_main(void) {
 void mark(Object object) {
     if (!is_marked(object)) {
         mark_object(object);
-        push(stack, get_object_addr(object));
+        push(stack, (size_t*) get_object_addr(object));
     }
 }
 
