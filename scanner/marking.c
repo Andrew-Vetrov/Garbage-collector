@@ -36,11 +36,8 @@ void mark(Object object) {
         push(stack, get_object_addr(object));
 =======
 void mark(size_t* elem) {
-    //if (elem != START_ALLOCATOR_HEAP && !get_bit_by_address(elem)) {
-    printf("%p\n", elem);
-    printf("BIT = %d\n", get_bit_by_address(elem));
-    if (!get_bit_by_address(elem)) {
-        set_bit_by_address(elem, 1);
+    if (!is_marked(elem)) {
+        mark_object(elem);
         push(stack, elem);
 >>>>>>> 266071b (inner_pointer_fix: done)
     }
