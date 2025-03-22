@@ -38,3 +38,5 @@ size_t gc_malloc(size_t size);
 size_t get_valid_object(size_t object_addr);
 
 void mark_object(size_t object_addr);
+
+bool is_marked(size_t valid_object_addr);

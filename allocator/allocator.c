@@ -545,3 +545,27 @@ void mark_object(size_t object_addr) {
         assert(false);
     }
 }
+
+bool is_marked(size_t valid_object_addr) {
+    if (valid_object_addr >= START_BIG_ALLOCATOR_HEAP &&  
+        valid_object_addr < END_BIG_ALLOCATOR_HEAP) {
+        Header *object_header = 0;
+        for (Header *curr_header = occupied_p; curr_header != NULL; 
+            curr_header = curr_header->next_header) {
+            if (curr_header->addr == valid_object_addr) {
+                object_header = curr_header;
+                break;
+            }
+        }
+
+        assert(valid_object_addr != 0);
+
+        return object_header->isMarked;
+    } else if (valid_object_addr >= START_ALLOCATOR_HEAP && 
+               valid_object_addr < END_ALLOCATOR_HEAP) {
+        return get_bit_by_address(valid_object_addr) ? true : false;
+    } else {
+        fprintf(stderr, "Invalid address was given in is_marked()\n");
+        assert(false);
+    }
+}
