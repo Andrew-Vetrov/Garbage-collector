@@ -521,6 +521,8 @@ int get_object(size_t object_addr, Object* object) {
         }
 
         *object = object_addr - ((object_addr_in_block - BLOCK_HEADER_SIZE) % object_size);
+    } else {
+        return INVALID_ADDRESS;
     }
 
     return 0;
@@ -565,7 +567,7 @@ bool is_marked(Object object) {
                object_addr < END_ALLOCATOR_HEAP) {
         return get_bit_by_address(object_addr) ? true : false;
     } else {
-        fprintf(stderr, "Invalid address was given in is_marked()\n");
+        fprintf(stderr, "Invalid address %p was given in is_marked()\n", object_addr);
         assert(false);
     }
 }
