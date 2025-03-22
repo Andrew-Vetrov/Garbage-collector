@@ -36,3 +36,5 @@ void show_bitmap(size_t object_address);
 size_t gc_malloc(size_t size);
 
 size_t get_valid_object(size_t object_addr);
+
+void mark_object(size_t object_addr);

@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <sys/mman.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -525,4 +526,22 @@ size_t get_valid_object(size_t object_addr) {
     }
 
     return res;
+}
+
+void mark_object(size_t object_addr) {
+    if (object_addr >= START_BIG_ALLOCATOR_HEAP && object_addr < END_BIG_ALLOCATOR_HEAP) {
+        Header *curr_header = occupied_p;
+        while (curr_header != NULL) {
+            if (curr_header->addr == object_addr) {
+                curr_header->isMarked = true;
+                return;
+            }
+            curr_header = curr_header->next_header;
+        }
+    } else if (object_addr >= START_ALLOCATOR_HEAP && object_addr < END_ALLOCATOR_HEAP) {
+        set_bit_by_address(object_addr, 1);
+    } else {
+        fprintf(stderr, "Invalid address was given in mark_object()\n");
+        assert(false);
+    }
 }
