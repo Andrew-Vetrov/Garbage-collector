@@ -1,5 +1,6 @@
 #pragma once
 #include <stdio.h>
+#include <stdbool.h>
 
 #define GET_BITMAP_ADDR(block_addr) ((block_addr) + (16))
 #define GET_OBJECT_SIZE_ADDR(block_addr) ((block_addr) + (8))
@@ -14,10 +15,12 @@
 #define OBJECT_SIZE_UPPER_BOUND (MAX_OBJECT_SIZE + 1)
 #define BITMAP_BYTES_COUNT (64)
 #define BLOCKS_COUNT (HEAP_SIZE / BLOCK_SIZE)
+#define INVALID_ADDRESS (-1)
+#define get_object_addr(object) ((size_t) object)
 
 extern size_t end_rsp_value;
-extern size_t START_ALLOCATOR_HEAP;
-extern size_t END_ALLOCATOR_HEAP;
+
+typedef size_t Object;
 
 __attribute__((constructor))
 void init_allocator();
@@ -34,3 +37,9 @@ size_t get_block_addr(size_t object_address);
 void show_bitmap(size_t object_address);
 
 size_t gc_malloc(size_t size);
+
+int get_object(size_t object_addr, Object* object);
+
+void mark_object(Object object);
+
+bool is_marked(Object object);
