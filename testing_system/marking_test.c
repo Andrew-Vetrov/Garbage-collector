@@ -38,20 +38,20 @@ void same_size_objects_marking_test(size_t objects_size) {
 #define DIFF_SIZE_MAX_SIZE (10000)
 
 void diff_size_objs_test() {
-    size_t alive_objects_addrs[SAME_SIZE_OBJS_COUNT] = {0};
+    size_t alive_objects_addrs[DIFF_SIZE_OBJS_COUNT] = {0};
 
-    for (unsigned int i = 0; i < SAME_SIZE_OBJS_COUNT; i++) {
+    for (unsigned int i = 0; i < DIFF_SIZE_OBJS_COUNT; i++) {
         alive_objects_addrs[i] = gc_malloc(i % DIFF_SIZE_MAX_SIZE + 1);
         assert(alive_objects_addrs[i] != NULL);
     }
 
-    for (unsigned int i = 0; i < SAME_SIZE_OBJS_COUNT; i += 2) {
+    for (unsigned int i = 0; i < DIFF_SIZE_OBJS_COUNT; i += 2) {
         alive_objects_addrs[i] = (size_t)NULL;
     }
 
     full_marking();
 
-    for (unsigned int i = 1; i < SAME_SIZE_OBJS_COUNT; i += 2) {
+    for (unsigned int i = 1; i < DIFF_SIZE_OBJS_COUNT; i += 2) {
         Object object;
         assert(get_object(alive_objects_addrs[i], &object) == 0);
         assert(get_object_addr(object) == alive_objects_addrs[i]);
