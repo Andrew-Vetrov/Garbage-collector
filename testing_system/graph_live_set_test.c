@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <string.h>
-#include "../allocator/allocator.h"
+#include <time.h>
+
+#include "../gc.h"
 
 #define BIG_GRAPH_SIZE 256 * 1024 * 1024
 

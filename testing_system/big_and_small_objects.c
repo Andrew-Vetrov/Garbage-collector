@@ -1,7 +1,9 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "../allocator/allocator.h"
+#include "../gc.h"
 #include "../scanner/marking.h"
 
 #define SIZE 1000
@@ -26,11 +28,11 @@ int main() {
 
     full_marking();
 
-    assert(is_marked(array) == true);
+    assert(is_marked((Object)array) == true);
 
     for (size_t i = 0; i < SIZE; i++) {
-        assert(is_marked(array[i]) == true);
+        assert(is_marked((Object)array[i]) == true);
     }
-    
+
     return 0;
 }

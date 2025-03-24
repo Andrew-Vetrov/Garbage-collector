@@ -43,7 +43,7 @@ int main() {
 			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {
 				flag = 1;
 				system("make clean");
-				system("make -f Makefile1");
+				system("make -f testing_system/Makefile1");
 				//strncat(command, " -DLISP=1 ", 9);
 			}
 

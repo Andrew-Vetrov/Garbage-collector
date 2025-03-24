@@ -40,10 +40,10 @@ size_t get_block_addr(size_t object_address);
 
 void show_bitmap(size_t object_address);
 
-size_t gc_malloc(size_t size);
-
 int get_object(size_t object_addr, Object* object);
 
 void mark_object(Object object);
 
 bool is_marked(Object object);
+
+void sweep();
