@@ -4,6 +4,7 @@
 #include "../allocator/allocator.h"
 #include "marking.h"
 #include "stack.h"
+#include <assert.h>
 
 #define REGISTER_NAME_SIZE 10
 #define REGISTER_AMOUNT 13
@@ -29,7 +30,7 @@ void before_main(void) {
 void mark(Object object) {
     if (!is_marked(object)) {
         mark_object(object);
-        push(stack, (size_t*) get_object_addr(object));
+        push(stack, get_object_addr(object));
     }
 }
 
@@ -42,7 +43,7 @@ void scan(size_t object_addr) {
     size_t object_end_addr = object_start_addr + get_object_size_by_address(object_start_addr);
     for (size_t inner_object_addr = object_start_addr; inner_object_addr < object_end_addr; inner_object_addr += sizeof(size_t)) {
         Object inner_object;
-        if (get_object(inner_object_addr, &inner_object) == 0) {
+        if (get_object(*(size_t*)inner_object_addr, &inner_object) == 0) {
             mark(inner_object);
         }
     }
@@ -79,10 +80,11 @@ void pop_registers_from_stack() {
 }
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
+    assert(segment_start && segment_end && segment_start < segment_end);
     stack = create_stack();
     for (size_t object_addr = segment_start; object_addr < segment_end; object_addr += sizeof(size_t)) {
         Object object;
-        if (get_object(object_addr, &object) == 0) {
+        if (get_object(*(size_t*)object_addr, &object) == 0) {
             mark(object);
         }
     }
