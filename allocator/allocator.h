@@ -8,15 +8,31 @@
 #define GET_SIZE_WITH_ALIGNMENT(size) \
     ((((size) % (8) == (0)) ? (0) : (8) - ((size) % (8))) + (size))
 
+#ifndef HEAP_SIZE
 #define HEAP_SIZE (512 * 1024 * (size_t) 1024)
+#endif
+
 #define BLOCK_SIZE (4 * (size_t) 1024)
 #define BLOCK_HEADER_SIZE (80)
 #define MAX_OBJECT_SIZE (2008)
 #define OBJECT_SIZE_UPPER_BOUND (MAX_OBJECT_SIZE + 1)
 #define BITMAP_BYTES_COUNT (64)
 #define BLOCKS_COUNT (HEAP_SIZE / BLOCK_SIZE)
+#define HEADERS_COUNT (HEAP_SIZE / GET_SIZE_WITH_ALIGNMENT(MAX_OBJECT_SIZE + 1))
 #define INVALID_ADDRESS (-1)
 #define get_object_addr(object) ((size_t) object)
+
+typedef struct Node_t {
+    size_t block_addr;
+    struct Node_t* next_node;
+} Node;
+
+typedef struct Header {
+    size_t addr;
+    size_t size;
+    bool isMarked;
+    struct Header *next_header;
+} Header;
 
 extern size_t end_rsp_value;
 
