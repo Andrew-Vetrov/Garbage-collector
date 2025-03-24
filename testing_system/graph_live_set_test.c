@@ -4,7 +4,7 @@
 #include <string.h>
 #include "../allocator/allocator.h"
 
-#define BIG_GRAPH_SIZE 1024 * 1024 * 1024
+#define BIG_GRAPH_SIZE 256 * 1024 * 1024
 
 typedef struct Node {
     int id;
