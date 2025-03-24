@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "../allocator/allocator.h"
+#include "../gc.h"
 #include "../scanner/marking.h"
 
 typedef struct Node_t {

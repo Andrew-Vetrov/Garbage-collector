@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../allocator/allocator.h"
+
+#include "../gc.h"
+
 
 typedef struct Node {
     struct Node* left;

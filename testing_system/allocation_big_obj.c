@@ -1,12 +1,11 @@
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include "../allocator/allocator.h"
+
+#include "../gc.h"
 
 extern size_t START_BIG_ALLOCATOR_HEAP;
 
 int main() {
-
     // allocation without alignment
     void *p1 = (void *)gc_malloc(2400);
     void *p2 = (void *)gc_malloc(2400);

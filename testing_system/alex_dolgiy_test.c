@@ -1,11 +1,11 @@
-#include "../scanner/marking.h"
-
 #include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "../allocator/allocator.h"
+#include "../gc.h"
+#include "../scanner/marking.h"
 
 #define SAME_SIZE_OBJS_COUNT (10000)
 

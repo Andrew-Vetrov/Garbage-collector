@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../allocator/allocator.h"
+
+#include "../gc.h"
 // ��������� ���� ����������� ������
 typedef struct Node {
     int data;
@@ -45,7 +46,7 @@ void print_list(Node* head) {
 int main() {
     Node* head = NULL;
     int size = (int)1e7;
-    printf("Usage: %d\n", 10 * size * sizeof(Node)/1024/1024);
+    printf("Usage: %d\n", 10 * size * sizeof(Node) / 1024 / 1024);
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < 10; j++) {
             append(&head, 1);
