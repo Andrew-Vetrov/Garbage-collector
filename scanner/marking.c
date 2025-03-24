@@ -24,6 +24,7 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
 };
 
 void before_main(void) {
+    stack = create_stack();
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
@@ -81,7 +82,6 @@ void pop_registers_from_stack() {
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
     assert(segment_start && segment_end && segment_start < segment_end);
-    stack = create_stack();
     for (size_t object_addr = segment_start; object_addr < segment_end; object_addr += sizeof(size_t)) {
         Object object;
         if (get_object(*(size_t*)object_addr, &object) == 0) {

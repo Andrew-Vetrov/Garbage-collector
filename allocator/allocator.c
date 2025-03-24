@@ -373,7 +373,7 @@ size_t allocate_new_object(size_t object_size) {
         return NULL;
     }
 
-    asm volatile("mov %%rsp, %0" : "=r" (end_rsp_value));
+    
     Node* curr_entry = SEGREG_LIST[object_size];
 
     size_t block_addr;
@@ -473,6 +473,8 @@ size_t allocate_new_BIG_object(size_t object_size) {
 
 size_t gc_malloc(size_t size) {
     size_t res = NULL;
+    push_registers_to_stack();
+    asm volatile("mov %%rsp, %0" : "=r" (end_rsp_value));
     if (size >= 1 && size <= MAX_OBJECT_SIZE) {
         res = allocate_new_object(size);
         if (res == NULL) {
