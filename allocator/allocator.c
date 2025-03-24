@@ -5,6 +5,18 @@
 #include <stdbool.h>
 #include "../scanner/marking.h"
 
+typedef struct Node_t {
+    size_t block_addr;
+    struct Node_t* next_node;
+} Node;
+
+typedef struct Header {
+    size_t addr;
+    size_t size;
+    bool isMarked;
+    struct Header *next_header;
+} Header;
+
 size_t START_ALLOCATOR_HEAP = 0;
 size_t END_ALLOCATOR_HEAP = 0;
 

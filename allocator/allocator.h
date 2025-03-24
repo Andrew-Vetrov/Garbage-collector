@@ -22,18 +22,6 @@
 #define INVALID_ADDRESS (-1)
 #define get_object_addr(object) ((size_t) object)
 
-typedef struct Node_t {
-    size_t block_addr;
-    struct Node_t* next_node;
-} Node;
-
-typedef struct Header {
-    size_t addr;
-    size_t size;
-    bool isMarked;
-    struct Header *next_header;
-} Header;
-
 extern size_t end_rsp_value;
 
 typedef size_t Object;
