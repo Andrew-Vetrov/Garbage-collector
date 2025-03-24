@@ -229,6 +229,8 @@ void init_allocator() {
     free_p->next_header = NULL;
     free_p->size = HEAP_SIZE;
     free_p->addr = START_BIG_ALLOCATOR_HEAP;
+
+    occupied_p = NULL;
 }
 
 Node* allocate_new_block() {
@@ -512,15 +514,17 @@ int get_object(size_t object_addr, Object* object) {
         size_t block_addr = get_block_addr(object_addr);
         size_t object_addr_in_block = object_addr - block_addr;
 
-        if (object_addr_in_block >= 0 && object_addr_in_block < BLOCK_HEADER_SIZE) {                // pointer to header
+        if (object_addr_in_block >= 0 && object_addr_in_block < BLOCK_HEADER_SIZE) {       // pointer to header
             return INVALID_ADDRESS;
         }
 
-        size_t object_size = GET_SIZE_WITH_ALIGNMENT(get_object_size_by_address(object_addr));   
+        size_t object_size = get_object_size_by_address(object_addr);
 
-        if (object_size == 0) {                                                                     // uninitialized block
+        if (object_size <= 0 || object_size > MAX_OBJECT_SIZE) {                           // uninitialized block
             return INVALID_ADDRESS;
         }
+
+        object_size = GET_SIZE_WITH_ALIGNMENT(object_size);
 
         *object = object_addr - ((object_addr_in_block - BLOCK_HEADER_SIZE) % object_size);
         return 0;
