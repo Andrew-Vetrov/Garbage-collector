@@ -502,7 +502,7 @@ int get_object(size_t object_addr, Object* object) {
         while (curr_header != NULL) {
             if (curr_header->addr <= object_addr && object_addr < curr_header->addr + curr_header->size) {
                 *object = curr_header->addr;
-                break;
+                return 0;
             }
             curr_header = curr_header->next_header;
         }
@@ -521,11 +521,10 @@ int get_object(size_t object_addr, Object* object) {
         }
 
         *object = object_addr - ((object_addr_in_block - BLOCK_HEADER_SIZE) % object_size);
-    } else {
-        return INVALID_ADDRESS;
+        return 0;
     }
 
-    return 0;
+    return INVALID_ADDRESS;
 }
 
 void mark_object(Object object) {
