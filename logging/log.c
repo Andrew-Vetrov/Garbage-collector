@@ -1,9 +1,11 @@
 #include "log.h"
 
 FILE* log_file = NULL;
-size_t prev_object_size = -1, last_object_size = 0, memory_limit = 0, memory_used = 0, object_count = 0, marked_objects = 0;
+size_t prev_object_size = -1, last_object_size = 0, memory_limit = 0, memory_used = 0, object_count = 0, marked_objects = 0, m_size = 0;
 clock_t start_time = 0, end_time = 0;
 int mark_stage_count = 0, sweep_stage_count = 0, new_objects_count = 0;
+
+bool extra_log = false;
 
 char log_file_name[25];
 
@@ -17,18 +19,24 @@ static double log_time() {
 
 static void printf_in_file() {
 	if (log_file) {
+		buf_pos[0] = 0;
 		fprintf(log_file, "%s", log_buffer);
 		buf_pos = log_buffer;
 	}
 
 	else {
-		perror("log_file is NULL.");
+		fprintf(stderr, "log_file is NULL.\n");
 	}
 }
 
 static void add_log_line(const char* format, ...) {
-	if (new_objects_count != 0) {
-		add_log_line("[%010.6lf] OK. New objects with total size %lu bytes (count: %d, size of one object: %lu).\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size * (size_t)new_objects_count, new_objects_count, last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
+	if (new_objects_count != 0 && extra_log == false) {
+		buf_pos += sprintf(buf_pos, "[%010.6lf] OK. New objects with total size %lu bytes (count: %d, size of one object: %lu).\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size * (size_t)new_objects_count, new_objects_count, last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
+		
+		if (log_buffer + BUFFER_SIZE - buf_pos <= BUFFER_DEAD_NUMBER) {
+			printf_in_file();
+		}
+		
 		prev_object_size = -1;
 		new_objects_count = 0;
 	}
@@ -37,6 +45,10 @@ static void add_log_line(const char* format, ...) {
 	va_start(args, format);
 
 	buf_pos += vsprintf(buf_pos, format, args);
+
+	if (extra_log == true) {
+		extra_log = false;
+	}
 	
 	if (log_buffer + BUFFER_SIZE - buf_pos <= BUFFER_DEAD_NUMBER) {
 		printf_in_file();
@@ -51,6 +63,7 @@ static void add_log_line(const char* format, ...) {
 
 static void log_new_object() {
 	if (last_object_size != prev_object_size && prev_object_size != -1) {
+		extra_log = true;
 		add_log_line("[%010.6lf] OK. New objects with total size %lu bytes (count: %d, size of one object: %lu).\n\tUsed space: %lu/%lu bytes.\n\tNumber of objects: %lu.\n\tFree space: %lu/%lu bytes.\n", log_time(), last_object_size * (size_t)new_objects_count, new_objects_count, last_object_size, memory_used, memory_limit, object_count, memory_limit - memory_used, memory_limit);
 		new_objects_count = 0;
 	}
@@ -76,17 +89,17 @@ void log(log_t type, log_t result) {
 		case START:
 			build_count = fopen("build_count.log", "a+");
 			if (!build_count) {
-				perror("Error opening the file \"build_count.log\".");
+				fprintf(stderr, "Error opening the file \"build_count.log\".\n");
 			}
 
 			if (fseek(build_count, 0, SEEK_END)) {
-				perror("Error: fseek.");
+				fprintf(stderr, "Error: fseek.\n");
 				fclose(build_count);
 			}
 
 			long file_size = ftell(build_count);
 			if (file_size == -1L) {
-				perror("Error: ftell.");
+				fprintf(stderr, "Error: ftell.\n");
 				fclose(build_count);
 			}
 
@@ -102,7 +115,7 @@ void log(log_t type, log_t result) {
 			else {
 				int last_build_number, indx_in_name = 0, string_len = 0;
 				if (fseek(build_count, 0, SEEK_SET)) {
-					perror("Error: fseek.");
+					fprintf(stderr, "Error: fseek.\n");
 					fclose(last_build_number);
 				}
 
@@ -111,7 +124,7 @@ void log(log_t type, log_t result) {
 
 				build_count = fopen("build_count.log", "w");
 				if (!build_count) {
-					perror("Error opening the file \"build_count.log\".");
+					fprintf(stderr, "Error opening the file \"build_count.log\".\n");
 				}
 
 				fprintf(build_count, "%d\n", ++last_build_number);
@@ -136,7 +149,7 @@ void log(log_t type, log_t result) {
 
 			log_file = fopen(log_file_name, "a+");
 			if (!log_file) {
-				perror("Error opening log_file.");
+				fprintf(stderr, "Error opening log_file.\n");
 			}
 			
 			add_log_line("[000.000000] Start of allocator initialization.\n");
@@ -144,8 +157,13 @@ void log(log_t type, log_t result) {
 
 			break;
 
+		case B_ERROR:
+			add_log_line("[%010.6lf] Can't allocate BIG_allocator's heap!\n", log_time());
+
+			break;
+
 		case ERROR:
-			add_log_line("[%010.6lf] Error initializing allocator: mmap() function returned MAP_FAILED.\n", log_time());
+			add_log_line("[%010.6lf] Can't allocate allocator's heap!\n", log_time());
 
 			break;
 
@@ -159,8 +177,13 @@ void log(log_t type, log_t result) {
 
 	case DESTROY_ALLOCATOR:
 		switch (result) {
+		case B_ERROR:
+			add_log_line("[%010.6lf] Can't unmap BIG_heap!\n", log_time());
+
+			break;
+		
 		case ERROR:
-			add_log_line("[%010.6lf] Error destroying allocator: munmap() function returned -1.\n", log_time());
+			add_log_line("[%010.6lf] Can't unmap heap!\n", log_time());
 
 			break;
 
@@ -170,6 +193,7 @@ void log(log_t type, log_t result) {
 			if (buf_pos != log_file) {
 				printf_in_file();
 			}
+			printf("DESTROY\n");
 
 			break;
 		}
@@ -182,6 +206,16 @@ void log(log_t type, log_t result) {
 #ifdef LOG
 		case ERROR:
 			add_log_line("[%010.6lf] Denied: size of object is too large.\n", log_time());
+
+			break;
+
+		case B_HEAP_ERROR:
+			add_log_line("[%010.6lf] No memory in BIG heap!\n", log_time());
+
+			break;
+
+		case HEAP_ERROR:
+			add_log_line("[%010.6lf] No memory in small heap!\n", log_time());
 
 			break;
 #endif
@@ -217,8 +251,10 @@ void log(log_t type, log_t result) {
 			break;
 
 		case OK:
-			add_log_line("[%010.6lf] Mark stage %d completed. Objects collected: %lu.\n", log_time(), mark_stage_count, object_count - marked_objects);
+			add_log_line("[%010.6lf] Mark stage %d completed. Objects collected: %lu.\n\t%lu bytes of memory were freed.\n", log_time(), mark_stage_count, object_count - marked_objects, memory_used - m_size);
 			object_count = marked_objects;
+			memory_used = m_size;
+			m_size = 0;
 
 			break;
 		}
@@ -240,6 +276,21 @@ void log(log_t type, log_t result) {
 		}
 
 		break;
+
+	case OTHER:
+		switch (result) {
+		case O_EMPTY_BLOCK:
+			add_log_line("[%010.6lf] No empty blocks in garbage collector!\n", log_time());
+
+			break;
+
+		case O_HEADER:
+			add_log_line("[%010.6lf] No empty headers in garbage collector!\n", log_time());
+
+			break;
+		}
+
+		break;
 #endif
 	}
 }
@@ -255,4 +306,9 @@ log_t check_the_space(size_t object_size) {
 	}
 
 	return OK;
+}
+
+void log_mark_alive(size_t object_size) {
+	m_size += object_size;
+	log(MARK, ALIVE);
 }

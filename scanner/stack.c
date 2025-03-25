@@ -1,35 +1,36 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "stack.h"
 
 Stack* create_stack() {
     Stack* stack = (Stack*)malloc(sizeof(Stack));
-    stack->data = (size_t**)malloc(STACK_INIT_CAPACITY * sizeof(size_t*));
+    stack->data = (size_t*)malloc(STACK_INIT_CAPACITY * sizeof(size_t));
     stack->top = -1;
     stack->capacity = STACK_INIT_CAPACITY;
     return stack;
 }
 
-int is_empty(Stack *stack) {
+int is_empty(Stack* stack) {
     return stack->top == -1;
 }
 
 void resize(Stack* stack) {
     stack->capacity *= 2;
-    stack->data = (size_t**)realloc(stack->data, stack->capacity * sizeof(size_t*));
+    stack->data = (size_t*)realloc(stack->data, stack->capacity * sizeof(size_t));
     if (stack->data == NULL) {
         perror("realloc");
         exit(EXIT_FAILURE);
     }
 }
 
-void push(Stack* stack, size_t* value) {
+void push(Stack* stack, size_t value) {
     if (stack->top == stack->capacity - 1) {
         resize(stack);
     }
     stack->data[++stack->top] = value;
 }
 
-size_t* pop(Stack* stack) {
+size_t pop(Stack* stack) {
     if (is_empty(stack)) {
         exit(EXIT_FAILURE);
     }
