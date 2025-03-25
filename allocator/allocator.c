@@ -15,7 +15,7 @@ typedef struct Header {
     size_t addr;
     size_t size;
     bool isMarked;
-    struct Header* next_header;
+    struct Header *next_header;
 } Header;
 
 size_t START_ALLOCATOR_HEAP = 0;
@@ -148,12 +148,11 @@ size_t get_object_size_by_address(size_t object_addr) {
         size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
         size_t block_addr = object_addr - (object_relative_addr % BLOCK_SIZE);
         size_t object_size = *(size_t*)GET_OBJECT_SIZE_ADDR(block_addr);
-
+    
         return GET_SIZE_WITH_ALIGNMENT(object_size);
-
-    }
-    else if (START_BIG_ALLOCATOR_HEAP <= object_addr && object_addr < END_BIG_ALLOCATOR_HEAP) {
-        Header* curr_header = occupied_p;
+    
+    } else if (START_BIG_ALLOCATOR_HEAP <= object_addr && object_addr < END_BIG_ALLOCATOR_HEAP) {
+        Header *curr_header = occupied_p;
         while (curr_header != NULL) {
             if (curr_header->addr == object_addr) {
                 return curr_header->size;
@@ -180,7 +179,6 @@ Header* get_new_header() {
 __attribute__((constructor))
 void __init_allocator() {
     log(INIT_ALLOCATOR, START);
-
     START_ALLOCATOR_HEAP =
         (size_t)mmap(NULL, HEAP_SIZE,
             PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
@@ -544,8 +542,7 @@ int get_object(size_t object_addr, Object* object) {
             }
             curr_header = curr_header->next_header;
         }
-    }
-    else if (object_addr >= START_ALLOCATOR_HEAP && object_addr < END_ALLOCATOR_HEAP) {
+    } else if (object_addr >= START_ALLOCATOR_HEAP && object_addr < END_ALLOCATOR_HEAP) {
         size_t block_addr = get_block_addr(object_addr);
         size_t object_addr_in_block = object_addr - block_addr;
 
@@ -608,12 +605,10 @@ bool is_marked(Object object) {
         assert(object_addr != 0);
 
         return object_header->isMarked;
-    }
-    else if (object_addr >= START_ALLOCATOR_HEAP &&
-        object_addr < END_ALLOCATOR_HEAP) {
+    } else if (object_addr >= START_ALLOCATOR_HEAP && 
+               object_addr < END_ALLOCATOR_HEAP) {
         return get_bit_by_address(object_addr) ? true : false;
-    }
-    else {
+    } else {
         fprintf(stderr, "Invalid address %p was given in is_marked()\n", object_addr);
         assert(false);
     }
