@@ -165,7 +165,6 @@ size_t get_object_size_by_address(size_t object_addr) {
 
 Header* get_new_header() {
     if (HEADER_LIST_HEAD == NULL) {
-        fprintf(stderr, "No empty headers in garbage collector!\n");
         return NULL;
     } else {
         Header* result = HEADER_LIST_HEAD;
@@ -236,7 +235,6 @@ void init_allocator() {
 
 Node* allocate_new_block() {
     if (EMPTY_LIST_HEAD == NULL) {
-        fprintf(stderr, "No empty blocks in garbage collector!\n");
         return NULL;
     } else {
         Node* result = EMPTY_LIST_HEAD;
@@ -371,12 +369,7 @@ void sweep() {
 }
 
 size_t allocate_new_object(size_t object_size) {
-    if (object_size > MAX_OBJECT_SIZE) {
-        fprintf(stderr, "Size of object is too large\n");
-        return NULL;
-    }
 
-    
     Node* curr_entry = SEGREG_LIST[object_size];
 
     size_t block_addr;
@@ -447,7 +440,7 @@ size_t allocate_new_BIG_object(size_t object_size) {
             } else {
                 // take as much as we need
                 if ((new_header = get_new_header()) == NULL) {
-                    fprintf(stderr, "No headers for big heap!\n");
+                    return NULL;
                 }
 
                 new_header->addr = p->addr;
