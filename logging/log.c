@@ -54,10 +54,6 @@ static void add_log_line(const char* format, ...) {
 		printf_in_file();
 	}
 
-#ifdef DEBUG
-	vprintf(format, args);
-#endif
-
 	va_end(args);
 }
 
@@ -193,8 +189,7 @@ void log(log_t type, log_t result) {
 			if (buf_pos != log_file) {
 				printf_in_file();
 			}
-			printf("DESTROY\n");
-
+			
 			break;
 		}
 
@@ -251,7 +246,8 @@ void log(log_t type, log_t result) {
 			break;
 
 		case OK:
-			add_log_line("[%010.6lf] Mark stage %d completed. Objects collected: %lu.\n\t%lu bytes of memory were freed.\n", log_time(), mark_stage_count, object_count - marked_objects, memory_used - m_size);
+			add_log_line("[%010.6lf] Mark stage %d completed. Objects collected: %lu.\n\t%lu bytes of memory were freed.\n\tUsed space: %lu/%lu bytes.\n", log_time(), mark_stage_count, object_count - marked_objects, memory_used - m_size, m_size, memory_limit);
+
 			object_count = marked_objects;
 			memory_used = m_size;
 			m_size = 0;

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import re
+from matplotlib.ticker import ScalarFormatter
 
 def parse_file(filename):
     mark_durations = []
@@ -54,21 +55,25 @@ def plot_durations_and_objects(mark_durations, sweep_durations, mark_objects_col
     ax1.plot(mark_stages, mark_durations, label='Mark stage duration', marker='o')
     ax1.plot(sweep_stages, sweep_durations, label='Sweep stage duration', marker='o')
     
-    ax1.set_xticks(mark_stages)
-    ax1.set_yticks(list(set(mark_durations + sweep_durations)))
+    ax1.set_xticks([min(mark_stages), max(mark_stages)])
+    ax1.set_yticks([min(mark_durations + sweep_durations), max(mark_durations + sweep_durations)])
     ax1.set_xlabel('Stage Number')
     ax1.set_ylabel('Duration (microseconds)')
     ax1.set_title('Mark and Sweep Stage Durations')
     ax1.legend()
     ax1.grid(True)
     
-    stages = list(mark_objects_collected.keys())
-    objects_collected = list(mark_objects_collected.values())
+    stages = sorted(mark_objects_collected.keys())
+    objects_collected = [mark_objects_collected[stage] for stage in stages]
     
-    ax2.bar(stages, objects_collected, label='Objects Collected', color='orange')
+    ax2.plot(stages, objects_collected, label='Objects Collected', marker='o', color='orange')
     
-    ax2.set_xticks(stages)
-    ax2.set_yticks(objects_collected)
+    ax2.set_xticks([min(stages), max(stages)])
+    ax2.set_yticks([min(objects_collected), max(objects_collected)])
+    
+    ax2.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
+    ax2.ticklabel_format(style='plain', axis='y')
+    
     ax2.set_xlabel('Mark Stage Number')
     ax2.set_ylabel('Objects Collected')
     ax2.set_title('Objects Collected per Mark Stage')
@@ -76,10 +81,9 @@ def plot_durations_and_objects(mark_durations, sweep_durations, mark_objects_col
     ax2.grid(True)
     
     plt.subplots_adjust(hspace=0.3)
-    
     plt.show()
 
 if __name__ == "__main__":
-    filename = input("Enter the filename: ")
+    filename = input("Enter the relative path to the log file number (example: ../../26):") + ".log"
     mark_durations, sweep_durations, mark_objects_collected = parse_file(filename)
     plot_durations_and_objects(mark_durations, sweep_durations, mark_objects_collected)
