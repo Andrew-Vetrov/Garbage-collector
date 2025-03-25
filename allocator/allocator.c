@@ -18,18 +18,6 @@ typedef struct Header {
     struct Header* next_header;
 } Header;
 
-typedef struct Node_t {
-    size_t block_addr;
-    struct Node_t* next_node;
-} Node;
-
-typedef struct Header {
-    size_t addr;
-    size_t size;
-    bool isMarked;
-    struct Header *next_header;
-} Header;
-
 size_t START_ALLOCATOR_HEAP = 0;
 size_t END_ALLOCATOR_HEAP = 0;
 
@@ -160,11 +148,12 @@ size_t get_object_size_by_address(size_t object_addr) {
         size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
         size_t block_addr = object_addr - (object_relative_addr % BLOCK_SIZE);
         size_t object_size = *(size_t*)GET_OBJECT_SIZE_ADDR(block_addr);
-    
+
         return GET_SIZE_WITH_ALIGNMENT(object_size);
-    
-    } else if (START_BIG_ALLOCATOR_HEAP <= object_addr && object_addr < END_BIG_ALLOCATOR_HEAP) {
-        Header *curr_header = occupied_p;
+
+    }
+    else if (START_BIG_ALLOCATOR_HEAP <= object_addr && object_addr < END_BIG_ALLOCATOR_HEAP) {
+        Header* curr_header = occupied_p;
         while (curr_header != NULL) {
             if (curr_header->addr == object_addr) {
                 return curr_header->size;
