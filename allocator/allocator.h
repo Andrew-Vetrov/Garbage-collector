@@ -27,10 +27,10 @@ extern size_t end_rsp_value;
 typedef size_t Object;
 
 __attribute__((constructor))
-void init_allocator();
+void __init_allocator();
 
 __attribute__((destructor))
-void destroy_allocator();
+void __destroy_allocator();
 
 size_t allocate_new_object(size_t object_size);
 

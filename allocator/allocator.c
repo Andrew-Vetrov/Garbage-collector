@@ -176,7 +176,7 @@ Header* get_new_header() {
 }
 
 __attribute__((constructor))
-void init_allocator() {
+void __init_allocator() {
     START_ALLOCATOR_HEAP =
         (size_t)mmap(NULL, HEAP_SIZE,
             PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
@@ -247,7 +247,7 @@ Node* allocate_new_block() {
 }
 
 __attribute__((destructor))
-void destroy_allocator() {
+void __destroy_allocator() {
     if (munmap((void*)START_ALLOCATOR_HEAP, HEAP_SIZE) == -1) {
         fprintf(stderr, "Can't unmap heap!\n");
     }
