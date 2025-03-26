@@ -3,8 +3,8 @@
 #pragma once
 
 typedef struct {
-    size_t* data;   
-    int top;      
+    size_t* data;
+    int top;
     int capacity;
 } Stack;
 
@@ -27,4 +27,3 @@ size_t pop(Stack* stack);
 
 
 void free_stack(Stack* stack);
-

@@ -1,0 +1,3649 @@
+[000.000000] Start of allocator initialization.
+[000.000007] User memory limit set: 131072 bytes.
+[000.000091] Allocator initialized.
+[000.000242] OK. New objects with total size 64256 bytes (count: 4016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.000241] No empty blocks in garbage collector!
+[000.000252] Mark stage 1 started.
+[000.000814] Mark stage 1 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.000819] Sweep stage 1 started.
+[000.000828] Sweep stage 1 completed.
+[000.000900] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.000900] No empty blocks in garbage collector!
+[000.000903] Mark stage 2 started.
+[000.001238] Mark stage 2 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.001239] Sweep stage 2 started.
+[000.001241] Sweep stage 2 completed.
+[000.001312] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.001312] No empty blocks in garbage collector!
+[000.001314] Mark stage 3 started.
+[000.001656] Mark stage 3 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.001657] Sweep stage 3 started.
+[000.001659] Sweep stage 3 completed.
+[000.001729] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.001729] No empty blocks in garbage collector!
+[000.001731] Mark stage 4 started.
+[000.002065] Mark stage 4 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.002065] Sweep stage 4 started.
+[000.002067] Sweep stage 4 completed.
+[000.002137] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.002137] No empty blocks in garbage collector!
+[000.002139] Mark stage 5 started.
+[000.002472] Mark stage 5 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.002472] Sweep stage 5 started.
+[000.002474] Sweep stage 5 completed.
+[000.002546] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.002545] No empty blocks in garbage collector!
+[000.002547] Mark stage 6 started.
+[000.002924] Mark stage 6 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.002925] Sweep stage 6 started.
+[000.002927] Sweep stage 6 completed.
+[000.003001] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.003000] No empty blocks in garbage collector!
+[000.003003] Mark stage 7 started.
+[000.003338] Mark stage 7 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.003339] Sweep stage 7 started.
+[000.003340] Sweep stage 7 completed.
+[000.003410] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.003410] No empty blocks in garbage collector!
+[000.003412] Mark stage 8 started.
+[000.003791] Mark stage 8 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.003792] Sweep stage 8 started.
+[000.003794] Sweep stage 8 completed.
+[000.003923] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.003923] No empty blocks in garbage collector!
+[000.003925] Mark stage 9 started.
+[000.004261] Mark stage 9 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.004261] Sweep stage 9 started.
+[000.004263] Sweep stage 9 completed.
+[000.004334] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.004334] No empty blocks in garbage collector!
+[000.004336] Mark stage 10 started.
+[000.004688] Mark stage 10 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.004689] Sweep stage 10 started.
+[000.004691] Sweep stage 10 completed.
+[000.004761] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.004761] No empty blocks in garbage collector!
+[000.004764] Mark stage 11 started.
+[000.005113] Mark stage 11 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.005114] Sweep stage 11 started.
+[000.005118] Sweep stage 11 completed.
+[000.005188] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.005188] No empty blocks in garbage collector!
+[000.005190] Mark stage 12 started.
+[000.005527] Mark stage 12 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.005528] Sweep stage 12 started.
+[000.005529] Sweep stage 12 completed.
+[000.005600] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.005600] No empty blocks in garbage collector!
+[000.005602] Mark stage 13 started.
+[000.005951] Mark stage 13 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.005952] Sweep stage 13 started.
+[000.005954] Sweep stage 13 completed.
+[000.006026] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.006026] No empty blocks in garbage collector!
+[000.006028] Mark stage 14 started.
+[000.006363] Mark stage 14 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.006364] Sweep stage 14 started.
+[000.006365] Sweep stage 14 completed.
+[000.006436] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.006436] No empty blocks in garbage collector!
+[000.006440] Mark stage 15 started.
+[000.006777] Mark stage 15 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.006778] Sweep stage 15 started.
+[000.006779] Sweep stage 15 completed.
+[000.006856] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.006856] No empty blocks in garbage collector!
+[000.006859] Mark stage 16 started.
+[000.007194] Mark stage 16 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.007194] Sweep stage 16 started.
+[000.007196] Sweep stage 16 completed.
+[000.007266] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.007266] No empty blocks in garbage collector!
+[000.007268] Mark stage 17 started.
+[000.007603] Mark stage 17 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.007604] Sweep stage 17 started.
+[000.007608] Sweep stage 17 completed.
+[000.007678] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.007678] No empty blocks in garbage collector!
+[000.007680] Mark stage 18 started.
+[000.008051] Mark stage 18 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.008052] Sweep stage 18 started.
+[000.008054] Sweep stage 18 completed.
+[000.008124] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.008124] No empty blocks in garbage collector!
+[000.008126] Mark stage 19 started.
+[000.008462] Mark stage 19 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.008462] Sweep stage 19 started.
+[000.008466] Sweep stage 19 completed.
+[000.008537] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.008537] No empty blocks in garbage collector!
+[000.008540] Mark stage 20 started.
+[000.008893] Mark stage 20 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.008894] Sweep stage 20 started.
+[000.008898] Sweep stage 20 completed.
+[000.008970] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.008970] No empty blocks in garbage collector!
+[000.008973] Mark stage 21 started.
+[000.009308] Mark stage 21 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.009309] Sweep stage 21 started.
+[000.009311] Sweep stage 21 completed.
+[000.009382] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.009382] No empty blocks in garbage collector!
+[000.009384] Mark stage 22 started.
+[000.009718] Mark stage 22 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.009719] Sweep stage 22 started.
+[000.009720] Sweep stage 22 completed.
+[000.009815] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.009815] No empty blocks in garbage collector!
+[000.009818] Mark stage 23 started.
+[000.010224] Mark stage 23 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.010226] Sweep stage 23 started.
+[000.010230] Sweep stage 23 completed.
+[000.010302] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.010301] No empty blocks in garbage collector!
+[000.010304] Mark stage 24 started.
+[000.010644] Mark stage 24 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.010645] Sweep stage 24 started.
+[000.010649] Sweep stage 24 completed.
+[000.010720] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.010720] No empty blocks in garbage collector!
+[000.010722] Mark stage 25 started.
+[000.011063] Mark stage 25 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.011064] Sweep stage 25 started.
+[000.011066] Sweep stage 25 completed.
+[000.011136] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.011136] No empty blocks in garbage collector!
+[000.011138] Mark stage 26 started.
+[000.011473] Mark stage 26 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.011473] Sweep stage 26 started.
+[000.011475] Sweep stage 26 completed.
+[000.011546] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.011545] No empty blocks in garbage collector!
+[000.011548] Mark stage 27 started.
+[000.011888] Mark stage 27 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.011889] Sweep stage 27 started.
+[000.011891] Sweep stage 27 completed.
+[000.011962] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.011962] No empty blocks in garbage collector!
+[000.011965] Mark stage 28 started.
+[000.012299] Mark stage 28 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.012300] Sweep stage 28 started.
+[000.012302] Sweep stage 28 completed.
+[000.012374] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.012373] No empty blocks in garbage collector!
+[000.012376] Mark stage 29 started.
+[000.012709] Mark stage 29 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.012710] Sweep stage 29 started.
+[000.012712] Sweep stage 29 completed.
+[000.012782] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.012782] No empty blocks in garbage collector!
+[000.012784] Mark stage 30 started.
+[000.013126] Mark stage 30 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.013127] Sweep stage 30 started.
+[000.013129] Sweep stage 30 completed.
+[000.013202] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.013202] No empty blocks in garbage collector!
+[000.013204] Mark stage 31 started.
+[000.013629] Mark stage 31 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.013629] Sweep stage 31 started.
+[000.013631] Sweep stage 31 completed.
+[000.013703] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.013703] No empty blocks in garbage collector!
+[000.013709] Mark stage 32 started.
+[000.014050] Mark stage 32 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.014051] Sweep stage 32 started.
+[000.014053] Sweep stage 32 completed.
+[000.014122] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.014122] No empty blocks in garbage collector!
+[000.014124] Mark stage 33 started.
+[000.014550] Mark stage 33 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.014551] Sweep stage 33 started.
+[000.014555] Sweep stage 33 completed.
+[000.014633] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.014633] No empty blocks in garbage collector!
+[000.014636] Mark stage 34 started.
+[000.014985] Mark stage 34 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.014986] Sweep stage 34 started.
+[000.014991] Sweep stage 34 completed.
+[000.015061] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.015061] No empty blocks in garbage collector!
+[000.015063] Mark stage 35 started.
+[000.015398] Mark stage 35 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.015399] Sweep stage 35 started.
+[000.015400] Sweep stage 35 completed.
+[000.015471] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.015471] No empty blocks in garbage collector!
+[000.015473] Mark stage 36 started.
+[000.015813] Mark stage 36 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.015814] Sweep stage 36 started.
+[000.015816] Sweep stage 36 completed.
+[000.015892] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.015892] No empty blocks in garbage collector!
+[000.015895] Mark stage 37 started.
+[000.016239] Mark stage 37 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.016240] Sweep stage 37 started.
+[000.016242] Sweep stage 37 completed.
+[000.016312] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.016312] No empty blocks in garbage collector!
+[000.016315] Mark stage 38 started.
+[000.016650] Mark stage 38 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.016651] Sweep stage 38 started.
+[000.016652] Sweep stage 38 completed.
+[000.016735] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.016735] No empty blocks in garbage collector!
+[000.016738] Mark stage 39 started.
+[000.017084] Mark stage 39 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.017085] Sweep stage 39 started.
+[000.017087] Sweep stage 39 completed.
+[000.017157] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.017157] No empty blocks in garbage collector!
+[000.017159] Mark stage 40 started.
+[000.017497] Mark stage 40 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.017498] Sweep stage 40 started.
+[000.017500] Sweep stage 40 completed.
+[000.017570] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.017570] No empty blocks in garbage collector!
+[000.017572] Mark stage 41 started.
+[000.017996] Mark stage 41 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.017996] Sweep stage 41 started.
+[000.018000] Sweep stage 41 completed.
+[000.018077] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.018076] No empty blocks in garbage collector!
+[000.018079] Mark stage 42 started.
+[000.018415] Mark stage 42 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.018415] Sweep stage 42 started.
+[000.018417] Sweep stage 42 completed.
+[000.018489] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.018489] No empty blocks in garbage collector!
+[000.018491] Mark stage 43 started.
+[000.018826] Mark stage 43 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.018827] Sweep stage 43 started.
+[000.018829] Sweep stage 43 completed.
+[000.018907] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.018906] No empty blocks in garbage collector!
+[000.018908] Mark stage 44 started.
+[000.019254] Mark stage 44 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.019255] Sweep stage 44 started.
+[000.019258] Sweep stage 44 completed.
+[000.019327] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.019327] No empty blocks in garbage collector!
+[000.019330] Mark stage 45 started.
+[000.019667] Mark stage 45 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.019667] Sweep stage 45 started.
+[000.019669] Sweep stage 45 completed.
+[000.019741] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.019741] No empty blocks in garbage collector!
+[000.019743] Mark stage 46 started.
+[000.020098] Mark stage 46 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.020099] Sweep stage 46 started.
+[000.020101] Sweep stage 46 completed.
+[000.020176] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.020176] No empty blocks in garbage collector!
+[000.020179] Mark stage 47 started.
+[000.020518] Mark stage 47 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.020519] Sweep stage 47 started.
+[000.020521] Sweep stage 47 completed.
+[000.020591] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.020591] No empty blocks in garbage collector!
+[000.020593] Mark stage 48 started.
+[000.021018] Mark stage 48 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.021019] Sweep stage 48 started.
+[000.021021] Sweep stage 48 completed.
+[000.021090] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.021090] No empty blocks in garbage collector!
+[000.021094] Mark stage 49 started.
+[000.021435] Mark stage 49 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.021436] Sweep stage 49 started.
+[000.021438] Sweep stage 49 completed.
+[000.021512] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.021511] No empty blocks in garbage collector!
+[000.021514] Mark stage 50 started.
+[000.021849] Mark stage 50 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.021849] Sweep stage 50 started.
+[000.021851] Sweep stage 50 completed.
+[000.021931] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.021930] No empty blocks in garbage collector!
+[000.021933] Mark stage 51 started.
+[000.022277] Mark stage 51 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.022278] Sweep stage 51 started.
+[000.022280] Sweep stage 51 completed.
+[000.022351] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.022351] No empty blocks in garbage collector!
+[000.022353] Mark stage 52 started.
+[000.022689] Mark stage 52 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.022689] Sweep stage 52 started.
+[000.022693] Sweep stage 52 completed.
+[000.022764] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.022764] No empty blocks in garbage collector!
+[000.022766] Mark stage 53 started.
+[000.023107] Mark stage 53 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.023108] Sweep stage 53 started.
+[000.023110] Sweep stage 53 completed.
+[000.023181] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.023181] No empty blocks in garbage collector!
+[000.023183] Mark stage 54 started.
+[000.023521] Mark stage 54 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.023521] Sweep stage 54 started.
+[000.023523] Sweep stage 54 completed.
+[000.023594] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.023594] No empty blocks in garbage collector!
+[000.023596] Mark stage 55 started.
+[000.023946] Mark stage 55 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.023946] Sweep stage 55 started.
+[000.023948] Sweep stage 55 completed.
+[000.024021] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.024021] No empty blocks in garbage collector!
+[000.024023] Mark stage 56 started.
+[000.024365] Mark stage 56 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.024366] Sweep stage 56 started.
+[000.024368] Sweep stage 56 completed.
+[000.024466] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.024466] No empty blocks in garbage collector!
+[000.024468] Mark stage 57 started.
+[000.024811] Mark stage 57 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.024812] Sweep stage 57 started.
+[000.024814] Sweep stage 57 completed.
+[000.024888] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.024888] No empty blocks in garbage collector!
+[000.024890] Mark stage 58 started.
+[000.025238] Mark stage 58 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.025240] Sweep stage 58 started.
+[000.025242] Sweep stage 58 completed.
+[000.025314] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.025314] No empty blocks in garbage collector!
+[000.025317] Mark stage 59 started.
+[000.025657] Mark stage 59 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.025658] Sweep stage 59 started.
+[000.025660] Sweep stage 59 completed.
+[000.025730] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.025730] No empty blocks in garbage collector!
+[000.025733] Mark stage 60 started.
+[000.026068] Mark stage 60 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.026069] Sweep stage 60 started.
+[000.026070] Sweep stage 60 completed.
+[000.026142] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.026141] No empty blocks in garbage collector!
+[000.026143] Mark stage 61 started.
+[000.026481] Mark stage 61 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.026481] Sweep stage 61 started.
+[000.026483] Sweep stage 61 completed.
+[000.026561] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.026561] No empty blocks in garbage collector!
+[000.026563] Mark stage 62 started.
+[000.026902] Mark stage 62 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.026903] Sweep stage 62 started.
+[000.026905] Sweep stage 62 completed.
+[000.026975] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.026975] No empty blocks in garbage collector!
+[000.026977] Mark stage 63 started.
+[000.027314] Mark stage 63 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.027315] Sweep stage 63 started.
+[000.027317] Sweep stage 63 completed.
+[000.027387] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.027387] No empty blocks in garbage collector!
+[000.027389] Mark stage 64 started.
+[000.027746] Mark stage 64 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.027747] Sweep stage 64 started.
+[000.027749] Sweep stage 64 completed.
+[000.027822] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.027822] No empty blocks in garbage collector!
+[000.027824] Mark stage 65 started.
+[000.028160] Mark stage 65 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.028161] Sweep stage 65 started.
+[000.028163] Sweep stage 65 completed.
+[000.028234] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.028234] No empty blocks in garbage collector!
+[000.028238] Mark stage 66 started.
+[000.028579] Mark stage 66 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.028580] Sweep stage 66 started.
+[000.028582] Sweep stage 66 completed.
+[000.028653] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.028653] No empty blocks in garbage collector!
+[000.028655] Mark stage 67 started.
+[000.029082] Mark stage 67 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.029083] Sweep stage 67 started.
+[000.029085] Sweep stage 67 completed.
+[000.029156] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.029155] No empty blocks in garbage collector!
+[000.029157] Mark stage 68 started.
+[000.029493] Mark stage 68 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.029493] Sweep stage 68 started.
+[000.029495] Sweep stage 68 completed.
+[000.029569] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.029569] No empty blocks in garbage collector!
+[000.029571] Mark stage 69 started.
+[000.029907] Mark stage 69 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.029908] Sweep stage 69 started.
+[000.029912] Sweep stage 69 completed.
+[000.029983] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.029983] No empty blocks in garbage collector!
+[000.029985] Mark stage 70 started.
+[000.030355] Mark stage 70 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.030356] Sweep stage 70 started.
+[000.030358] Sweep stage 70 completed.
+[000.030430] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.030430] No empty blocks in garbage collector!
+[000.030432] Mark stage 71 started.
+[000.030785] Mark stage 71 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.030786] Sweep stage 71 started.
+[000.030790] Sweep stage 71 completed.
+[000.030861] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.030861] No empty blocks in garbage collector!
+[000.030864] Mark stage 72 started.
+[000.031201] Mark stage 72 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.031201] Sweep stage 72 started.
+[000.031203] Sweep stage 72 completed.
+[000.031276] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.031276] No empty blocks in garbage collector!
+[000.031278] Mark stage 73 started.
+[000.031623] Mark stage 73 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.031624] Sweep stage 73 started.
+[000.031626] Sweep stage 73 completed.
+[000.031697] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.031697] No empty blocks in garbage collector!
+[000.031700] Mark stage 74 started.
+[000.032043] Mark stage 74 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.032044] Sweep stage 74 started.
+[000.032046] Sweep stage 74 completed.
+[000.032117] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.032117] No empty blocks in garbage collector!
+[000.032119] Mark stage 75 started.
+[000.032542] Mark stage 75 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.032543] Sweep stage 75 started.
+[000.032545] Sweep stage 75 completed.
+[000.032615] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.032615] No empty blocks in garbage collector!
+[000.032618] Mark stage 76 started.
+[000.032952] Mark stage 76 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.032953] Sweep stage 76 started.
+[000.032955] Sweep stage 76 completed.
+[000.033024] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.033024] No empty blocks in garbage collector!
+[000.033026] Mark stage 77 started.
+[000.033364] Mark stage 77 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.033365] Sweep stage 77 started.
+[000.033366] Sweep stage 77 completed.
+[000.033436] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.033436] No empty blocks in garbage collector!
+[000.033438] Mark stage 78 started.
+[000.033780] Mark stage 78 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.033781] Sweep stage 78 started.
+[000.033783] Sweep stage 78 completed.
+[000.033853] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.033853] No empty blocks in garbage collector!
+[000.033856] Mark stage 79 started.
+[000.034191] Mark stage 79 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.034192] Sweep stage 79 started.
+[000.034194] Sweep stage 79 completed.
+[000.034292] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.034292] No empty blocks in garbage collector!
+[000.034294] Mark stage 80 started.
+[000.034636] Mark stage 80 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.034637] Sweep stage 80 started.
+[000.034639] Sweep stage 80 completed.
+[000.034709] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.034709] No empty blocks in garbage collector!
+[000.034711] Mark stage 81 started.
+[000.035047] Mark stage 81 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.035047] Sweep stage 81 started.
+[000.035049] Sweep stage 81 completed.
+[000.035150] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.035150] No empty blocks in garbage collector!
+[000.035152] Mark stage 82 started.
+[000.035493] Mark stage 82 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.035494] Sweep stage 82 started.
+[000.035496] Sweep stage 82 completed.
+[000.035566] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.035566] No empty blocks in garbage collector!
+[000.035570] Mark stage 83 started.
+[000.035917] Mark stage 83 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.035918] Sweep stage 83 started.
+[000.035920] Sweep stage 83 completed.
+[000.035991] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.035990] No empty blocks in garbage collector!
+[000.035993] Mark stage 84 started.
+[000.036328] Mark stage 84 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.036329] Sweep stage 84 started.
+[000.036331] Sweep stage 84 completed.
+[000.036401] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.036401] No empty blocks in garbage collector!
+[000.036403] Mark stage 85 started.
+[000.036831] Mark stage 85 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.036831] Sweep stage 85 started.
+[000.036833] Sweep stage 85 completed.
+[000.036907] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.036907] No empty blocks in garbage collector!
+[000.036909] Mark stage 86 started.
+[000.037247] Mark stage 86 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.037248] Sweep stage 86 started.
+[000.037250] Sweep stage 86 completed.
+[000.037321] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.037321] No empty blocks in garbage collector!
+[000.037323] Mark stage 87 started.
+[000.037663] Mark stage 87 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.037664] Sweep stage 87 started.
+[000.037666] Sweep stage 87 completed.
+[000.037741] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.037741] No empty blocks in garbage collector!
+[000.037743] Mark stage 88 started.
+[000.038097] Mark stage 88 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.038097] Sweep stage 88 started.
+[000.038099] Sweep stage 88 completed.
+[000.038169] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.038169] No empty blocks in garbage collector!
+[000.038172] Mark stage 89 started.
+[000.038509] Mark stage 89 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.038510] Sweep stage 89 started.
+[000.038512] Sweep stage 89 completed.
+[000.038585] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.038585] No empty blocks in garbage collector!
+[000.038587] Mark stage 90 started.
+[000.038931] Mark stage 90 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.038932] Sweep stage 90 started.
+[000.038936] Sweep stage 90 completed.
+[000.039007] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.039007] No empty blocks in garbage collector!
+[000.039009] Mark stage 91 started.
+[000.039349] Mark stage 91 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.039349] Sweep stage 91 started.
+[000.039352] Sweep stage 91 completed.
+[000.039422] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.039422] No empty blocks in garbage collector!
+[000.039424] Mark stage 92 started.
+[000.039758] Mark stage 92 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.039759] Sweep stage 92 started.
+[000.039761] Sweep stage 92 completed.
+[000.039835] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.039835] No empty blocks in garbage collector!
+[000.039838] Mark stage 93 started.
+[000.040189] Mark stage 93 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.040190] Sweep stage 93 started.
+[000.040194] Sweep stage 93 completed.
+[000.040266] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.040266] No empty blocks in garbage collector!
+[000.040268] Mark stage 94 started.
+[000.040604] Mark stage 94 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.040605] Sweep stage 94 started.
+[000.040609] Sweep stage 94 completed.
+[000.040679] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.040679] No empty blocks in garbage collector!
+[000.040681] Mark stage 95 started.
+[000.041023] Mark stage 95 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.041024] Sweep stage 95 started.
+[000.041026] Sweep stage 95 completed.
+[000.041099] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.041099] No empty blocks in garbage collector!
+[000.041101] Mark stage 96 started.
+[000.041438] Mark stage 96 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.041439] Sweep stage 96 started.
+[000.041440] Sweep stage 96 completed.
+[000.041516] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.041516] No empty blocks in garbage collector!
+[000.041518] Mark stage 97 started.
+[000.041931] Mark stage 97 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.041932] Sweep stage 97 started.
+[000.041934] Sweep stage 97 completed.
+[000.042004] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.042004] No empty blocks in garbage collector!
+[000.042007] Mark stage 98 started.
+[000.042343] Mark stage 98 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.042343] Sweep stage 98 started.
+[000.042345] Sweep stage 98 completed.
+[000.042419] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.042419] No empty blocks in garbage collector!
+[000.042421] Mark stage 99 started.
+[000.042758] Mark stage 99 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.042758] Sweep stage 99 started.
+[000.042760] Sweep stage 99 completed.
+[000.042831] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.042831] No empty blocks in garbage collector!
+[000.042835] Mark stage 100 started.
+[000.043176] Mark stage 100 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.043177] Sweep stage 100 started.
+[000.043179] Sweep stage 100 completed.
+[000.043248] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.043248] No empty blocks in garbage collector!
+[000.043251] Mark stage 101 started.
+[000.043587] Mark stage 101 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.043588] Sweep stage 101 started.
+[000.043592] Sweep stage 101 completed.
+[000.043663] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.043662] No empty blocks in garbage collector!
+[000.043665] Mark stage 102 started.
+[000.044005] Mark stage 102 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.044006] Sweep stage 102 started.
+[000.044008] Sweep stage 102 completed.
+[000.044079] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.044079] No empty blocks in garbage collector!
+[000.044081] Mark stage 103 started.
+[000.044418] Mark stage 103 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.044418] Sweep stage 103 started.
+[000.044422] Sweep stage 103 completed.
+[000.044493] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.044492] No empty blocks in garbage collector!
+[000.044495] Mark stage 104 started.
+[000.044831] Mark stage 104 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.044831] Sweep stage 104 started.
+[000.044833] Sweep stage 104 completed.
+[000.044909] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.044909] No empty blocks in garbage collector!
+[000.044911] Mark stage 105 started.
+[000.045247] Mark stage 105 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.045248] Sweep stage 105 started.
+[000.045252] Sweep stage 105 completed.
+[000.045322] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.045322] No empty blocks in garbage collector!
+[000.045324] Mark stage 106 started.
+[000.045660] Mark stage 106 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.045661] Sweep stage 106 started.
+[000.045663] Sweep stage 106 completed.
+[000.045734] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.045734] No empty blocks in garbage collector!
+[000.045736] Mark stage 107 started.
+[000.046087] Mark stage 107 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.046088] Sweep stage 107 started.
+[000.046092] Sweep stage 107 completed.
+[000.046162] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.046162] No empty blocks in garbage collector!
+[000.046167] Mark stage 108 started.
+[000.046505] Mark stage 108 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.046506] Sweep stage 108 started.
+[000.046507] Sweep stage 108 completed.
+[000.046577] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.046577] No empty blocks in garbage collector!
+[000.046579] Mark stage 109 started.
+[000.046920] Mark stage 109 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.046921] Sweep stage 109 started.
+[000.046923] Sweep stage 109 completed.
+[000.046994] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.046993] No empty blocks in garbage collector!
+[000.046996] Mark stage 110 started.
+[000.047338] Mark stage 110 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.047339] Sweep stage 110 started.
+[000.047341] Sweep stage 110 completed.
+[000.047412] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.047412] No empty blocks in garbage collector!
+[000.047414] Mark stage 111 started.
+[000.047751] Mark stage 111 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.047751] Sweep stage 111 started.
+[000.047755] Sweep stage 111 completed.
+[000.047830] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.047830] No empty blocks in garbage collector!
+[000.047832] Mark stage 112 started.
+[000.048175] Mark stage 112 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.048176] Sweep stage 112 started.
+[000.048178] Sweep stage 112 completed.
+[000.048249] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.048249] No empty blocks in garbage collector!
+[000.048251] Mark stage 113 started.
+[000.048588] Mark stage 113 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.048588] Sweep stage 113 started.
+[000.048590] Sweep stage 113 completed.
+[000.048660] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.048660] No empty blocks in garbage collector!
+[000.048662] Mark stage 114 started.
+[000.049001] Mark stage 114 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.049001] Sweep stage 114 started.
+[000.049003] Sweep stage 114 completed.
+[000.049076] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.049076] No empty blocks in garbage collector!
+[000.049078] Mark stage 115 started.
+[000.049418] Mark stage 115 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.049419] Sweep stage 115 started.
+[000.049423] Sweep stage 115 completed.
+[000.049493] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.049493] No empty blocks in garbage collector!
+[000.049496] Mark stage 116 started.
+[000.049834] Mark stage 116 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.049835] Sweep stage 116 started.
+[000.049841] Sweep stage 116 completed.
+[000.049912] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.049912] No empty blocks in garbage collector!
+[000.049914] Mark stage 117 started.
+[000.050273] Mark stage 117 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.050274] Sweep stage 117 started.
+[000.050278] Sweep stage 117 completed.
+[000.050348] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.050348] No empty blocks in garbage collector!
+[000.050351] Mark stage 118 started.
+[000.050687] Mark stage 118 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.050688] Sweep stage 118 started.
+[000.050690] Sweep stage 118 completed.
+[000.050760] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.050759] No empty blocks in garbage collector!
+[000.050762] Mark stage 119 started.
+[000.051099] Mark stage 119 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.051100] Sweep stage 119 started.
+[000.051102] Sweep stage 119 completed.
+[000.051178] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.051177] No empty blocks in garbage collector!
+[000.051180] Mark stage 120 started.
+[000.051517] Mark stage 120 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.051518] Sweep stage 120 started.
+[000.051520] Sweep stage 120 completed.
+[000.051591] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.051590] No empty blocks in garbage collector!
+[000.051593] Mark stage 121 started.
+[000.051937] Mark stage 121 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.051938] Sweep stage 121 started.
+[000.051940] Sweep stage 121 completed.
+[000.052013] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.052013] No empty blocks in garbage collector!
+[000.052016] Mark stage 122 started.
+[000.052358] Mark stage 122 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.052359] Sweep stage 122 started.
+[000.052361] Sweep stage 122 completed.
+[000.052431] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.052431] No empty blocks in garbage collector!
+[000.052433] Mark stage 123 started.
+[000.052772] Mark stage 123 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.052772] Sweep stage 123 started.
+[000.052774] Sweep stage 123 completed.
+[000.052845] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.052844] No empty blocks in garbage collector!
+[000.052847] Mark stage 124 started.
+[000.053188] Mark stage 124 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.053189] Sweep stage 124 started.
+[000.053191] Sweep stage 124 completed.
+[000.053262] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.053262] No empty blocks in garbage collector!
+[000.053267] Mark stage 125 started.
+[000.053603] Mark stage 125 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.053604] Sweep stage 125 started.
+[000.053606] Sweep stage 125 completed.
+[000.053676] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.053676] No empty blocks in garbage collector!
+[000.053679] Mark stage 126 started.
+[000.054015] Mark stage 126 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.054015] Sweep stage 126 started.
+[000.054017] Sweep stage 126 completed.
+[000.054088] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.054088] No empty blocks in garbage collector!
+[000.054090] Mark stage 127 started.
+[000.054433] Mark stage 127 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.054434] Sweep stage 127 started.
+[000.054438] Sweep stage 127 completed.
+[000.054509] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.054508] No empty blocks in garbage collector!
+[000.054511] Mark stage 128 started.
+[000.054849] Mark stage 128 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.054849] Sweep stage 128 started.
+[000.054853] Sweep stage 128 completed.
+[000.054926] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.054925] No empty blocks in garbage collector!
+[000.054928] Mark stage 129 started.
+[000.055276] Mark stage 129 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.055277] Sweep stage 129 started.
+[000.055279] Sweep stage 129 completed.
+[000.055349] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.055349] No empty blocks in garbage collector!
+[000.055352] Mark stage 130 started.
+[000.055693] Mark stage 130 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.055694] Sweep stage 130 started.
+[000.055696] Sweep stage 130 completed.
+[000.055794] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.055794] No empty blocks in garbage collector!
+[000.055797] Mark stage 131 started.
+[000.056134] Mark stage 131 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.056135] Sweep stage 131 started.
+[000.056137] Sweep stage 131 completed.
+[000.056206] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.056206] No empty blocks in garbage collector!
+[000.056208] Mark stage 132 started.
+[000.056550] Mark stage 132 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.056550] Sweep stage 132 started.
+[000.056555] Sweep stage 132 completed.
+[000.056631] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.056630] No empty blocks in garbage collector!
+[000.056633] Mark stage 133 started.
+[000.056971] Mark stage 133 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.056973] Sweep stage 133 started.
+[000.056978] Sweep stage 133 completed.
+[000.057051] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.057051] No empty blocks in garbage collector!
+[000.057054] Mark stage 134 started.
+[000.057394] Mark stage 134 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.057394] Sweep stage 134 started.
+[000.057396] Sweep stage 134 completed.
+[000.057471] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.057471] No empty blocks in garbage collector!
+[000.057474] Mark stage 135 started.
+[000.057811] Mark stage 135 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.057811] Sweep stage 135 started.
+[000.057816] Sweep stage 135 completed.
+[000.057886] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.057886] No empty blocks in garbage collector!
+[000.057888] Mark stage 136 started.
+[000.058224] Mark stage 136 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.058225] Sweep stage 136 started.
+[000.058229] Sweep stage 136 completed.
+[000.058300] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.058300] No empty blocks in garbage collector!
+[000.058302] Mark stage 137 started.
+[000.058643] Mark stage 137 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.058644] Sweep stage 137 started.
+[000.058646] Sweep stage 137 completed.
+[000.058718] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.058717] No empty blocks in garbage collector!
+[000.058720] Mark stage 138 started.
+[000.059057] Mark stage 138 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.059058] Sweep stage 138 started.
+[000.059062] Sweep stage 138 completed.
+[000.059132] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.059132] No empty blocks in garbage collector!
+[000.059134] Mark stage 139 started.
+[000.059475] Mark stage 139 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.059475] Sweep stage 139 started.
+[000.059477] Sweep stage 139 completed.
+[000.059547] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.059547] No empty blocks in garbage collector!
+[000.059549] Mark stage 140 started.
+[000.059886] Mark stage 140 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.059887] Sweep stage 140 started.
+[000.059889] Sweep stage 140 completed.
+[000.059958] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.059958] No empty blocks in garbage collector!
+[000.059960] Mark stage 141 started.
+[000.060315] Mark stage 141 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.060316] Sweep stage 141 started.
+[000.060318] Sweep stage 141 completed.
+[000.060393] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.060393] No empty blocks in garbage collector!
+[000.060398] Mark stage 142 started.
+[000.060736] Mark stage 142 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.060737] Sweep stage 142 started.
+[000.060739] Sweep stage 142 completed.
+[000.060810] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.060809] No empty blocks in garbage collector!
+[000.060812] Mark stage 143 started.
+[000.061149] Mark stage 143 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.061150] Sweep stage 143 started.
+[000.061152] Sweep stage 143 completed.
+[000.061224] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.061223] No empty blocks in garbage collector!
+[000.061225] Mark stage 144 started.
+[000.061577] Mark stage 144 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.061578] Sweep stage 144 started.
+[000.061580] Sweep stage 144 completed.
+[000.061651] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.061650] No empty blocks in garbage collector!
+[000.061653] Mark stage 145 started.
+[000.061991] Mark stage 145 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.061992] Sweep stage 145 started.
+[000.061994] Sweep stage 145 completed.
+[000.062066] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.062066] No empty blocks in garbage collector!
+[000.062068] Mark stage 146 started.
+[000.062408] Mark stage 146 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.062408] Sweep stage 146 started.
+[000.062410] Sweep stage 146 completed.
+[000.062486] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.062486] No empty blocks in garbage collector!
+[000.062488] Mark stage 147 started.
+[000.062825] Mark stage 147 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.062826] Sweep stage 147 started.
+[000.062830] Sweep stage 147 completed.
+[000.062901] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.062901] No empty blocks in garbage collector!
+[000.062903] Mark stage 148 started.
+[000.063329] Mark stage 148 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.063329] Sweep stage 148 started.
+[000.063331] Sweep stage 148 completed.
+[000.063403] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.063402] No empty blocks in garbage collector!
+[000.063405] Mark stage 149 started.
+[000.063748] Mark stage 149 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.063749] Sweep stage 149 started.
+[000.063751] Sweep stage 149 completed.
+[000.063821] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.063821] No empty blocks in garbage collector!
+[000.063824] Mark stage 150 started.
+[000.064160] Mark stage 150 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.064163] Sweep stage 150 started.
+[000.064165] Sweep stage 150 completed.
+[000.064238] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.064238] No empty blocks in garbage collector!
+[000.064240] Mark stage 151 started.
+[000.064620] Mark stage 151 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.064621] Sweep stage 151 started.
+[000.064626] Sweep stage 151 completed.
+[000.064696] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.064696] No empty blocks in garbage collector!
+[000.064698] Mark stage 152 started.
+[000.065034] Mark stage 152 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.065035] Sweep stage 152 started.
+[000.065039] Sweep stage 152 completed.
+[000.065110] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.065110] No empty blocks in garbage collector!
+[000.065112] Mark stage 153 started.
+[000.065448] Mark stage 153 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.065448] Sweep stage 153 started.
+[000.065450] Sweep stage 153 completed.
+[000.065526] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.065526] No empty blocks in garbage collector!
+[000.065529] Mark stage 154 started.
+[000.065874] Mark stage 154 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.065875] Sweep stage 154 started.
+[000.065877] Sweep stage 154 completed.
+[000.065947] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.065947] No empty blocks in garbage collector!
+[000.065950] Mark stage 155 started.
+[000.066292] Mark stage 155 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.066293] Sweep stage 155 started.
+[000.066295] Sweep stage 155 completed.
+[000.066365] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.066365] No empty blocks in garbage collector!
+[000.066368] Mark stage 156 started.
+[000.066705] Mark stage 156 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.066706] Sweep stage 156 started.
+[000.066708] Sweep stage 156 completed.
+[000.066779] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.066779] No empty blocks in garbage collector!
+[000.066785] Mark stage 157 started.
+[000.067123] Mark stage 157 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.067124] Sweep stage 157 started.
+[000.067126] Sweep stage 157 completed.
+[000.067198] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.067198] No empty blocks in garbage collector!
+[000.067200] Mark stage 158 started.
+[000.067536] Mark stage 158 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.067537] Sweep stage 158 started.
+[000.067541] Sweep stage 158 completed.
+[000.067614] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.067614] No empty blocks in garbage collector!
+[000.067619] Mark stage 159 started.
+[000.067975] Mark stage 159 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.067976] Sweep stage 159 started.
+[000.067978] Sweep stage 159 completed.
+[000.068049] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.068049] No empty blocks in garbage collector!
+[000.068051] Mark stage 160 started.
+[000.068390] Mark stage 160 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.068391] Sweep stage 160 started.
+[000.068394] Sweep stage 160 completed.
+[000.068467] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.068467] No empty blocks in garbage collector!
+[000.068469] Mark stage 161 started.
+[000.068812] Mark stage 161 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.068813] Sweep stage 161 started.
+[000.068815] Sweep stage 161 completed.
+[000.068886] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.068885] No empty blocks in garbage collector!
+[000.068888] Mark stage 162 started.
+[000.069226] Mark stage 162 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.069226] Sweep stage 162 started.
+[000.069228] Sweep stage 162 completed.
+[000.069297] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.069297] No empty blocks in garbage collector!
+[000.069300] Mark stage 163 started.
+[000.069635] Mark stage 163 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.069636] Sweep stage 163 started.
+[000.069638] Sweep stage 163 completed.
+[000.069709] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.069709] No empty blocks in garbage collector!
+[000.069711] Mark stage 164 started.
+[000.070055] Mark stage 164 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.070056] Sweep stage 164 started.
+[000.070058] Sweep stage 164 completed.
+[000.070141] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.070140] No empty blocks in garbage collector!
+[000.070143] Mark stage 165 started.
+[000.070481] Mark stage 165 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.070482] Sweep stage 165 started.
+[000.070486] Sweep stage 165 completed.
+[000.070556] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.070556] No empty blocks in garbage collector!
+[000.070558] Mark stage 166 started.
+[000.070903] Mark stage 166 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.070904] Sweep stage 166 started.
+[000.070906] Sweep stage 166 completed.
+[000.070977] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.070977] No empty blocks in garbage collector!
+[000.070981] Mark stage 167 started.
+[000.071319] Mark stage 167 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.071320] Sweep stage 167 started.
+[000.071324] Sweep stage 167 completed.
+[000.071393] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.071393] No empty blocks in garbage collector!
+[000.071396] Mark stage 168 started.
+[000.071732] Mark stage 168 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.071733] Sweep stage 168 started.
+[000.071735] Sweep stage 168 completed.
+[000.071809] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.071809] No empty blocks in garbage collector!
+[000.071812] Mark stage 169 started.
+[000.072150] Mark stage 169 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.072151] Sweep stage 169 started.
+[000.072153] Sweep stage 169 completed.
+[000.072223] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.072222] No empty blocks in garbage collector!
+[000.072225] Mark stage 170 started.
+[000.072561] Mark stage 170 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.072562] Sweep stage 170 started.
+[000.072564] Sweep stage 170 completed.
+[000.072635] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.072635] No empty blocks in garbage collector!
+[000.072637] Mark stage 171 started.
+[000.072994] Mark stage 171 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.072995] Sweep stage 171 started.
+[000.072997] Sweep stage 171 completed.
+[000.073069] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.073068] No empty blocks in garbage collector!
+[000.073071] Mark stage 172 started.
+[000.073408] Mark stage 172 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.073409] Sweep stage 172 started.
+[000.073411] Sweep stage 172 completed.
+[000.073480] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.073480] No empty blocks in garbage collector!
+[000.073483] Mark stage 173 started.
+[000.073825] Mark stage 173 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.073826] Sweep stage 173 started.
+[000.073828] Sweep stage 173 completed.
+[000.073899] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.073898] No empty blocks in garbage collector!
+[000.073901] Mark stage 174 started.
+[000.074238] Mark stage 174 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.074238] Sweep stage 174 started.
+[000.074242] Sweep stage 174 completed.
+[000.074313] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.074313] No empty blocks in garbage collector!
+[000.074315] Mark stage 175 started.
+[000.074653] Mark stage 175 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.074654] Sweep stage 175 started.
+[000.074659] Sweep stage 175 completed.
+[000.074731] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.074731] No empty blocks in garbage collector!
+[000.074733] Mark stage 176 started.
+[000.075076] Mark stage 176 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.075077] Sweep stage 176 started.
+[000.075079] Sweep stage 176 completed.
+[000.075149] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.075149] No empty blocks in garbage collector!
+[000.075151] Mark stage 177 started.
+[000.075491] Mark stage 177 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.075492] Sweep stage 177 started.
+[000.075494] Sweep stage 177 completed.
+[000.075566] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.075566] No empty blocks in garbage collector!
+[000.075569] Mark stage 178 started.
+[000.075917] Mark stage 178 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.075918] Sweep stage 178 started.
+[000.075922] Sweep stage 178 completed.
+[000.075992] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.075992] No empty blocks in garbage collector!
+[000.075994] Mark stage 179 started.
+[000.076336] Mark stage 179 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.076337] Sweep stage 179 started.
+[000.076338] Sweep stage 179 completed.
+[000.076412] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.076412] No empty blocks in garbage collector!
+[000.076414] Mark stage 180 started.
+[000.076751] Mark stage 180 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.076751] Sweep stage 180 started.
+[000.076753] Sweep stage 180 completed.
+[000.076825] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.076825] No empty blocks in garbage collector!
+[000.076827] Mark stage 181 started.
+[000.077172] Mark stage 181 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.077172] Sweep stage 181 started.
+[000.077174] Sweep stage 181 completed.
+[000.077245] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.077244] No empty blocks in garbage collector!
+[000.077247] Mark stage 182 started.
+[000.077583] Mark stage 182 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.077584] Sweep stage 182 started.
+[000.077586] Sweep stage 182 completed.
+[000.077657] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.077657] No empty blocks in garbage collector!
+[000.077659] Mark stage 183 started.
+[000.077995] Mark stage 183 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.077995] Sweep stage 183 started.
+[000.077997] Sweep stage 183 completed.
+[000.078069] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.078069] No empty blocks in garbage collector!
+[000.078073] Mark stage 184 started.
+[000.078417] Mark stage 184 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.078417] Sweep stage 184 started.
+[000.078419] Sweep stage 184 completed.
+[000.078490] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.078490] No empty blocks in garbage collector!
+[000.078492] Mark stage 185 started.
+[000.078830] Mark stage 185 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.078831] Sweep stage 185 started.
+[000.078833] Sweep stage 185 completed.
+[000.078905] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.078905] No empty blocks in garbage collector!
+[000.078907] Mark stage 186 started.
+[000.079251] Mark stage 186 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.079252] Sweep stage 186 started.
+[000.079254] Sweep stage 186 completed.
+[000.079324] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.079324] No empty blocks in garbage collector!
+[000.079327] Mark stage 187 started.
+[000.079666] Mark stage 187 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.079667] Sweep stage 187 started.
+[000.079669] Sweep stage 187 completed.
+[000.079738] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.079738] No empty blocks in garbage collector!
+[000.079740] Mark stage 188 started.
+[000.080121] Mark stage 188 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.080122] Sweep stage 188 started.
+[000.080125] Sweep stage 188 completed.
+[000.080196] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.080196] No empty blocks in garbage collector!
+[000.080199] Mark stage 189 started.
+[000.080626] Mark stage 189 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.080627] Sweep stage 189 started.
+[000.080629] Sweep stage 189 completed.
+[000.080700] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.080700] No empty blocks in garbage collector!
+[000.080702] Mark stage 190 started.
+[000.081054] Mark stage 190 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.081055] Sweep stage 190 started.
+[000.081059] Sweep stage 190 completed.
+[000.081134] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.081134] No empty blocks in garbage collector!
+[000.081137] Mark stage 191 started.
+[000.081474] Mark stage 191 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.081474] Sweep stage 191 started.
+[000.081478] Sweep stage 191 completed.
+[000.081548] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.081548] No empty blocks in garbage collector!
+[000.081550] Mark stage 192 started.
+[000.081888] Mark stage 192 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.081890] Sweep stage 192 started.
+[000.081892] Sweep stage 192 completed.
+[000.081964] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.081964] No empty blocks in garbage collector!
+[000.081966] Mark stage 193 started.
+[000.082311] Mark stage 193 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.082312] Sweep stage 193 started.
+[000.082314] Sweep stage 193 completed.
+[000.082386] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.082386] No empty blocks in garbage collector!
+[000.082388] Mark stage 194 started.
+[000.082727] Mark stage 194 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.082728] Sweep stage 194 started.
+[000.082730] Sweep stage 194 completed.
+[000.082800] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.082800] No empty blocks in garbage collector!
+[000.082802] Mark stage 195 started.
+[000.083146] Mark stage 195 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.083147] Sweep stage 195 started.
+[000.083149] Sweep stage 195 completed.
+[000.083220] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.083220] No empty blocks in garbage collector!
+[000.083222] Mark stage 196 started.
+[000.083562] Mark stage 196 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.083562] Sweep stage 196 started.
+[000.083567] Sweep stage 196 completed.
+[000.083637] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.083637] No empty blocks in garbage collector!
+[000.083639] Mark stage 197 started.
+[000.083978] Mark stage 197 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.083979] Sweep stage 197 started.
+[000.083981] Sweep stage 197 completed.
+[000.084054] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.084054] No empty blocks in garbage collector!
+[000.084056] Mark stage 198 started.
+[000.084399] Mark stage 198 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.084400] Sweep stage 198 started.
+[000.084404] Sweep stage 198 completed.
+[000.084480] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.084479] No empty blocks in garbage collector!
+[000.084482] Mark stage 199 started.
+[000.084820] Mark stage 199 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.084821] Sweep stage 199 started.
+[000.084823] Sweep stage 199 completed.
+[000.084893] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.084893] No empty blocks in garbage collector!
+[000.084895] Mark stage 200 started.
+[000.085242] Mark stage 200 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.085243] Sweep stage 200 started.
+[000.085246] Sweep stage 200 completed.
+[000.085314] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.085314] No empty blocks in garbage collector!
+[000.085319] Mark stage 201 started.
+[000.085664] Mark stage 201 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.085664] Sweep stage 201 started.
+[000.085666] Sweep stage 201 completed.
+[000.085737] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.085737] No empty blocks in garbage collector!
+[000.085739] Mark stage 202 started.
+[000.086079] Mark stage 202 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.086079] Sweep stage 202 started.
+[000.086083] Sweep stage 202 completed.
+[000.086156] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.086156] No empty blocks in garbage collector!
+[000.086158] Mark stage 203 started.
+[000.086502] Mark stage 203 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.086502] Sweep stage 203 started.
+[000.086504] Sweep stage 203 completed.
+[000.086574] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.086574] No empty blocks in garbage collector!
+[000.086576] Mark stage 204 started.
+[000.086914] Mark stage 204 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.086915] Sweep stage 204 started.
+[000.086917] Sweep stage 204 completed.
+[000.086990] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.086990] No empty blocks in garbage collector!
+[000.086992] Mark stage 205 started.
+[000.087330] Mark stage 205 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.087331] Sweep stage 205 started.
+[000.087333] Sweep stage 205 completed.
+[000.087409] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.087408] No empty blocks in garbage collector!
+[000.087411] Mark stage 206 started.
+[000.087749] Mark stage 206 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.087750] Sweep stage 206 started.
+[000.087752] Sweep stage 206 completed.
+[000.087824] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.087824] No empty blocks in garbage collector!
+[000.087826] Mark stage 207 started.
+[000.088164] Mark stage 207 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.088165] Sweep stage 207 started.
+[000.088167] Sweep stage 207 completed.
+[000.088237] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.088237] No empty blocks in garbage collector!
+[000.088239] Mark stage 208 started.
+[000.088581] Mark stage 208 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.088582] Sweep stage 208 started.
+[000.088586] Sweep stage 208 completed.
+[000.088656] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.088656] No empty blocks in garbage collector!
+[000.088658] Mark stage 209 started.
+[000.088999] Mark stage 209 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.089002] Sweep stage 209 started.
+[000.089004] Sweep stage 209 completed.
+[000.089074] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.089074] No empty blocks in garbage collector!
+[000.089077] Mark stage 210 started.
+[000.089421] Mark stage 210 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.089422] Sweep stage 210 started.
+[000.089426] Sweep stage 210 completed.
+[000.089496] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.089496] No empty blocks in garbage collector!
+[000.089499] Mark stage 211 started.
+[000.089837] Mark stage 211 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.089838] Sweep stage 211 started.
+[000.089842] Sweep stage 211 completed.
+[000.089911] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.089911] No empty blocks in garbage collector!
+[000.089913] Mark stage 212 started.
+[000.090253] Mark stage 212 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.090254] Sweep stage 212 started.
+[000.090256] Sweep stage 212 completed.
+[000.090326] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.090325] No empty blocks in garbage collector!
+[000.090328] Mark stage 213 started.
+[000.090672] Mark stage 213 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.090673] Sweep stage 213 started.
+[000.090675] Sweep stage 213 completed.
+[000.090748] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.090747] No empty blocks in garbage collector!
+[000.090750] Mark stage 214 started.
+[000.091088] Mark stage 214 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.091088] Sweep stage 214 started.
+[000.091090] Sweep stage 214 completed.
+[000.091162] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.091162] No empty blocks in garbage collector!
+[000.091164] Mark stage 215 started.
+[000.091509] Mark stage 215 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.091510] Sweep stage 215 started.
+[000.091512] Sweep stage 215 completed.
+[000.091582] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.091582] No empty blocks in garbage collector!
+[000.091585] Mark stage 216 started.
+[000.091922] Mark stage 216 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.091923] Sweep stage 216 started.
+[000.091925] Sweep stage 216 completed.
+[000.091997] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.091997] No empty blocks in garbage collector!
+[000.091999] Mark stage 217 started.
+[000.092337] Mark stage 217 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.092337] Sweep stage 217 started.
+[000.092339] Sweep stage 217 completed.
+[000.092416] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.092416] No empty blocks in garbage collector!
+[000.092421] Mark stage 218 started.
+[000.092760] Mark stage 218 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.092761] Sweep stage 218 started.
+[000.092765] Sweep stage 218 completed.
+[000.092835] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.092834] No empty blocks in garbage collector!
+[000.092837] Mark stage 219 started.
+[000.093179] Mark stage 219 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.093180] Sweep stage 219 started.
+[000.093182] Sweep stage 219 completed.
+[000.093254] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.093254] No empty blocks in garbage collector!
+[000.093256] Mark stage 220 started.
+[000.093601] Mark stage 220 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.093602] Sweep stage 220 started.
+[000.093604] Sweep stage 220 completed.
+[000.093675] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.093674] No empty blocks in garbage collector!
+[000.093677] Mark stage 221 started.
+[000.094015] Mark stage 221 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.094016] Sweep stage 221 started.
+[000.094020] Sweep stage 221 completed.
+[000.094091] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.094091] No empty blocks in garbage collector!
+[000.094093] Mark stage 222 started.
+[000.094434] Mark stage 222 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.094435] Sweep stage 222 started.
+[000.094437] Sweep stage 222 completed.
+[000.094508] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.094508] No empty blocks in garbage collector!
+[000.094510] Mark stage 223 started.
+[000.094848] Mark stage 223 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.094849] Sweep stage 223 started.
+[000.094853] Sweep stage 223 completed.
+[000.094924] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.094924] No empty blocks in garbage collector!
+[000.094926] Mark stage 224 started.
+[000.095264] Mark stage 224 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.095264] Sweep stage 224 started.
+[000.095266] Sweep stage 224 completed.
+[000.095337] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.095337] No empty blocks in garbage collector!
+[000.095339] Mark stage 225 started.
+[000.095691] Mark stage 225 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.095692] Sweep stage 225 started.
+[000.095696] Sweep stage 225 completed.
+[000.095767] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.095767] No empty blocks in garbage collector!
+[000.095771] Mark stage 226 started.
+[000.096110] Mark stage 226 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.096110] Sweep stage 226 started.
+[000.096112] Sweep stage 226 completed.
+[000.096182] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.096182] No empty blocks in garbage collector!
+[000.096185] Mark stage 227 started.
+[000.096521] Mark stage 227 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.096521] Sweep stage 227 started.
+[000.096523] Sweep stage 227 completed.
+[000.096594] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.096593] No empty blocks in garbage collector!
+[000.096596] Mark stage 228 started.
+[000.096938] Mark stage 228 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.096939] Sweep stage 228 started.
+[000.096943] Sweep stage 228 completed.
+[000.097013] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.097013] No empty blocks in garbage collector!
+[000.097016] Mark stage 229 started.
+[000.097354] Mark stage 229 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.097355] Sweep stage 229 started.
+[000.097357] Sweep stage 229 completed.
+[000.097437] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.097437] No empty blocks in garbage collector!
+[000.097440] Mark stage 230 started.
+[000.097800] Mark stage 230 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.097801] Sweep stage 230 started.
+[000.097803] Sweep stage 230 completed.
+[000.097874] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.097874] No empty blocks in garbage collector!
+[000.097877] Mark stage 231 started.
+[000.098214] Mark stage 231 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.098215] Sweep stage 231 started.
+[000.098217] Sweep stage 231 completed.
+[000.098287] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.098287] No empty blocks in garbage collector!
+[000.098289] Mark stage 232 started.
+[000.098628] Mark stage 232 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.098628] Sweep stage 232 started.
+[000.098632] Sweep stage 232 completed.
+[000.098706] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.098706] No empty blocks in garbage collector!
+[000.098708] Mark stage 233 started.
+[000.099049] Mark stage 233 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.099050] Sweep stage 233 started.
+[000.099054] Sweep stage 233 completed.
+[000.099125] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.099125] No empty blocks in garbage collector!
+[000.099127] Mark stage 234 started.
+[000.099465] Mark stage 234 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.099466] Sweep stage 234 started.
+[000.099472] Sweep stage 234 completed.
+[000.099543] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.099543] No empty blocks in garbage collector!
+[000.099545] Mark stage 235 started.
+[000.099888] Mark stage 235 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.099889] Sweep stage 235 started.
+[000.099893] Sweep stage 235 completed.
+[000.099963] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.099963] No empty blocks in garbage collector!
+[000.099965] Mark stage 236 started.
+[000.100310] Mark stage 236 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.100310] Sweep stage 236 started.
+[000.100312] Sweep stage 236 completed.
+[000.100384] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.100384] No empty blocks in garbage collector!
+[000.100386] Mark stage 237 started.
+[000.100730] Mark stage 237 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.100731] Sweep stage 237 started.
+[000.100735] Sweep stage 237 completed.
+[000.100833] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.100833] No empty blocks in garbage collector!
+[000.100836] Mark stage 238 started.
+[000.101175] Mark stage 238 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.101175] Sweep stage 238 started.
+[000.101177] Sweep stage 238 completed.
+[000.101248] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.101248] No empty blocks in garbage collector!
+[000.101250] Mark stage 239 started.
+[000.101588] Mark stage 239 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.101588] Sweep stage 239 started.
+[000.101590] Sweep stage 239 completed.
+[000.101660] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.101660] No empty blocks in garbage collector!
+[000.101662] Mark stage 240 started.
+[000.102007] Mark stage 240 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.102008] Sweep stage 240 started.
+[000.102012] Sweep stage 240 completed.
+[000.102083] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.102083] No empty blocks in garbage collector!
+[000.102085] Mark stage 241 started.
+[000.102424] Mark stage 241 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.102424] Sweep stage 241 started.
+[000.102428] Sweep stage 241 completed.
+[000.102500] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.102500] No empty blocks in garbage collector!
+[000.102502] Mark stage 242 started.
+[000.102847] Mark stage 242 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.102848] Sweep stage 242 started.
+[000.102852] Sweep stage 242 completed.
+[000.102922] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.102922] No empty blocks in garbage collector!
+[000.102926] Mark stage 243 started.
+[000.103267] Mark stage 243 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.103268] Sweep stage 243 started.
+[000.103272] Sweep stage 243 completed.
+[000.103346] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.103346] No empty blocks in garbage collector!
+[000.103348] Mark stage 244 started.
+[000.103688] Mark stage 244 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.103689] Sweep stage 244 started.
+[000.103691] Sweep stage 244 completed.
+[000.103766] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.103766] No empty blocks in garbage collector!
+[000.103769] Mark stage 245 started.
+[000.104106] Mark stage 245 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.104107] Sweep stage 245 started.
+[000.104109] Sweep stage 245 completed.
+[000.104180] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.104180] No empty blocks in garbage collector!
+[000.104182] Mark stage 246 started.
+[000.104521] Mark stage 246 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.104522] Sweep stage 246 started.
+[000.104526] Sweep stage 246 completed.
+[000.104597] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.104597] No empty blocks in garbage collector!
+[000.104599] Mark stage 247 started.
+[000.104943] Mark stage 247 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.104944] Sweep stage 247 started.
+[000.104948] Sweep stage 247 completed.
+[000.105018] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.105018] No empty blocks in garbage collector!
+[000.105020] Mark stage 248 started.
+[000.105360] Mark stage 248 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.105360] Sweep stage 248 started.
+[000.105364] Sweep stage 248 completed.
+[000.105435] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.105435] No empty blocks in garbage collector!
+[000.105438] Mark stage 249 started.
+[000.105782] Mark stage 249 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.105783] Sweep stage 249 started.
+[000.105786] Sweep stage 249 completed.
+[000.105862] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.105862] No empty blocks in garbage collector!
+[000.105865] Mark stage 250 started.
+[000.106210] Mark stage 250 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.106211] Sweep stage 250 started.
+[000.106215] Sweep stage 250 completed.
+[000.106285] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.106285] No empty blocks in garbage collector!
+[000.106287] Mark stage 251 started.
+[000.106627] Mark stage 251 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.106630] Sweep stage 251 started.
+[000.106634] Sweep stage 251 completed.
+[000.106706] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.106705] No empty blocks in garbage collector!
+[000.106708] Mark stage 252 started.
+[000.107052] Mark stage 252 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.107053] Sweep stage 252 started.
+[000.107057] Sweep stage 252 completed.
+[000.107129] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.107129] No empty blocks in garbage collector!
+[000.107132] Mark stage 253 started.
+[000.107469] Mark stage 253 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.107470] Sweep stage 253 started.
+[000.107472] Sweep stage 253 completed.
+[000.107542] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.107542] No empty blocks in garbage collector!
+[000.107544] Mark stage 254 started.
+[000.107882] Mark stage 254 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.107883] Sweep stage 254 started.
+[000.107885] Sweep stage 254 completed.
+[000.107955] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.107955] No empty blocks in garbage collector!
+[000.107957] Mark stage 255 started.
+[000.108300] Mark stage 255 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.108301] Sweep stage 255 started.
+[000.108305] Sweep stage 255 completed.
+[000.108375] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.108374] No empty blocks in garbage collector!
+[000.108377] Mark stage 256 started.
+[000.108715] Mark stage 256 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.108716] Sweep stage 256 started.
+[000.108718] Sweep stage 256 completed.
+[000.108788] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.108788] No empty blocks in garbage collector!
+[000.108790] Mark stage 257 started.
+[000.109133] Mark stage 257 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.109134] Sweep stage 257 started.
+[000.109136] Sweep stage 257 completed.
+[000.109206] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.109206] No empty blocks in garbage collector!
+[000.109209] Mark stage 258 started.
+[000.109547] Mark stage 258 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.109548] Sweep stage 258 started.
+[000.109550] Sweep stage 258 completed.
+[000.109621] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.109621] No empty blocks in garbage collector!
+[000.109623] Mark stage 259 started.
+[000.110052] Mark stage 259 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.110053] Sweep stage 259 started.
+[000.110057] Sweep stage 259 completed.
+[000.110129] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.110129] No empty blocks in garbage collector!
+[000.110133] Mark stage 260 started.
+[000.110513] Mark stage 260 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.110514] Sweep stage 260 started.
+[000.110519] Sweep stage 260 completed.
+[000.110589] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.110589] No empty blocks in garbage collector!
+[000.110591] Mark stage 261 started.
+[000.110933] Mark stage 261 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.110933] Sweep stage 261 started.
+[000.110937] Sweep stage 261 completed.
+[000.111010] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.111010] No empty blocks in garbage collector!
+[000.111012] Mark stage 262 started.
+[000.111445] Mark stage 262 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.111446] Sweep stage 262 started.
+[000.111450] Sweep stage 262 completed.
+[000.111520] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.111520] No empty blocks in garbage collector!
+[000.111523] Mark stage 263 started.
+[000.111951] Mark stage 263 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.111952] Sweep stage 263 started.
+[000.111954] Sweep stage 263 completed.
+[000.112031] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.112031] No empty blocks in garbage collector!
+[000.112033] Mark stage 264 started.
+[000.112372] Mark stage 264 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.112372] Sweep stage 264 started.
+[000.112374] Sweep stage 264 completed.
+[000.112473] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.112473] No empty blocks in garbage collector!
+[000.112475] Mark stage 265 started.
+[000.112814] Mark stage 265 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.112815] Sweep stage 265 started.
+[000.112816] Sweep stage 265 completed.
+[000.112887] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.112887] No empty blocks in garbage collector!
+[000.112889] Mark stage 266 started.
+[000.113234] Mark stage 266 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.113235] Sweep stage 266 started.
+[000.113237] Sweep stage 266 completed.
+[000.113307] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.113307] No empty blocks in garbage collector!
+[000.113309] Mark stage 267 started.
+[000.113647] Mark stage 267 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.113648] Sweep stage 267 started.
+[000.113650] Sweep stage 267 completed.
+[000.113724] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.113724] No empty blocks in garbage collector!
+[000.113726] Mark stage 268 started.
+[000.114071] Mark stage 268 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.114073] Sweep stage 268 started.
+[000.114076] Sweep stage 268 completed.
+[000.114147] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.114146] No empty blocks in garbage collector!
+[000.114149] Mark stage 269 started.
+[000.114577] Mark stage 269 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.114578] Sweep stage 269 started.
+[000.114580] Sweep stage 269 completed.
+[000.114651] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.114651] No empty blocks in garbage collector!
+[000.114653] Mark stage 270 started.
+[000.115010] Mark stage 270 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.115011] Sweep stage 270 started.
+[000.115013] Sweep stage 270 completed.
+[000.115088] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.115088] No empty blocks in garbage collector!
+[000.115091] Mark stage 271 started.
+[000.115434] Mark stage 271 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.115435] Sweep stage 271 started.
+[000.115439] Sweep stage 271 completed.
+[000.115508] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.115508] No empty blocks in garbage collector!
+[000.115511] Mark stage 272 started.
+[000.115850] Mark stage 272 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.115850] Sweep stage 272 started.
+[000.115854] Sweep stage 272 completed.
+[000.115926] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.115926] No empty blocks in garbage collector!
+[000.115928] Mark stage 273 started.
+[000.116268] Mark stage 273 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.116268] Sweep stage 273 started.
+[000.116270] Sweep stage 273 completed.
+[000.116345] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.116344] No empty blocks in garbage collector!
+[000.116347] Mark stage 274 started.
+[000.116688] Mark stage 274 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.116689] Sweep stage 274 started.
+[000.116693] Sweep stage 274 completed.
+[000.116763] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.116762] No empty blocks in garbage collector!
+[000.116765] Mark stage 275 started.
+[000.117104] Mark stage 275 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.117105] Sweep stage 275 started.
+[000.117109] Sweep stage 275 completed.
+[000.117181] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.117181] No empty blocks in garbage collector!
+[000.117183] Mark stage 276 started.
+[000.117528] Mark stage 276 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.117529] Sweep stage 276 started.
+[000.117533] Sweep stage 276 completed.
+[000.117603] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.117603] No empty blocks in garbage collector!
+[000.117608] Mark stage 277 started.
+[000.117946] Mark stage 277 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.117947] Sweep stage 277 started.
+[000.117949] Sweep stage 277 completed.
+[000.118019] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.118018] No empty blocks in garbage collector!
+[000.118021] Mark stage 278 started.
+[000.118364] Mark stage 278 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.118365] Sweep stage 278 started.
+[000.118367] Sweep stage 278 completed.
+[000.118437] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.118437] No empty blocks in garbage collector!
+[000.118440] Mark stage 279 started.
+[000.118779] Mark stage 279 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.118780] Sweep stage 279 started.
+[000.118784] Sweep stage 279 completed.
+[000.118857] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.118857] No empty blocks in garbage collector!
+[000.118859] Mark stage 280 started.
+[000.119202] Mark stage 280 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.119203] Sweep stage 280 started.
+[000.119207] Sweep stage 280 completed.
+[000.119285] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.119284] No empty blocks in garbage collector!
+[000.119287] Mark stage 281 started.
+[000.119625] Mark stage 281 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.119626] Sweep stage 281 started.
+[000.119630] Sweep stage 281 completed.
+[000.119700] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.119700] No empty blocks in garbage collector!
+[000.119703] Mark stage 282 started.
+[000.120045] Mark stage 282 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.120045] Sweep stage 282 started.
+[000.120047] Sweep stage 282 completed.
+[000.120120] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.120119] No empty blocks in garbage collector!
+[000.120122] Mark stage 283 started.
+[000.120467] Mark stage 283 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.120468] Sweep stage 283 started.
+[000.120470] Sweep stage 283 completed.
+[000.120541] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.120541] No empty blocks in garbage collector!
+[000.120543] Mark stage 284 started.
+[000.120970] Mark stage 284 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.120971] Sweep stage 284 started.
+[000.120975] Sweep stage 284 completed.
+[000.121046] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.121046] No empty blocks in garbage collector!
+[000.121051] Mark stage 285 started.
+[000.121395] Mark stage 285 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.121396] Sweep stage 285 started.
+[000.121400] Sweep stage 285 completed.
+[000.121471] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.121471] No empty blocks in garbage collector!
+[000.121474] Mark stage 286 started.
+[000.121813] Mark stage 286 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.121814] Sweep stage 286 started.
+[000.121815] Sweep stage 286 completed.
+[000.121886] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.121886] No empty blocks in garbage collector!
+[000.121888] Mark stage 287 started.
+[000.122225] Mark stage 287 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.122225] Sweep stage 287 started.
+[000.122227] Sweep stage 287 completed.
+[000.122303] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.122303] No empty blocks in garbage collector!
+[000.122306] Mark stage 288 started.
+[000.122645] Mark stage 288 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.122645] Sweep stage 288 started.
+[000.122649] Sweep stage 288 completed.
+[000.122724] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.122723] No empty blocks in garbage collector!
+[000.122726] Mark stage 289 started.
+[000.123065] Mark stage 289 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.123066] Sweep stage 289 started.
+[000.123068] Sweep stage 289 completed.
+[000.123139] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.123139] No empty blocks in garbage collector!
+[000.123141] Mark stage 290 started.
+[000.123489] Mark stage 290 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.123490] Sweep stage 290 started.
+[000.123494] Sweep stage 290 completed.
+[000.123565] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.123564] No empty blocks in garbage collector!
+[000.123567] Mark stage 291 started.
+[000.123905] Mark stage 291 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.123906] Sweep stage 291 started.
+[000.123908] Sweep stage 291 completed.
+[000.123979] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.123979] No empty blocks in garbage collector!
+[000.123981] Mark stage 292 started.
+[000.124386] Mark stage 292 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.124387] Sweep stage 292 started.
+[000.124389] Sweep stage 292 completed.
+[000.124459] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.124459] No empty blocks in garbage collector!
+[000.124462] Mark stage 293 started.
+[000.124801] Mark stage 293 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.124802] Sweep stage 293 started.
+[000.124808] Sweep stage 293 completed.
+[000.124878] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.124877] No empty blocks in garbage collector!
+[000.124880] Mark stage 294 started.
+[000.125221] Mark stage 294 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.125221] Sweep stage 294 started.
+[000.125223] Sweep stage 294 completed.
+[000.125318] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.125317] No empty blocks in garbage collector!
+[000.125320] Mark stage 295 started.
+[000.125671] Mark stage 295 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.125673] Sweep stage 295 started.
+[000.125675] Sweep stage 295 completed.
+[000.125747] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.125747] No empty blocks in garbage collector!
+[000.125750] Mark stage 296 started.
+[000.126090] Mark stage 296 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.126091] Sweep stage 296 started.
+[000.126095] Sweep stage 296 completed.
+[000.126166] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.126165] No empty blocks in garbage collector!
+[000.126168] Mark stage 297 started.
+[000.126512] Mark stage 297 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.126514] Sweep stage 297 started.
+[000.126516] Sweep stage 297 completed.
+[000.126586] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.126586] No empty blocks in garbage collector!
+[000.126589] Mark stage 298 started.
+[000.126930] Mark stage 298 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.126931] Sweep stage 298 started.
+[000.126933] Sweep stage 298 completed.
+[000.127004] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.127004] No empty blocks in garbage collector!
+[000.127006] Mark stage 299 started.
+[000.127359] Mark stage 299 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.127361] Sweep stage 299 started.
+[000.127363] Sweep stage 299 completed.
+[000.127433] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.127433] No empty blocks in garbage collector!
+[000.127436] Mark stage 300 started.
+[000.127780] Mark stage 300 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.127781] Sweep stage 300 started.
+[000.127783] Sweep stage 300 completed.
+[000.127853] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.127853] No empty blocks in garbage collector!
+[000.127855] Mark stage 301 started.
+[000.128194] Mark stage 301 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.128195] Sweep stage 301 started.
+[000.128197] Sweep stage 301 completed.
+[000.128274] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.128273] No empty blocks in garbage collector!
+[000.128281] Mark stage 302 started.
+[000.128622] Mark stage 302 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.128623] Sweep stage 302 started.
+[000.128625] Sweep stage 302 completed.
+[000.128697] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.128697] No empty blocks in garbage collector!
+[000.128699] Mark stage 303 started.
+[000.129040] Mark stage 303 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.129042] Sweep stage 303 started.
+[000.129043] Sweep stage 303 completed.
+[000.129114] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.129114] No empty blocks in garbage collector!
+[000.129116] Mark stage 304 started.
+[000.129463] Mark stage 304 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.129464] Sweep stage 304 started.
+[000.129466] Sweep stage 304 completed.
+[000.129536] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.129536] No empty blocks in garbage collector!
+[000.129539] Mark stage 305 started.
+[000.129880] Mark stage 305 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.129881] Sweep stage 305 started.
+[000.129883] Sweep stage 305 completed.
+[000.129954] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.129953] No empty blocks in garbage collector!
+[000.129956] Mark stage 306 started.
+[000.130328] Mark stage 306 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.130329] Sweep stage 306 started.
+[000.130331] Sweep stage 306 completed.
+[000.130401] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.130400] No empty blocks in garbage collector!
+[000.130403] Mark stage 307 started.
+[000.130742] Mark stage 307 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.130743] Sweep stage 307 started.
+[000.130745] Sweep stage 307 completed.
+[000.130816] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.130816] No empty blocks in garbage collector!
+[000.130818] Mark stage 308 started.
+[000.131158] Mark stage 308 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.131159] Sweep stage 308 started.
+[000.131161] Sweep stage 308 completed.
+[000.131230] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.131230] No empty blocks in garbage collector!
+[000.131232] Mark stage 309 started.
+[000.131577] Mark stage 309 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.131578] Sweep stage 309 started.
+[000.131580] Sweep stage 309 completed.
+[000.131651] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.131650] No empty blocks in garbage collector!
+[000.131653] Mark stage 310 started.
+[000.131991] Mark stage 310 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.131996] Sweep stage 310 started.
+[000.131999] Sweep stage 310 completed.
+[000.132070] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.132070] No empty blocks in garbage collector!
+[000.132073] Mark stage 311 started.
+[000.132427] Mark stage 311 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.132428] Sweep stage 311 started.
+[000.132430] Sweep stage 311 completed.
+[000.132500] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.132500] No empty blocks in garbage collector!
+[000.132502] Mark stage 312 started.
+[000.132842] Mark stage 312 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.132843] Sweep stage 312 started.
+[000.132844] Sweep stage 312 completed.
+[000.132916] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.132915] No empty blocks in garbage collector!
+[000.132918] Mark stage 313 started.
+[000.133257] Mark stage 313 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.133258] Sweep stage 313 started.
+[000.133260] Sweep stage 313 completed.
+[000.133337] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.133337] No empty blocks in garbage collector!
+[000.133339] Mark stage 314 started.
+[000.133679] Mark stage 314 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.133680] Sweep stage 314 started.
+[000.133682] Sweep stage 314 completed.
+[000.133753] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.133753] No empty blocks in garbage collector!
+[000.133755] Mark stage 315 started.
+[000.134095] Mark stage 315 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.134096] Sweep stage 315 started.
+[000.134098] Sweep stage 315 completed.
+[000.134168] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.134168] No empty blocks in garbage collector!
+[000.134170] Mark stage 316 started.
+[000.134514] Mark stage 316 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.134515] Sweep stage 316 started.
+[000.134517] Sweep stage 316 completed.
+[000.134590] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.134590] No empty blocks in garbage collector!
+[000.134593] Mark stage 317 started.
+[000.134932] Mark stage 317 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.134932] Sweep stage 317 started.
+[000.134934] Sweep stage 317 completed.
+[000.135005] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.135005] No empty blocks in garbage collector!
+[000.135007] Mark stage 318 started.
+[000.135353] Mark stage 318 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.135354] Sweep stage 318 started.
+[000.135356] Sweep stage 318 completed.
+[000.135425] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.135425] No empty blocks in garbage collector!
+[000.135430] Mark stage 319 started.
+[000.135770] Mark stage 319 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.135771] Sweep stage 319 started.
+[000.135772] Sweep stage 319 completed.
+[000.135845] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.135845] No empty blocks in garbage collector!
+[000.135847] Mark stage 320 started.
+[000.136186] Mark stage 320 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.136187] Sweep stage 320 started.
+[000.136189] Sweep stage 320 completed.
+[000.136259] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.136259] No empty blocks in garbage collector!
+[000.136261] Mark stage 321 started.
+[000.136614] Mark stage 321 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.136615] Sweep stage 321 started.
+[000.136617] Sweep stage 321 completed.
+[000.136691] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.136690] No empty blocks in garbage collector!
+[000.136693] Mark stage 322 started.
+[000.137034] Mark stage 322 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.137034] Sweep stage 322 started.
+[000.137036] Sweep stage 322 completed.
+[000.137108] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.137108] No empty blocks in garbage collector!
+[000.137110] Mark stage 323 started.
+[000.137450] Mark stage 323 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.137450] Sweep stage 323 started.
+[000.137452] Sweep stage 323 completed.
+[000.137523] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.137522] No empty blocks in garbage collector!
+[000.137524] Mark stage 324 started.
+[000.137869] Mark stage 324 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.137870] Sweep stage 324 started.
+[000.137874] Sweep stage 324 completed.
+[000.137944] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.137944] No empty blocks in garbage collector!
+[000.137947] Mark stage 325 started.
+[000.138287] Mark stage 325 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.138288] Sweep stage 325 started.
+[000.138292] Sweep stage 325 completed.
+[000.138362] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.138362] No empty blocks in garbage collector!
+[000.138365] Mark stage 326 started.
+[000.138709] Mark stage 326 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.138710] Sweep stage 326 started.
+[000.138712] Sweep stage 326 completed.
+[000.138782] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.138782] No empty blocks in garbage collector!
+[000.138785] Mark stage 327 started.
+[000.139124] Mark stage 327 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.139127] Sweep stage 327 started.
+[000.139129] Sweep stage 327 completed.
+[000.139200] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.139200] No empty blocks in garbage collector!
+[000.139202] Mark stage 328 started.
+[000.139543] Mark stage 328 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.139543] Sweep stage 328 started.
+[000.139545] Sweep stage 328 completed.
+[000.139616] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.139616] No empty blocks in garbage collector!
+[000.139618] Mark stage 329 started.
+[000.139964] Mark stage 329 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.139965] Sweep stage 329 started.
+[000.139967] Sweep stage 329 completed.
+[000.140042] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.140041] No empty blocks in garbage collector!
+[000.140044] Mark stage 330 started.
+[000.140384] Mark stage 330 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.140385] Sweep stage 330 started.
+[000.140387] Sweep stage 330 completed.
+[000.140457] OK. New objects with total size 48256 bytes (count: 3016, size of one object: 16).
+	Used space: 64256/131072 bytes.
+	Number of objects: 4016.
+	Free space: 66816/131072 bytes.
+[000.140457] No empty blocks in garbage collector!
+[000.140459] Mark stage 331 started.
+[000.140805] Mark stage 331 completed. Objects collected: 3016.
+	48256 bytes of memory were freed.
+	Used space: 16000/131072 bytes.
+[000.140806] Sweep stage 331 started.
+[000.140808] Sweep stage 331 completed.
+[000.140851] OK. New objects with total size 11264 bytes (count: 704, size of one object: 16).
+	Used space: 27264/131072 bytes.
+	Number of objects: 1704.
+	Free space: 103808/131072 bytes.
+[000.140850] Allocator destroyed.

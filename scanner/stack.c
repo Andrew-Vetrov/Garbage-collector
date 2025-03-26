@@ -10,7 +10,7 @@ Stack* create_stack() {
     return stack;
 }
 
-int is_empty(Stack *stack) {
+int is_empty(Stack* stack) {
     return stack->top == -1;
 }
 

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <sys/mman.h>
 #include "../allocator/allocator.h"
+#include "../logging/log.h"
 #include "marking.h"
 #include "stack.h"
 #include <assert.h>
@@ -65,7 +66,7 @@ void push_registers_to_stack() {
         asm volatile(
             "push %[reg]\n"
             :
-            : [reg] "r" (REGISTERS[i])
+        : [reg] "r" (REGISTERS[i])
             );
     }
 }
@@ -76,7 +77,7 @@ void pop_registers_from_stack() {
         asm volatile(
             "pop %[reg]\n"
             :
-            : [reg] "r" (REGISTERS[i]));
+        : [reg] "r" (REGISTERS[i]));
     }
 }
 
@@ -97,7 +98,9 @@ void collect() {
 }
 
 void full_marking() {
+    log(MARK, START);
     segment_traverse(end_rsp_value, start_rsp_value);
-    segment_traverse((size_t) &__data_start, (size_t) &edata);
-    segment_traverse((size_t) &__bss_start, (size_t) &end);
+    segment_traverse((size_t)&__data_start, (size_t)&edata);
+    segment_traverse((size_t)&__bss_start, (size_t)&end);
+    log(MARK, OK);
 }
