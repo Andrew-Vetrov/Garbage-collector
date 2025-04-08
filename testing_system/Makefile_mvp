@@ -1,11 +1,10 @@
-
 LIB_NAME = lib.a
 
 CC = gcc
 
 CFLAGS = -w
 
-SRC = allocator/allocator.c scanner/marking.c scanner/stack.c logging/log.c mt-safety/threads-storage.c mt-safety/mt-safety.c
+SRC = allocator/allocator.c scanner/marking.c scanner/stack.c mt-safety/mt-safety.c mt-safety/threads-storage.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -17,7 +16,7 @@ $(LIB_NAME): $(OBJ)
 	ar rcs $@ $^
 
 %.o: %.c
-	$(CC) -c $^ $(CFLAGS) -o $@
+	$(CC) -c $^ -DHEAP_SIZE=4096 $(CFLAGS) -o $@
 
 clean:
 	rm $(OBJ) $(LIB_NAME)

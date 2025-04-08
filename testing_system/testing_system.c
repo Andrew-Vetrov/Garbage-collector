@@ -16,7 +16,7 @@ int main() {
 	int compilation_result;
 	int runtime_result;
 	directory = opendir("./testing_system");
-	char OBJ[] = " ./allocator/allocator.o ./scanner/marking.o ./scanner/stack.o";
+	char OBJ[] = " ./allocator/allocator.o ./scanner/marking.o ./scanner/stack.o ./logging/log.o";
 	while (1) {
 		inp = readdir(directory);
 		if (inp == NULL) {
@@ -35,7 +35,6 @@ int main() {
 		int flag = 0;
 		char command[BUFSIZ] = "gcc ";
 		fprintf(stderr, "\nTesting %s\n", matched_names[i]);
-
 		pid_t pid = fork();
 		if (pid == 0) {
 			char command[BUFSIZ] = "gcc ";
@@ -44,7 +43,7 @@ int main() {
 			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {
 				flag = 1;
 				system("make clean");
-				system("make -f Makefile1");
+				system("make -f testing_system/Makefile1");
 				//strncat(command, " -DLISP=1 ", 9);
 			}
 
@@ -72,7 +71,6 @@ int main() {
 				continue;
 			}
 			fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
-
 			return 1;
 		}
 	}
