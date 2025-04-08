@@ -135,7 +135,7 @@ void threads_marking() {
     pthread_attr_t thread_attr;
     void* thread_stack_addr;
     size_t thread_stack_size;
-
+    pthread_mutex_lock(get_storage_lock());
     start_threads_storage_traverse();
     pthread_t now_thread = get_next_thread();
 
@@ -143,8 +143,9 @@ void threads_marking() {
         pthread_getattr_np(now_thread, &thread_attr);
         pthread_attr_getstack(&thread_attr, &thread_stack_addr, &thread_stack_size);
 
-        segment_traverse((char*)thread_stack_addr, (char*)thread_stack_addr + thread_stack_size);
+        segment_traverse((size_t)thread_stack_addr, (size_t)thread_stack_addr + thread_stack_size);
 
         now_thread = get_next_thread();
     }
+    pthread_mutex_unlock(get_storage_lock());
 }

@@ -32,7 +32,6 @@ int __wrap_pthread_create(pthread_t *__restrict__ thread,
 #ifdef DEBUG
     fprintf(stderr, "pthread_create was wrapped\n");
 #endif
-    lock_allocation();
     WrapperArgs *args = (WrapperArgs *)calloc(1, sizeof(WrapperArgs));
     StorageCell *thread_node = create_cell_for_thread();
 
@@ -40,15 +39,17 @@ int __wrap_pthread_create(pthread_t *__restrict__ thread,
     args->user_routine = start_routine;
     args->thread_node = thread_node;
 
-    int result = pthread_create(thread, attr, start_routine, arg);
+    int result = pthread_create(thread, attr, wrap_user_routine, args);
 
     if (result == 0) {
         thread_node->thread = *thread;
+#ifdef DEBUG
+        fprintf(stderr, "thread %lu was catched\n", *thread);
+#endif
     } else {
         free(args);
         destroy_cell(thread_node);
     }
 
-    unlock_allocation();
     return result;
 }
