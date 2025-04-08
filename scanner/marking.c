@@ -1,7 +1,11 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
 #include <sys/mman.h>
 #include "../allocator/allocator.h"
+#include "../mt-safety/threads-storage.h"
+#include <sys/mman.h>
 #include "../logging/log.h"
 #include "marking.h"
 #include "stack.h"
@@ -103,4 +107,23 @@ void full_marking() {
     segment_traverse((size_t)&__data_start, (size_t)&edata);
     segment_traverse((size_t)&__bss_start, (size_t)&end);
     log(MARK, OK);
+}
+
+void threads_marking() {
+    pthread_attr_t thread_attr;
+    void* thread_stack_addr;
+    size_t thread_stack_size;
+    pthread_mutex_lock(get_storage_lock());
+    start_threads_storage_traverse();
+    pthread_t now_thread = get_next_thread();
+
+    while (now_thread != 0) {
+        pthread_getattr_np(now_thread, &thread_attr);
+        pthread_attr_getstack(&thread_attr, &thread_stack_addr, &thread_stack_size);
+
+        segment_traverse((size_t)thread_stack_addr, (size_t)thread_stack_addr + thread_stack_size);
+
+        now_thread = get_next_thread();
+    }
+    pthread_mutex_unlock(get_storage_lock());
 }

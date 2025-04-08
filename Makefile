@@ -5,7 +5,7 @@ CC = gcc
 
 CFLAGS = -w
 
-SRC = allocator/allocator.c scanner/marking.c scanner/stack.c logging/log.c
+SRC = allocator/allocator.c scanner/marking.c scanner/stack.c logging/log.c mt-safety/threads-storage.c mt-safety/mt-safety.c
 
 OBJ = $(SRC:.c=.o)
 
