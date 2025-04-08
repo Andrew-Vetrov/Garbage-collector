@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "allocation-lock.h"
 #include "threads-storage.h"
 
 typedef struct {
