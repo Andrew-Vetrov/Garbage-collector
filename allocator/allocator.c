@@ -5,39 +5,13 @@
 #include <stdbool.h>
 #include "../scanner/marking.h"
 #include "../logging/log.h"
-
-typedef struct Node_t {
-    size_t block_addr;
-    struct Node_t* next_node;
-} Node;
-
-typedef struct Header {
-    size_t addr;
-    size_t size;
-    bool isMarked;
-    struct Header *next_header;
-} Header;
-
-size_t START_ALLOCATOR_HEAP = 0;
-size_t END_ALLOCATOR_HEAP = 0;
-
-static Node* SEGREG_LIST[OBJECT_SIZE_UPPER_BOUND] = { 0 };
-static Node NODES_LIST[BLOCKS_COUNT];
-static Node* EMPTY_LIST_HEAD = 0;
+#include "small-objs-heap.h"
+#include "big-objs-heap.h"
 
 size_t end_rsp_value;
 
-static Header HEADERS_LIST[HEADERS_COUNT];
-static Header* HEADER_LIST_HEAD = 0;
-
-Header* free_p = NULL;
-Header* occupied_p = NULL;
-
-size_t START_BIG_ALLOCATOR_HEAP = 0;
-size_t END_BIG_ALLOCATOR_HEAP = 0;
-
 void show_bitmap(size_t object_addr) {
-    size_t relative_object_addr = object_addr - START_ALLOCATOR_HEAP;
+    size_t relative_object_addr = object_addr - get_small_obj_heap_start();
     size_t block_addr = object_addr - (relative_object_addr % BLOCK_SIZE);
     size_t bitmap_addr = GET_BITMAP_ADDR(block_addr);
 
@@ -54,7 +28,7 @@ void show_bitmap(size_t object_addr) {
 }
 
 size_t get_block_addr(size_t object_addr) {
-    size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
+    size_t object_relative_addr = object_addr - get_small_obj_heap_start();
     return (object_addr - (object_relative_addr % BLOCK_SIZE));
 }
 
@@ -76,7 +50,7 @@ void init_header(Node* entry, size_t object_size) {
 void fill_all_bitmaps_with_zeros() {
     Node* curr_entry;
     for (int i = 1; i < OBJECT_SIZE_UPPER_BOUND; i++) {
-        curr_entry = SEGREG_LIST[i];
+        curr_entry = get_segreg_list_head(i);
         while (curr_entry != NULL) {
             size_t bitmap_addr = GET_BITMAP_ADDR(curr_entry->block_addr);
             size_t curr_bytes_addr = bitmap_addr;
@@ -93,7 +67,7 @@ void fill_all_bitmaps_with_zeros() {
 
 unsigned char get_bit_by_address(size_t object_addr) {
 
-    size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
+    size_t object_relative_addr = object_addr - get_small_obj_heap_start();
     size_t block_addr = object_addr - (object_relative_addr % BLOCK_SIZE);
     size_t objects_addr = block_addr + BLOCK_HEADER_SIZE;
     size_t bitmap_addr = GET_BITMAP_ADDR(block_addr);
@@ -110,7 +84,7 @@ unsigned char get_bit_by_address(size_t object_addr) {
 }
 
 void set_bit_by_address(size_t object_addr, unsigned char bit) {
-    size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
+    size_t object_relative_addr = object_addr - get_small_obj_heap_start();
     size_t block_addr = object_addr - (object_relative_addr % BLOCK_SIZE);
     size_t objects_addr = block_addr + BLOCK_HEADER_SIZE;
     size_t bitmap_addr = GET_BITMAP_ADDR(block_addr);
@@ -144,15 +118,15 @@ bool is_bitmap_empty(size_t block_addr) {
 
 size_t get_object_size_by_address(size_t object_addr) {
 
-    if (START_ALLOCATOR_HEAP <= object_addr && object_addr < END_ALLOCATOR_HEAP) {
-        size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
+    if (get_small_obj_heap_start() <= object_addr && object_addr < get_small_obj_heap_end()) {
+        size_t object_relative_addr = object_addr - get_small_obj_heap_start();
         size_t block_addr = object_addr - (object_relative_addr % BLOCK_SIZE);
         size_t object_size = *(size_t*)GET_OBJECT_SIZE_ADDR(block_addr);
     
         return GET_SIZE_WITH_ALIGNMENT(object_size);
     
-    } else if (START_BIG_ALLOCATOR_HEAP <= object_addr && object_addr < END_BIG_ALLOCATOR_HEAP) {
-        Header *curr_header = occupied_p;
+    } else if (get_big_objs_heap_start() <= object_addr && object_addr < get_big_objs_heap_end()) {
+        Header *curr_header = get_occupied_p();
         while (curr_header != NULL) {
             if (curr_header->addr == object_addr) {
                 return curr_header->size;
@@ -164,92 +138,26 @@ size_t get_object_size_by_address(size_t object_addr) {
     assert(false);
 }
 
-Header* get_new_header() {
-    if (HEADER_LIST_HEAD == NULL) {
-        return NULL;
-    }
-    else {
-        Header* result = HEADER_LIST_HEAD;
-        HEADER_LIST_HEAD = HEADER_LIST_HEAD->next_header;
-        result->next_header = NULL;
-        return result;
-    }
-}
-
 __attribute__((constructor))
 void __init_allocator() {
     log(INIT_ALLOCATOR, START);
-    START_ALLOCATOR_HEAP =
-        (size_t)mmap(NULL, HEAP_SIZE,
-            PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 
-    if (START_ALLOCATOR_HEAP == MAP_FAILED) {
-        log(INIT_ALLOCATOR, ERROR);
-        return;
-    }
-
-    START_BIG_ALLOCATOR_HEAP =
-        (size_t)mmap(NULL, HEAP_SIZE,
-            PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
-
-    if (START_BIG_ALLOCATOR_HEAP == MAP_FAILED) {
-        log(INIT_ALLOCATOR, B_ERROR);
-        return;
-    }
+    __init_small_objs_heap();
+    __init_big_objs_heap();
 
     set_memory_limit(HEAP_SIZE * 2, 100);
-
-    END_ALLOCATOR_HEAP = START_ALLOCATOR_HEAP + HEAP_SIZE;
-    END_BIG_ALLOCATOR_HEAP = START_BIG_ALLOCATOR_HEAP + HEAP_SIZE;
-
-    for (int i = 0; i < BLOCKS_COUNT; i++) {
-        NODES_LIST[i].block_addr =
-            START_ALLOCATOR_HEAP + BLOCK_SIZE * i;
-        *(size_t*)NODES_LIST[i].block_addr =
-            NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
-        if (i != BLOCKS_COUNT - 1) {
-            NODES_LIST[i].next_node = &NODES_LIST[i + 1];
-        }
-        else {
-            NODES_LIST[i].next_node = 0;
-        }
-    }
-
-    EMPTY_LIST_HEAD = &NODES_LIST[0];
-
-    for (int i = 0; i < HEADERS_COUNT; i++) {
-        HEADERS_LIST[i].addr = HEADERS_LIST[i].size = 0;
-        HEADERS_LIST[i].isMarked = false;
-        if (i != HEADERS_COUNT - 1) {
-            HEADERS_LIST[i].next_header = &HEADERS_LIST[i + 1];
-        }
-        else {
-            HEADERS_LIST[i].next_header = 0;
-        }
-    }
-
-    HEADER_LIST_HEAD = &HEADERS_LIST[0];
-
-    free_p = get_new_header();
-
-    free_p->isMarked = false;
-    free_p->next_header = NULL;
-    free_p->size = HEAP_SIZE;
-    free_p->addr = START_BIG_ALLOCATOR_HEAP;
-
-    occupied_p = NULL;
 
     log(INIT_ALLOCATOR, OK);
 }
 
 Node* allocate_new_block() {
-    if (EMPTY_LIST_HEAD == NULL) {
+    if (get_empty_list_head() == NULL) {
         log(OTHER, O_EMPTY_BLOCK);
         return NULL;
     }
     else {
-        Node* result = EMPTY_LIST_HEAD;
-        EMPTY_LIST_HEAD = EMPTY_LIST_HEAD->next_node;
+        Node* result = get_empty_list_head();
+        set_empty_list_head(result->next_node);
         result->next_node = NULL;
         return result;
     }
@@ -257,13 +165,8 @@ Node* allocate_new_block() {
 
 __attribute__((destructor))
 void __destroy_allocator() {
-    if (munmap((void*)START_ALLOCATOR_HEAP, HEAP_SIZE) == -1) {
-        log(DESTROY_ALLOCATOR, ERROR);
-    }
-
-    if (munmap((void*)START_BIG_ALLOCATOR_HEAP, HEAP_SIZE) == -1) {
-        log(DESTROY_ALLOCATOR, B_ERROR);
-    }
+    __destroy_small_objs_heap();
+    __destroy_big_objs_heap();
 
     log(DESTROY_ALLOCATOR, OK);
 }
@@ -275,26 +178,27 @@ void sweep() {
     int empty_nodes_count = 0;
     int segreg_list_nodes_count = 0;
 #endif
-    EMPTY_LIST_HEAD = NULL;
+    set_empty_list_head(NULL);
     for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
-        SEGREG_LIST[i] = NULL;
+        set_segreg_list_head(i, NULL);
     }
 
     for (int i = 0; i < BLOCKS_COUNT; i++) {
-        *(size_t*)GET_SLIDER_POSITION_ADDR(NODES_LIST[i].block_addr) =
-            NODES_LIST[i].block_addr + BLOCK_HEADER_SIZE;
-        NODES_LIST[i].next_node = NULL;
-        if (is_bitmap_empty(NODES_LIST[i].block_addr)) {
+        Node* node = get_block_node(i);
+        *(size_t*)GET_SLIDER_POSITION_ADDR(node->block_addr) =
+            node->block_addr + BLOCK_HEADER_SIZE;
+        node->next_node = NULL;
+        if (is_bitmap_empty(node->block_addr)) {
 #ifdef DEBUG
             empty_nodes_count++;
 #endif
-            * (size_t*)GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr) = 0;
-            if (EMPTY_LIST_HEAD == NULL) {
-                EMPTY_LIST_HEAD = &NODES_LIST[i];
+            * (size_t*)GET_OBJECT_SIZE_ADDR(node->block_addr) = 0;
+            if (get_empty_list_head() == NULL) {
+                set_empty_list_head(node);
             }
             else {
-                NODES_LIST[i].next_node = EMPTY_LIST_HEAD;
-                EMPTY_LIST_HEAD = &NODES_LIST[i];
+                node->next_node = get_empty_list_head();
+                set_empty_list_head(node);
             }
         }
         else {
@@ -302,13 +206,13 @@ void sweep() {
             segreg_list_nodes_count++;
 #endif
             size_t object_size =
-                *(size_t*)GET_OBJECT_SIZE_ADDR(NODES_LIST[i].block_addr);
-            if (SEGREG_LIST[object_size] == NULL) {
-                SEGREG_LIST[object_size] = &NODES_LIST[i];
+                *(size_t*)GET_OBJECT_SIZE_ADDR(node->block_addr);
+            if (get_segreg_list_head(object_size) == NULL) {
+                set_segreg_list_head(object_size, node);
             }
             else {
-                NODES_LIST[i].next_node = SEGREG_LIST[object_size];
-                SEGREG_LIST[object_size] = &NODES_LIST[i];
+                node->next_node = get_segreg_list_head(object_size);
+                set_segreg_list_head(object_size, node);
             }
         }
     }
@@ -318,12 +222,12 @@ void sweep() {
 #endif
 
     // start of sweeping BIG objects
-    if (!occupied_p) {
+    if (!get_occupied_p()) {
         log(SWEEP, OK);
         return;
     }
 
-    Header* prev = NULL, * curr = occupied_p, * move;
+    Header* prev = NULL, * curr = get_occupied_p(), * move;
 
     while (curr != NULL) {
         if (curr->isMarked == true) {
@@ -335,7 +239,7 @@ void sweep() {
             move = curr;
 
             if (prev == NULL && curr->next_header == NULL) {
-                curr = occupied_p = NULL;
+                set_occupied_p(curr = NULL);
             }
             else {
                 if (prev) {
@@ -343,17 +247,17 @@ void sweep() {
                     curr = curr->next_header;
                 }
                 else {
-                    curr = occupied_p = curr->next_header;
+                    set_occupied_p(curr = curr->next_header);
                 }
             }
 
             move->next_header = NULL;
 
             // find correct position for this header in free list
-
+            Header* free_p = get_free_p();
             if (free_p == NULL) {
-                free_p = move;
-                free_p->next_header = NULL;
+                set_free_p(move);
+                move->next_header = NULL;
             }
             else if (move->addr < free_p->addr) {
                 if (move->addr + move->size < free_p->addr) {
@@ -363,7 +267,7 @@ void sweep() {
                     move->size += free_p->size;
                     move->next_header = free_p->next_header;
                 }
-                free_p = move;
+                set_free_p(move);
             }
             else {
                 Header* prev_free_p = free_p, * curr_free_p = free_p->next_header;
@@ -398,7 +302,7 @@ void sweep() {
 size_t allocate_new_object(size_t object_size) {
     log_t cts_result = check_the_space(GET_SIZE_WITH_ALIGNMENT(object_size));
 
-    Node* curr_entry = SEGREG_LIST[object_size];
+    Node* curr_entry = get_segreg_list_head(object_size);
 
     size_t block_addr;
     size_t slider_position;
@@ -424,12 +328,15 @@ size_t allocate_new_object(size_t object_size) {
 
         *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) = slider_position;
 
-        curr_entry = SEGREG_LIST[object_size] = curr_entry->next_node;
+        curr_entry = curr_entry->next_node;
+        set_segreg_list_head(object_size, curr_entry);
     }
 
-    if ((curr_entry = SEGREG_LIST[object_size] = allocate_new_block()) == NULL) {
+    curr_entry = allocate_new_block();
+    set_segreg_list_head(object_size, curr_entry);
+    if (curr_entry == NULL) {
         fill_all_bitmaps_with_zeros();
-        return NULL;
+        return (size_t) NULL;
     }
     else {
         init_header(curr_entry, object_size);
@@ -449,11 +356,11 @@ size_t allocate_new_BIG_object(size_t object_size) {
     object_size = GET_SIZE_WITH_ALIGNMENT(object_size);
     log_t cts_result = check_the_space(object_size);
 
-    if (free_p == NULL) { // no free blocks
-        return NULL;
+    if (get_free_p() == NULL) { // no free blocks
+        return (size_t) NULL;
     }
 
-    for (p = free_p; p != NULL; prev = p, p = p->next_header) {
+    for (p = get_free_p(); p != NULL; prev = p, p = p->next_header) {
         if (p->size >= object_size) {
 
             Header* new_header;
@@ -461,13 +368,13 @@ size_t allocate_new_BIG_object(size_t object_size) {
             if (p->size == object_size) {
                 // move entire header to the occupied headers
                 if (prev == NULL && p->next_header == NULL) {
-                    free_p = NULL;
+                    set_free_p(NULL);
                 }
                 else {
                     if (prev)
                         prev->next_header = p->next_header;
                     else
-                        free_p = p->next_header;
+                        set_free_p(p->next_header);
                 }
                 new_header = p;
             }
@@ -475,7 +382,7 @@ size_t allocate_new_BIG_object(size_t object_size) {
                 // take as much as we need
                 if ((new_header = get_new_header()) == NULL) {
                     log(OTHER, O_HEADER);
-                    return NULL;
+                    return (size_t) NULL;
                 }
 
                 new_header->addr = p->addr;
@@ -487,13 +394,13 @@ size_t allocate_new_BIG_object(size_t object_size) {
 
             new_header->isMarked = false;
 
-            if (occupied_p == NULL) {
-                occupied_p = new_header;
-                occupied_p->next_header = NULL;
+            if (get_occupied_p() == NULL) {
+                set_occupied_p(new_header);
+                new_header->next_header = NULL;
             }
             else {
-                new_header->next_header = occupied_p;
-                occupied_p = new_header;
+                new_header->next_header = get_occupied_p();
+                set_occupied_p(new_header);
             }
 
             log(ALLOCATE_NEW_OBJECT, OK);
@@ -501,11 +408,11 @@ size_t allocate_new_BIG_object(size_t object_size) {
         }
     }
 
-    return NULL;
+    return (size_t) NULL;
 }
 
 size_t gc_malloc(size_t size) {
-    size_t res = NULL;
+    size_t res = (size_t) NULL;
     push_registers_to_stack();
     asm volatile("mov %%rsp, %0" : "=r" (end_rsp_value));
     if (size >= 1 && size <= MAX_OBJECT_SIZE) {
@@ -533,8 +440,8 @@ size_t gc_malloc(size_t size) {
 }
 
 int get_object(size_t object_addr, Object* object) {
-    if (object_addr >= START_BIG_ALLOCATOR_HEAP && object_addr < END_BIG_ALLOCATOR_HEAP) {
-        Header* curr_header = occupied_p;
+    if (object_addr >= get_big_objs_heap_start() && object_addr < get_big_objs_heap_end()) {
+        Header* curr_header = get_occupied_p();
         while (curr_header != NULL) {
             if (curr_header->addr <= object_addr && object_addr < curr_header->addr + curr_header->size) {
                 *object = curr_header->addr;
@@ -542,7 +449,7 @@ int get_object(size_t object_addr, Object* object) {
             }
             curr_header = curr_header->next_header;
         }
-    } else if (object_addr >= START_ALLOCATOR_HEAP && object_addr < END_ALLOCATOR_HEAP) {
+    } else if (object_addr >= get_small_obj_heap_start() && object_addr < get_small_obj_heap_end()) {
         size_t block_addr = get_block_addr(object_addr);
         size_t object_addr_in_block = object_addr - block_addr;
 
@@ -567,8 +474,8 @@ int get_object(size_t object_addr, Object* object) {
 
 void mark_object(Object object) {
     size_t object_addr = get_object_addr(object);
-    if (object_addr >= START_BIG_ALLOCATOR_HEAP && object_addr < END_BIG_ALLOCATOR_HEAP) {
-        Header* curr_header = occupied_p;
+    if (object_addr >= get_big_objs_heap_start() && object_addr < get_big_objs_heap_end()) {
+        Header* curr_header = get_occupied_p();
         while (curr_header != NULL) {
             if (curr_header->addr == object_addr) {
                 curr_header->isMarked = true;
@@ -579,7 +486,7 @@ void mark_object(Object object) {
             curr_header = curr_header->next_header;
         }
     }
-    else if (object_addr >= START_ALLOCATOR_HEAP && object_addr < END_ALLOCATOR_HEAP) {
+    else if (object_addr >= get_small_obj_heap_start() && object_addr < get_small_obj_heap_end()) {
         set_bit_by_address(object_addr, 1);
         log_mark_alive(get_object_size_by_address(object_addr));
     }
@@ -591,10 +498,10 @@ void mark_object(Object object) {
 
 bool is_marked(Object object) {
     size_t object_addr = get_object_addr(object);
-    if (object_addr >= START_BIG_ALLOCATOR_HEAP &&
-        object_addr < END_BIG_ALLOCATOR_HEAP) {
+    if (object_addr >= get_big_objs_heap_start() &&
+        object_addr < get_big_objs_heap_end()) {
         Header* object_header = 0;
-        for (Header* curr_header = occupied_p; curr_header != NULL;
+        for (Header* curr_header = get_occupied_p(); curr_header != NULL;
             curr_header = curr_header->next_header) {
             if (curr_header->addr == object_addr) {
                 object_header = curr_header;
@@ -605,8 +512,8 @@ bool is_marked(Object object) {
         assert(object_addr != 0);
 
         return object_header->isMarked;
-    } else if (object_addr >= START_ALLOCATOR_HEAP && 
-               object_addr < END_ALLOCATOR_HEAP) {
+    } else if (object_addr >= get_small_obj_heap_start() && 
+               object_addr < get_small_obj_heap_end()) {
         return get_bit_by_address(object_addr) ? true : false;
     } else {
         fprintf(stderr, "Invalid address %p was given in is_marked()\n", object_addr);
