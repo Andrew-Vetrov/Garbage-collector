@@ -5,7 +5,8 @@
 
 #include "../allocator/allocator.h"
 #include "../gc.h"
-#include "../scanner/marking.h"
+#include "../allocator/object.h"
+#include "../marker/marking.h"
 
 #define SAME_SIZE_OBJS_COUNT (10000)
 
@@ -24,7 +25,7 @@ void same_size_objects_marking_test(size_t objects_size) {
         alive_objects_addrs[i] = (size_t)NULL;
     }
 
-    full_marking();
+    mark();
 
     for (unsigned int i = 1; i < SAME_SIZE_OBJS_COUNT; i += 2) {
         Object object;
@@ -49,7 +50,7 @@ void diff_size_objs_test() {
         alive_objects_addrs[i] = (size_t)NULL;
     }
 
-    full_marking();
+    mark();
 
     for (unsigned int i = 1; i < DIFF_SIZE_OBJS_COUNT; i += 2) {
         Object object;
@@ -66,7 +67,7 @@ void inner_pointer_test() {
     assert(array != NULL);
 
     array += array_size - 1;
-    full_marking();
+    mark();
     array -= array_size - 1;
     Object object;
     assert(get_object((size_t)array, &object) == 0);
