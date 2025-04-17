@@ -73,23 +73,23 @@ size_t allocate_new_large_object(size_t object_size) {
     object_size = GET_SIZE_WITH_ALIGNMENT(object_size);
     log_t cts_result = check_the_space(object_size);
 
-    if (get_free_p() == NULL) {  // no free blocks
+    if (free_p == NULL) {  // no free blocks
         return (size_t)NULL;
     }
 
-    for (p = get_free_p(); p != NULL; prev = p, p = p->next_header) {
+    for (p = free_p; p != NULL; prev = p, p = p->next_header) {
         if (p->size >= object_size) {
             Header* new_header;
 
             if (p->size == object_size) {
                 // move entire header to the occupied headers
                 if (prev == NULL && p->next_header == NULL) {
-                    set_free_p(NULL);
+                    free_p = NULL;
                 } else {
                     if (prev)
                         prev->next_header = p->next_header;
                     else
-                        set_free_p(p->next_header);
+                        free_p = p->next_header;
                 }
                 new_header = p;
             } else {
@@ -108,12 +108,12 @@ size_t allocate_new_large_object(size_t object_size) {
 
             new_header->isMarked = false;
 
-            if (get_occupied_p() == NULL) {
-                set_occupied_p(new_header);
+            if (occupied_p == NULL) {
+                occupied_p = new_header;
                 new_header->next_header = NULL;
             } else {
-                new_header->next_header = get_occupied_p();
-                set_occupied_p(new_header);
+                new_header->next_header = occupied_p;
+                occupied_p = new_header;
             }
 
             log(ALLOCATE_NEW_OBJECT, OK);

@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fnmatch.h>
-#include <signal.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -16,7 +15,6 @@ int main() {
 	int compilation_result;
 	int runtime_result;
 	directory = opendir("./testing_system");
-	char OBJ[] = " ./allocator/allocator.o ./marker/marking.o ./marker/stack.o ./logging/log.o";
 	while (1) {
 		inp = readdir(directory);
 		if (inp == NULL) {
@@ -47,8 +45,8 @@ int main() {
 				//strncat(command, " -DLISP=1 ", 9);
 			}
 
-			strncat(command, " -L./ -l:lib.a", 22);
-			strncat(command, " -o test -w", 13);
+			strncat(command, " -L./ -l:build/libgc.a", 23);
+			strncat(command, " -o build/test -w", 18);
 			printf("Command %s\n", command);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
@@ -61,7 +59,7 @@ int main() {
 				system("make clean");
 				system("make");
 			}
-			execl("./test", "./test", (char*)NULL);
+			execl("./build/test", "./build/test", (char*)NULL);
 		}
 		else {
 			int status;
@@ -74,7 +72,7 @@ int main() {
 			return 1;
 		}
 	}
-	system("rm test");
+	system("rm build/test");
 	closedir(directory);
 
 	fprintf(stderr, "\nENDED SUCCESSFULLY\n");

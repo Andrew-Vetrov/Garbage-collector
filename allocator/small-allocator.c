@@ -64,7 +64,7 @@ void init_header(Node* entry, size_t object_size) {
 void fill_all_bitmaps_with_zeros() {
     Node* curr_entry;
     for (int i = 1; i < OBJECT_SIZE_UPPER_BOUND; i++) {
-        curr_entry = get_segreg_list_head(i);
+        curr_entry = SEGREG_LIST[i];
         while (curr_entry != NULL) {
             size_t bitmap_addr = GET_BITMAP_ADDR(curr_entry->block_addr);
             size_t curr_bytes_addr = bitmap_addr;
@@ -80,12 +80,12 @@ void fill_all_bitmaps_with_zeros() {
 }
 
 Node* allocate_new_block() {
-    if (get_empty_list_head() == NULL) {
+    if (EMPTY_LIST_HEAD == NULL) {
         log(OTHER, O_EMPTY_BLOCK);
         return NULL;
     } else {
-        Node* result = get_empty_list_head();
-        set_empty_list_head(result->next_node);
+        Node* result = EMPTY_LIST_HEAD;
+        EMPTY_LIST_HEAD = result->next_node;
         result->next_node = NULL;
         return result;
     }
@@ -94,7 +94,7 @@ Node* allocate_new_block() {
 size_t allocate_new_small_object(size_t object_size) {
     log_t cts_result = check_the_space(GET_SIZE_WITH_ALIGNMENT(object_size));
 
-    Node* curr_entry = get_segreg_list_head(object_size);
+    Node* curr_entry = SEGREG_LIST[object_size];
 
     size_t block_addr;
     size_t slider_position;
@@ -122,11 +122,11 @@ size_t allocate_new_small_object(size_t object_size) {
         *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) = slider_position;
 
         curr_entry = curr_entry->next_node;
-        set_segreg_list_head(object_size, curr_entry);
+        SEGREG_LIST[object_size] = curr_entry;
     }
 
     curr_entry = allocate_new_block();
-    set_segreg_list_head(object_size, curr_entry);
+    SEGREG_LIST[object_size] = curr_entry;
     if (curr_entry == NULL) {
         fill_all_bitmaps_with_zeros();
         return (size_t)NULL;
@@ -146,7 +146,7 @@ size_t allocate_new_small_object(size_t object_size) {
 /* getters */
 
 size_t get_block_addr(size_t object_addr) {
-    size_t object_relative_addr = object_addr - get_small_heap_start();
+    size_t object_relative_addr = object_addr - START_ALLOCATOR_HEAP;
     return (object_addr - (object_relative_addr % BLOCK_SIZE));
 }
 

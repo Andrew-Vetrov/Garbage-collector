@@ -17,11 +17,6 @@ size_t gc_malloc(size_t size) {
         mark();
         sweep();
         res = allocate_new_object(size);
-        if (res == NULL) {
-            log(ALLOCATE_NEW_OBJECT,
-                size <= MAX_OBJECT_SIZE ? HEAP_ERROR : B_HEAP_ERROR);
-        }
     }
-
     return res;
 }
