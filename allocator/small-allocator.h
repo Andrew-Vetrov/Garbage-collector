@@ -6,6 +6,9 @@
 #define BLOCKS_COUNT (HEAP_SIZE / BLOCK_SIZE)
 #define BLOCK_SIZE (4 * (size_t)1024)
 #define BLOCK_HEADER_SIZE (80)
+#define GET_BITMAP_ADDR(block_addr) ((block_addr) + (16))
+#define GET_OBJECT_SIZE_ADDR(block_addr) ((block_addr) + (8))
+#define GET_SLIDER_POSITION_ADDR(block_addr) ((block_addr) + (0))
 
 typedef struct Node_t {
     size_t block_addr;

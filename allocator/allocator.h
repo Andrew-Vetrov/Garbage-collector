@@ -2,9 +2,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#define GET_BITMAP_ADDR(block_addr) ((block_addr) + (16))
-#define GET_OBJECT_SIZE_ADDR(block_addr) ((block_addr) + (8))
-#define GET_SLIDER_POSITION_ADDR(block_addr) ((block_addr) + (0))
 #define GET_SIZE_WITH_ALIGNMENT(size) \
     ((((size) % (8) == (0)) ? (0) : (8) - ((size) % (8))) + (size))
 
