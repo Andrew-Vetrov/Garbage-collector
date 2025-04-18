@@ -98,6 +98,8 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
 
 void mark() {
     log(MARK, START);
+    push_registers_to_stack();
+    asm volatile("mov %%rsp, %0" : "=r"(end_rsp_value));
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse((size_t)&__data_start, (size_t)&edata);
     segment_traverse((size_t)&__bss_start, (size_t)&end);

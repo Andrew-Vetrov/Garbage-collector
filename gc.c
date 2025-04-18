@@ -10,8 +10,6 @@ size_t gc_malloc(size_t size) {
     }
 
     size_t res = (size_t)NULL;
-    push_registers_to_stack();
-    asm volatile("mov %%rsp, %0" : "=r"(end_rsp_value));
     res = allocate_new_object(size);
     if (res == NULL) {
         mark();
