@@ -57,7 +57,7 @@ int main() {
                CREATORS_COUNT * THREADS_COUNT + CREATORS_COUNT);
 
         for (int i = 0; i < CREATORS_COUNT * THREADS_COUNT; i++) {
-            if (ths[i] == thread) {
+            if (pthread_equal(ths[i], thread)) {
                 is_thread_catched[i] = true;
                 break;
             }
