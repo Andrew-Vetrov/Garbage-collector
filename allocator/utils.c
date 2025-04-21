@@ -1,6 +1,5 @@
 #include <stdlib.h>
 
-#include "allocator.h"
 #include "small-allocator.h"
 #include "bitmap.h"
 

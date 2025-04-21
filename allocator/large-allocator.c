@@ -67,7 +67,7 @@ void __destroy_large_allocator() {
     }
 }
 
-size_t allocate_new_large_object(size_t object_size) {
+size_t allocate_large_object(size_t object_size) {
     Header *p, *prev = NULL;
 
     object_size = GET_SIZE_WITH_ALIGNMENT(object_size);

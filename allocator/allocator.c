@@ -31,11 +31,11 @@ __attribute__((destructor)) void __destroy_allocator() {
 size_t allocate_new_object(size_t size) {
     size_t res = (size_t)NULL;
     if (size >= 1 && size <= MAX_OBJECT_SIZE) {
-        if ((res = allocate_new_small_object(size)) == NULL) {
+        if ((res = allocate_small_object(size)) == NULL) {
             log(ALLOCATE_NEW_OBJECT, HEAP_ERROR);
         }
     } else if (size > MAX_OBJECT_SIZE && size <= HEAP_SIZE) {
-        if ((res = allocate_new_large_object(size)) == NULL) {
+        if ((res = allocate_large_object(size)) == NULL) {
             log(ALLOCATE_NEW_OBJECT, B_HEAP_ERROR);
         }
     }

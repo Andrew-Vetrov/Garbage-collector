@@ -19,13 +19,7 @@ void __init_small_allocator();
 
 void __destroy_small_allocator();
 
-void init_header(Node* entry, size_t object_size);
-
-void fill_all_bitmaps_with_zeros();
-
-Node* allocate_new_block();
-
-size_t allocate_new_small_object(size_t object_size);
+size_t allocate_small_object(size_t object_size);
 
 /* get address of block in small heap where object is stored */
 size_t get_block_addr(size_t object_addr);

@@ -91,7 +91,7 @@ Node* allocate_new_block() {
     }
 }
 
-size_t allocate_new_small_object(size_t object_size) {
+size_t allocate_small_object(size_t object_size) {
     log_t cts_result = check_the_space(GET_SIZE_WITH_ALIGNMENT(object_size));
 
     Node* curr_entry = SEGREG_LIST[object_size];

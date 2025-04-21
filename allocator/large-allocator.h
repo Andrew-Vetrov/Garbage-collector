@@ -16,11 +16,9 @@ void __init_large_allocator();
 
 void __destroy_large_allocator();
 
-size_t allocate_new_large_object(size_t object_size);
+size_t allocate_large_object(size_t object_size);
 
 /* getters and setters */
-
-Header* get_new_header();
 
 /* get start address of large allocator's heap */
 size_t get_large_heap_start();
