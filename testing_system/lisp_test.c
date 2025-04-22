@@ -27,7 +27,7 @@ CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <string.h>
 #include <assert.h>
 #include <dirent.h>
-#include "../allocator/allocator.h"
+#include "../gc.h"
 
 //#define GC_DEBUG
 
@@ -769,7 +769,7 @@ static char *read_file(char *filename)
 	unsigned int file_size;
 
 
-	FILE *fs = fopen("./testing_system/file", "r");
+	FILE *fs = fopen("./testing_system/test_lisp_program", "r");
 	if (fs == NULL) {
 		perror("fopen");
 		exit(-1);
@@ -818,7 +818,7 @@ int main(int argc, char *argv[])
 
 	process_file("stdlib.l");
 	for (int i = 0; i < size; i++) {
-		process_file("file");
+		process_file("test_lisp_program");
 		//printf("loop %d\n", i);
 	}
 	return 0;

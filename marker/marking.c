@@ -1,9 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <pthread.h>
 #include <sys/mman.h>
-#include "../allocator/allocator.h"
+#include "../allocator/object.h"
+#include "../allocator/utils.h"
 #include "../mt-safety/threads-storage.h"
 #include <sys/mman.h>
 #include "../logging/log.h"
@@ -33,9 +33,9 @@ void before_main(void) {
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
-void mark(Object object) {
+void mark_and_push(Object object) {
     if (!is_marked(object)) {
-        mark_object(object);
+        mark_and_push(object);
         push(stack, get_object_addr(object));
     }
 }
@@ -46,11 +46,11 @@ void scan(size_t object_addr) {
         return;
     }
     size_t object_start_addr = get_object_addr(object);
-    size_t object_end_addr = object_start_addr + get_object_size_by_address(object_start_addr);
+    size_t object_end_addr = object_start_addr + get_object_size(object);
     for (size_t inner_object_addr = object_start_addr; inner_object_addr < object_end_addr; inner_object_addr += sizeof(size_t)) {
         Object inner_object;
         if (get_object(*(size_t*)inner_object_addr, &inner_object) == 0) {
-            mark(inner_object);
+            mark_and_push(inner_object);
         }
     }
 }
@@ -90,19 +90,16 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
     for (size_t object_addr = segment_start; object_addr < segment_end; object_addr += sizeof(size_t)) {
         Object object;
         if (get_object(*(size_t*)object_addr, &object) == 0) {
-            mark(object);
+            mark_and_push(object);
         }
     }
     closure();
 }
 
-void collect() {
-    full_marking();
-    sweep();
-}
-
-void full_marking() {
+void mark() {
     log(MARK, START);
+    push_registers_to_stack();
+    asm volatile("mov %%rsp, %0" : "=r"(end_rsp_value));
     segment_traverse(end_rsp_value, start_rsp_value);
     segment_traverse((size_t)&__data_start, (size_t)&edata);
     segment_traverse((size_t)&__bss_start, (size_t)&end);

@@ -2,14 +2,12 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "../allocator/allocator.h"
+#include "../allocator/bitmap.h"
+#include "../allocator/small-allocator.h"
 #include "../gc.h"
+#include "../sweeper/sweep.h"
 
-void sweep();
-void set_bit_by_address(size_t object_addr, unsigned char bit);
-size_t get_block_addr(size_t object_address);
-
-void test_placing_after_sweeping() {
+void test_small_allocator_placing_after_sweeping() {
     clock_t start, stop;
     size_t objs[6];
     set_bit_by_address(objs[0] = gc_malloc(8), 1);
@@ -33,4 +31,4 @@ void test_placing_after_sweeping() {
            (stop - start) / (CLOCKS_PER_SEC / 1000));
 }
 
-int main() { test_placing_after_sweeping(); }
+int main() { test_small_allocator_placing_after_sweeping(); }
