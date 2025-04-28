@@ -157,6 +157,9 @@ TreeNode* remove_bst(TreeNode* root, size_t addr, TreeNode** removed) {
 void cleanup_bst(TreeNode** root) {
     if (!(*root)) return;
 
+    // kostil'
+    TreeNode* insert_treap(TreeNode* root, TreeNode* new_node);
+
     cleanup_bst(&(*root)->left);
     cleanup_bst(&(*root)->right);
 
