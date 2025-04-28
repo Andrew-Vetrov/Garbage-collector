@@ -10,6 +10,8 @@ static StorageCell *created_threads_list = NULL;
 pthread_mutex_t storage_lock =
     PTHREAD_MUTEX_INITIALIZER;  // lock for work with created_threads_list
 
+static volatile unsigned int thread_count = 0;
+
 pthread_mutex_t *get_storage_lock() { return &storage_lock; }
 
 StorageCell *create_cell_for_thread() {
@@ -23,6 +25,7 @@ StorageCell *create_cell_for_thread() {
     }
 
     pthread_mutex_lock(&storage_lock);
+    thread_count++;
 
     if (created_threads_list != NULL) {
         created_threads_list->prev = new_node;
@@ -36,6 +39,7 @@ StorageCell *create_cell_for_thread() {
 
 void destroy_cell(StorageCell *cell) {
     pthread_mutex_lock(&storage_lock);
+    thread_count--;
 
     if (cell->prev) {
         cell->prev->next = cell->next;
@@ -62,6 +66,13 @@ __attribute__((destructor)) void __destroy_storage() {
     created_threads_list = NULL;
 
     pthread_mutex_unlock(&storage_lock);
+}
+
+unsigned int get_threads_storage_size() {
+    pthread_mutex_lock(&storage_lock);
+    unsigned int result = thread_count;
+    pthread_mutex_unlock(&storage_lock);
+    return result;
 }
 
 // Start of storage traversing API
