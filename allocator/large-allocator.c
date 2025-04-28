@@ -101,7 +101,7 @@ TreeNode* search_bst(TreeNode* root, size_t addr) {
 TreeNode* ext_search_bst(TreeNode* root, size_t addr) {
     if (!root) return NULL;
 
-    if (root->block.addr <= addr && addr < root->block.addr + HEAP_SIZE)
+    if (root->block.addr <= addr && addr < root->block.addr + root->block.size)
         return root;
     else if (addr < root->block.addr)
         return search_bst(root->left, addr);
