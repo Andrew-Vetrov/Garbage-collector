@@ -64,16 +64,19 @@ int main() {
 		else {
 			int status = 0;
 			waitpid(pid, &status, 0);
-			if (WIFEXITED(status) && WEXITSTATUS(status) == 0) {
-                fprintf(stderr, "\n\033[1;42mExecuted successfully\033[0m\n");
-                continue;
-            }
-            else if (WIFSIGNALED(status)) {
+			if (WIFEXITED(status)) {
+                if (WEXITSTATUS(status) == 0) {
+                    fprintf(stderr, "\n\033[1;42mExecuted successfully\033[0m\n");
+                    continue;
+                } else {
+                    fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
+                    return 1;           
+                }
+            } else if (WIFSIGNALED(status)) {
                 int signal = WTERMSIG(status);
                 fprintf(stderr, "\n\033[1;41mProcess terminated by signal %d\033[0m\n", signal);
                 return 1;
-            }
-            else {
+            } else {
                 fprintf(stderr, "\n\033[1;41mAn unknown error occurred\033[0m\n");
                 return 1;
             }
