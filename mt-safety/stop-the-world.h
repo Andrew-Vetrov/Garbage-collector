@@ -1,4 +1,4 @@
-void init_threads_stop();
+__attribute__((constructor)) void __init_stop_the_world();
 
 void prepare_thread_to_stop();
 
