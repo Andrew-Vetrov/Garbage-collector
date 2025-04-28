@@ -35,7 +35,7 @@ void before_main(void) {
 
 void mark_and_push(Object object) {
     if (!is_marked(object)) {
-        mark_and_push(object);
+        mark_object(object);
         push(stack, get_object_addr(object));
     }
 }
