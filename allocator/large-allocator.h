@@ -3,14 +3,19 @@
 
 #include "allocator.h"
 
-#define HEADERS_COUNT (HEAP_SIZE / GET_SIZE_WITH_ALIGNMENT(MAX_OBJECT_SIZE + 1))
+#define TREENODE_COUNT (HEAP_SIZE / GET_SIZE_WITH_ALIGNMENT(MAX_OBJECT_SIZE + 1))
 
 typedef struct Header {
     size_t addr;
     size_t size;
     bool isMarked;
-    struct Header* next_header;
 } Header;
+
+typedef struct TreeNode {
+    Header block;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
 
 void __init_large_allocator();
 
@@ -26,10 +31,16 @@ size_t get_large_heap_start();
 /* get end address of large allocator's heap */
 size_t get_large_heap_end();
 
-Header* get_free_p();
+TreeNode* get_free_root();
 
-void set_free_p(Header* new_free_p);
+void set_free_root(TreeNode* new_free_root);
 
-Header* get_occupied_p();
+TreeNode* get_occupied_root();
 
-void set_occupied_p(Header* new_occupied_p);
+void set_occupied_root(TreeNode* new_occupied_root);
+
+TreeNode* search_bst(TreeNode* root, size_t addr);
+
+TreeNode* ext_search_bst(TreeNode* root, size_t addr);
+
+void cleanup_bst(TreeNode** root);
