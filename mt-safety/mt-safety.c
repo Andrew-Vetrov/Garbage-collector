@@ -17,8 +17,6 @@ typedef struct {
 void *wrap_user_routine(void *arg) {
     WrapperArgs *args = (WrapperArgs *)arg;
 
-    prepare_thread_to_stop();
-
     void *result = args->user_routine(args->arg);
 
     destroy_cell(args->thread_node);
