@@ -308,11 +308,11 @@ size_t allocate_large_object(size_t object_size) {
         occupied_root = insert_bst(occupied_root, first_fit_node);
     } else {
 
-        first_fit_node->block.size = object_size;
-
         TreeNode* new_node = get_new_tree_node();
         new_node->block.addr = first_fit_node->block.addr + object_size;
         new_node->block.size = first_fit_node->block.size - object_size;
+
+        first_fit_node->block.size = object_size;
 
         occupied_root = insert_bst(occupied_root, first_fit_node);
         free_root = insert_treap(free_root, new_node);
