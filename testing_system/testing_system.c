@@ -53,7 +53,7 @@ int main() {
 				fprintf(stderr, "\033[1;41mCompilation failed\033[0m\n");
 				return 1;
 			}
-			fprintf(stderr, "\033[1;42mCompiled successfuly\033[0m\n");
+			fprintf(stderr, "\033[1;42mCompiled successfully\033[0m\n");
 			//alarm(10);
 			if (flag) {
 				system("make clean");
@@ -62,14 +62,25 @@ int main() {
 			execl("./build/test", "./build/test", (char*)NULL);
 		}
 		else {
-			int status;
+			int status = 0;
 			waitpid(pid, &status, 0);
-			if (WEXITSTATUS(status) == 0) {
-				fprintf(stderr, "\n\033[1;42mExecuted successfuly\033[0m\n");
-				continue;
-			}
-			fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
-			return 1;
+			if (WIFEXITED(status)) {
+                if (WEXITSTATUS(status) == 0) {
+                    fprintf(stderr, "\n\033[1;42mExecuted successfully\033[0m\n");
+                    continue;
+                } else {
+                    fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
+                    return 1;           
+                }
+            } else if (WIFSIGNALED(status)) {
+                int signal = WTERMSIG(status);
+                fprintf(stderr, "\n\033[1;41mProcess terminated by signal %d\033[0m\n", signal);
+                return 1;
+            } else {
+                fprintf(stderr, "\n\033[1;41mAn unknown error occurred\033[0m\n");
+                return 1;
+            }
+            
 		}
 	}
 	system("rm build/test");
