@@ -7,17 +7,17 @@
 #include "../logging/log.h"
 #include "allocator.h"
 
-static TreeNode TREENODES_LIST[TREENODE_COUNT];
-static TreeNode* TREENODE_LIST_HEAD = 0;
+static TreeNode* TREENODES_LIST = NULL;
+static TreeNode* TREENODE_LIST_HEAD = NULL;
 
 TreeNode* free_root = NULL;
 TreeNode* occupied_root = NULL;
 
-size_t START_BIG_ALLOCATOR_HEAP = 0;
-size_t END_BIG_ALLOCATOR_HEAP = 0;
+size_t *START_BIG_ALLOCATOR_HEAP = NULL;
+size_t *END_BIG_ALLOCATOR_HEAP = NULL;
 
 TreeNode* get_new_tree_node() {
-    if (TREENODE_COUNT == NULL) {
+    if (TREENODE_LIST_HEAD == NULL) {
         return NULL;
     } else {
         TreeNode* result = TREENODE_LIST_HEAD;
@@ -39,11 +39,27 @@ void free_tree_node(TreeNode* node) {
 }
 
 void __init_large_allocator() {
-    START_BIG_ALLOCATOR_HEAP =
+
+    if ((TREENODES_LIST = (TreeNode *)malloc(sizeof(TreeNode) * TREENODE_COUNT)) == NULL) {
+        log(INIT_ALLOCATOR, B_ERROR);
+        return;
+    }
+
+    if ((START_BIG_ALLOCATOR_HEAP = (size_t *)malloc(sizeof(size_t))) == NULL) {
+        log(INIT_ALLOCATOR, B_ERROR);
+        return;
+    }
+
+    if ((END_BIG_ALLOCATOR_HEAP = (size_t *)malloc(sizeof(size_t))) == NULL) {
+        log(INIT_ALLOCATOR, B_ERROR);
+        return;
+    }
+
+    *START_BIG_ALLOCATOR_HEAP =
         (size_t)mmap(NULL, HEAP_SIZE, PROT_WRITE | PROT_READ,
                      MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 
-    if (START_BIG_ALLOCATOR_HEAP == MAP_FAILED) {
+    if ((*START_BIG_ALLOCATOR_HEAP) == MAP_FAILED) {
         log(INIT_ALLOCATOR, B_ERROR);
         return;
     }
@@ -60,20 +76,24 @@ void __init_large_allocator() {
 
     TREENODE_LIST_HEAD = &TREENODES_LIST[0];
 
-    END_BIG_ALLOCATOR_HEAP = START_BIG_ALLOCATOR_HEAP + HEAP_SIZE;
+    *END_BIG_ALLOCATOR_HEAP = (*START_BIG_ALLOCATOR_HEAP) + HEAP_SIZE;
 
     free_root = get_new_tree_node();
 
     free_root->left = free_root->right = NULL;
     free_root->block.isMarked = false;
     free_root->block.size = HEAP_SIZE;
-    free_root->block.addr = START_BIG_ALLOCATOR_HEAP;
+    free_root->block.addr = (*START_BIG_ALLOCATOR_HEAP);
 }
 
 void __destroy_large_allocator() {
-    if (munmap((void*)START_BIG_ALLOCATOR_HEAP, HEAP_SIZE) == -1) {
+    if (munmap((void*)(*START_BIG_ALLOCATOR_HEAP), HEAP_SIZE) == -1) {
         log(DESTROY_ALLOCATOR, B_ERROR);
     }
+
+    free(TREENODES_LIST);
+    free(START_BIG_ALLOCATOR_HEAP);
+    free(END_BIG_ALLOCATOR_HEAP);
 }
 
 TreeNode* insert_bst(TreeNode* root, TreeNode* node) {
@@ -104,9 +124,9 @@ TreeNode* ext_search_bst(TreeNode* root, size_t addr) {
     if (root->block.addr <= addr && addr < root->block.addr + root->block.size)
         return root;
     else if (addr < root->block.addr)
-        return search_bst(root->left, addr);
+        return ext_search_bst(root->left, addr);
     else
-        return search_bst(root->right, addr);
+        return ext_search_bst(root->right, addr);
 }
 
 TreeNode* remove_bst(TreeNode* root, size_t addr, TreeNode** removed) {
@@ -254,9 +274,12 @@ TreeNode* insert_treap(TreeNode* root, TreeNode* new_node) {
 
     TreeNode* left_neighbor = find_rightmost(l);
     if (left_neighbor && (left_neighbor->block.addr + left_neighbor->block.size == new_node->block.addr)) {
-        left_neighbor->block.size += new_node->block.size;
-        free_tree_node(new_node);
-        new_node = left_neighbor;
+        new_node->block.addr = left_neighbor->block.addr;
+        new_node->block.size += left_neighbor->block.size;
+        TreeNode* tmp_removed = NULL;
+        l = remove_bst(l, left_neighbor->block.addr, &tmp_removed);
+        if (tmp_removed)
+            free_tree_node(tmp_removed);
     }
 
     TreeNode* right_neighbor = find_leftmost(r);
@@ -321,9 +344,9 @@ size_t allocate_large_object(size_t object_size) {
     return res;
 }
 
-size_t get_large_heap_start() { return START_BIG_ALLOCATOR_HEAP; }
+size_t get_large_heap_start() { return *START_BIG_ALLOCATOR_HEAP; }
 
-size_t get_large_heap_end() { return END_BIG_ALLOCATOR_HEAP; }
+size_t get_large_heap_end() { return *END_BIG_ALLOCATOR_HEAP; }
 
 TreeNode* get_free_root() { return free_root; }
 
@@ -332,3 +355,17 @@ void set_free_root(TreeNode* new_free_root) { free_root = new_free_root; }
 TreeNode* get_occupied_root() { return occupied_root; }
 
 void set_occupied_root(TreeNode* new_occupied_root) { occupied_root = new_occupied_root; }
+
+// debug shit
+
+size_t get_lhs_address() { return &START_BIG_ALLOCATOR_HEAP; }
+
+size_t get_lhe_address() { return &END_BIG_ALLOCATOR_HEAP; }
+
+size_t get_fr_root_address() { return &free_root; }
+
+size_t get_oc_root_address() { return &occupied_root; }
+
+size_t get_tnd_address() { return &TREENODES_LIST; }
+
+size_t get_trnlh_address() { return &TREENODE_LIST_HEAD; }

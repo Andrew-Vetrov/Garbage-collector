@@ -57,8 +57,8 @@ void sweep_large_heap() {
         return;
     }
 
-    TreeNode* occupied_root = get_occupied_root();
-    cleanup_bst(&occupied_root);
+    TreeNode** occupied_root_addr = get_oc_root_address();
+    cleanup_bst(occupied_root_addr);
 
     log(SWEEP, OK);
 }
