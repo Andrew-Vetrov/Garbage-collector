@@ -87,6 +87,7 @@ void pop_registers_from_stack() {
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
     assert(segment_start && segment_end && segment_start < segment_end);
+    printf("i am in segment traverse\n");
     for (size_t object_addr = segment_start; object_addr < segment_end; object_addr += sizeof(size_t)) {
         Object object;
         if (get_object(*(size_t*)object_addr, &object) == 0) {
@@ -100,7 +101,13 @@ void mark() {
     log(MARK, START);
     push_registers_to_stack();
     asm volatile("mov %%rsp, %0" : "=r"(end_rsp_value));
-    segment_traverse(end_rsp_value, start_rsp_value);
+    //segment_traverse(end_rsp_value, start_rsp_value);
+    pthread_attr_t attr;
+    void* stack_addr;
+    size_t stack_size;
+    pthread_getattr_np(pthread_self(), &attr);
+    pthread_attr_getstack(&attr, &stack_addr, &stack_size);
+    segment_traverse(stack_addr, (char*)stack_addr + stack_size);
     segment_traverse((size_t)&__data_start, (size_t)&edata);
     segment_traverse((size_t)&__bss_start, (size_t)&end);
     log(MARK, OK);
