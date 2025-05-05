@@ -87,7 +87,6 @@ void pop_registers_from_stack() {
 
 void segment_traverse(size_t segment_start, size_t segment_end) {
     assert(segment_start && segment_end && segment_start < segment_end);
-    printf("i am in segment traverse\n");
     for (size_t object_addr = segment_start; object_addr < segment_end; object_addr += sizeof(size_t)) {
         Object object;
         if (get_object(*(size_t*)object_addr, &object) == 0) {
