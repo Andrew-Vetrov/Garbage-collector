@@ -5,7 +5,6 @@
 #include "../logging/log.h"
 
 void sweep_small_heap() {
-    log(SWEEP, START);
     #ifdef DEBUG
         int empty_nodes_count = 0;
         int segreg_list_nodes_count = 0;
@@ -53,17 +52,16 @@ void sweep_small_heap() {
 
 void sweep_large_heap() {
     if (!get_occupied_root()) {
-        log(SWEEP, OK);
         return;
     }
 
     TreeNode** occupied_root_addr = get_oc_root_address();
     cleanup_bst(occupied_root_addr);
-
-    log(SWEEP, OK);
 }
 
 void sweep() {
+    log(SWEEP, START);
     sweep_small_heap();
     sweep_large_heap();
+    log(SWEEP, OK);
 }

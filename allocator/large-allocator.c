@@ -177,7 +177,6 @@ TreeNode* remove_bst(TreeNode* root, size_t addr, TreeNode** removed) {
 void cleanup_bst(TreeNode** root) {
     if (!(*root)) return;
 
-    // kostil'
     TreeNode* insert_treap(TreeNode* root, TreeNode* new_node);
 
     cleanup_bst(&(*root)->left);
@@ -316,12 +315,14 @@ TreeNode* remove_treap(TreeNode* t, size_t addr, TreeNode** removed) {
 size_t allocate_large_object(size_t object_size) {
     TreeNode* first_fit_node;
     size_t res = 0;
+    
     object_size = GET_SIZE_WITH_ALIGNMENT(object_size);
+    log_t cts_result = check_the_space(object_size);
 
     first_fit_search(free_root, object_size, &first_fit_node);
 
     if (first_fit_node == NULL) {
-        return NULL;
+        return (size_t)NULL;
     }
 
     res = first_fit_node->block.addr;
@@ -331,7 +332,14 @@ size_t allocate_large_object(size_t object_size) {
         occupied_root = insert_bst(occupied_root, first_fit_node);
     } else {
 
-        TreeNode* new_node = get_new_tree_node();
+        TreeNode* new_node;
+
+        if ((new_node = get_new_tree_node()) == NULL) {
+            free_root = insert_treap(free_root, first_fit_node);
+            log(OTHER, O_HEADER);
+            return (size_t)NULL;
+        }
+
         new_node->block.addr = first_fit_node->block.addr + object_size;
         new_node->block.size = first_fit_node->block.size - object_size;
 
@@ -341,6 +349,7 @@ size_t allocate_large_object(size_t object_size) {
         free_root = insert_treap(free_root, new_node);
     }
 
+    log(ALLOCATE_NEW_OBJECT, OK);
     return res;
 }
 
