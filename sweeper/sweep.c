@@ -2,6 +2,7 @@
 #include "../allocator/bitmap.h"
 #include "../allocator/large-allocator.h"
 #include "../allocator/small-allocator.h"
+#include "../allocator/binary-search-tree.h"
 #include "../logging/log.h"
 
 void sweep_small_heap() {
@@ -55,7 +56,7 @@ void sweep_large_heap() {
         return;
     }
 
-    TreeNode** occupied_root_addr = get_oc_root_address();
+    TreeNode** occupied_root_addr = (TreeNode **)get_oc_root_address();
     cleanup_bst(occupied_root_addr);
 }
 

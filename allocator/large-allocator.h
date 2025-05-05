@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -39,20 +41,15 @@ TreeNode* get_occupied_root();
 
 void set_occupied_root(TreeNode* new_occupied_root);
 
-TreeNode* search_bst(TreeNode* root, size_t addr);
-
-TreeNode* ext_search_bst(TreeNode* root, size_t addr);
-
-void cleanup_bst(TreeNode** root);
-
-size_t get_lhs_address();
-
-size_t get_lhe_address();
-
 size_t get_fr_root_address();
 
 size_t get_oc_root_address();
 
-size_t get_tnd_address();
+/* 
+    debug shit
 
-size_t get_trnlh_address();
+    size_t get_lhs_address();
+    size_t get_lhe_address();
+    size_t get_tnd_address();
+    size_t get_trnlh_address();
+*/

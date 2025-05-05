@@ -7,6 +7,7 @@
 #include "bitmap.h"
 #include "large-allocator.h"
 #include "small-allocator.h"
+#include "binary-search-tree.h"
 
 size_t get_object_size(Object object) {
     size_t object_addr = get_object_addr(object);
