@@ -1,7 +1,8 @@
+#include <assert.h>
 #include <stdlib.h>
 
-#include "small-allocator.h"
 #include "bitmap.h"
+#include "small-allocator.h"
 
 size_t end_rsp_value;
 
@@ -21,3 +22,5 @@ void show_bitmap(size_t object_addr) {
         putchar('\n');
     }
 }
+
+void my_assert(int expr) { assert(expr); }

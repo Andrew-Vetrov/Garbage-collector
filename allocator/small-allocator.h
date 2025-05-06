@@ -39,3 +39,14 @@ Node* get_block_node(int index);
 Node* get_empty_list_head();
 
 void set_empty_list_head(Node* new_head);
+
+/* mt-safety */
+void lock_empty_list();
+
+void unlock_empty_list();
+
+void clear_cache();
+
+void lock_all_segreg_lists();
+
+void unlock_all_segreg_lists();
