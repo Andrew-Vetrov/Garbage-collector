@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 #include "../gc.h"
-#include "../allocator/large-allocator.h"
+
+extern size_t START_BIG_ALLOCATOR_HEAP;
 
 int main() {
     // allocation without alignment
@@ -19,7 +20,7 @@ int main() {
     // MAX_OBJECT_SIZE (in small heap) + 1 allocated in big heap
     void *p8 = (void *)gc_malloc(2009);
 
-    assert(p1 == get_large_heap_start());
+    assert(p1 == START_BIG_ALLOCATOR_HEAP);
     assert(p2 == p1 + 2400);
     assert(p3 == p2 + 2400);
     assert(p4 == p3 + 3000);

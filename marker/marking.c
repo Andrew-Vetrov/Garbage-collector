@@ -63,6 +63,7 @@ void closure() {
     }
 }
 
+
 void push_registers_to_stack() {
     char reg[REGISTER_NAME_SIZE];
     for (int i = 0; i < REGISTER_AMOUNT; i++) {
