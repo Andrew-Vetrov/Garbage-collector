@@ -103,9 +103,21 @@ void mark() {
     pthread_attr_t attr;
     void* stack_addr;
     size_t stack_size;
-    pthread_getattr_np(pthread_self(), &attr);
-    pthread_attr_getstack(&attr, &stack_addr, &stack_size);
-    segment_traverse(stack_addr, (char*)stack_addr + stack_size);
+
+    pthread_mutex_lock(get_storage_lock());
+    start_threads_storage_traverse();
+    pthread_t now_thread = get_next_thread();
+
+    while (now_thread != 0) {
+        pthread_getattr_np(now_thread, &attr);
+        pthread_attr_getstack(&attr, &stack_addr, &stack_size);
+        printf("%p %p\n", stack_addr, (char*)stack_addr + stack_size);
+        segment_traverse(stack_addr, (char*)stack_addr + stack_size);
+        now_thread = get_next_thread();
+    }
+
+    pthread_mutex_unlock(get_storage_lock());
+    
     segment_traverse((size_t)&__data_start, (size_t)&edata);
     segment_traverse((size_t)&__bss_start, (size_t)&end);
     log(MARK, OK);
