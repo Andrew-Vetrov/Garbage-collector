@@ -7,6 +7,7 @@
 #include "bitmap.h"
 #include "large-allocator.h"
 #include "small-allocator.h"
+#include "binary-search-tree.h"
 
 size_t get_object_size(Object object) {
     size_t object_addr = get_object_addr(object);
@@ -21,12 +22,11 @@ size_t get_object_size(Object object) {
 
     } else if (get_large_heap_start() <= object_addr &&
                object_addr < get_large_heap_end()) {
-        Header* curr_header = get_occupied_p();
-        while (curr_header != NULL) {
-            if (curr_header->addr == object_addr) {
-                return curr_header->size;
-            }
-            curr_header = curr_header->next_header;
+
+        TreeNode* node = search_bst(get_occupied_root(), object_addr);
+
+        if (node) {
+            return node->block.size;
         }
     }
 
@@ -36,15 +36,14 @@ size_t get_object_size(Object object) {
 int get_object(size_t object_addr, Object* object) {
     if (object_addr >= get_large_heap_start() &&
         object_addr < get_large_heap_end()) {
-        Header* curr_header = get_occupied_p();
-        while (curr_header != NULL) {
-            if (curr_header->addr <= object_addr &&
-                object_addr < curr_header->addr + curr_header->size) {
-                *object = curr_header->addr;
-                return 0;
-            }
-            curr_header = curr_header->next_header;
+
+        TreeNode *node = ext_search_bst(get_occupied_root(), object_addr);
+        
+        if (node) {
+            *object = node->block.addr;
+            return 0;
         }
+
     } else if (object_addr >= get_small_heap_start() &&
                object_addr < get_small_heap_end()) {
         size_t block_addr = get_block_addr(object_addr);
@@ -76,15 +75,10 @@ void mark_object(Object object) {
     size_t object_addr = get_object_addr(object);
     if (object_addr >= get_large_heap_start() &&
         object_addr < get_large_heap_end()) {
-        Header* curr_header = get_occupied_p();
-        while (curr_header != NULL) {
-            if (curr_header->addr == object_addr) {
-                curr_header->isMarked = true;
-
-                log_mark_alive(curr_header->size);
-                return;
-            }
-            curr_header = curr_header->next_header;
+        TreeNode* node = search_bst(get_occupied_root(), object_addr);
+        if (node) {
+            node->block.isMarked = true;
+            log_mark_alive(node->block.size);
         }
     } else if (object_addr >= get_small_heap_start() &&
                object_addr < get_small_heap_end()) {
@@ -100,18 +94,9 @@ bool is_marked(Object object) {
     size_t object_addr = get_object_addr(object);
     if (object_addr >= get_large_heap_start() &&
         object_addr < get_large_heap_end()) {
-        Header* object_header = 0;
-        for (Header* curr_header = get_occupied_p(); curr_header != NULL;
-             curr_header = curr_header->next_header) {
-            if (curr_header->addr == object_addr) {
-                object_header = curr_header;
-                break;
-            }
-        }
-
-        assert(object_addr != 0);
-
-        return object_header->isMarked;
+        TreeNode* node = search_bst(get_occupied_root(), object_addr);
+        assert(node != NULL);
+        return node->block.isMarked;
     } else if (object_addr >= get_small_heap_start() &&
                object_addr < get_small_heap_end()) {
         return get_bit_by_address(object_addr) ? true : false;
