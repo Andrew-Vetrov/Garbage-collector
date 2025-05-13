@@ -28,3 +28,6 @@ lisp_test: all
 
 run_tests: all
 	gcc testing_system/testing_system.c -o ${BUILD_DIR}/run_tests -DDEBUG && ./${BUILD_DIR}/run_tests
+
+logs: CFLAGS += -DLOG
+logs: clean all

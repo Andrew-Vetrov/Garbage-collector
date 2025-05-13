@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../allocator/allocator.h"
 #include "../allocator/binary-search-tree.h"
 #include "../allocator/bitmap.h"

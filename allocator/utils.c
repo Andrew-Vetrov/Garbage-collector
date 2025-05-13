@@ -22,5 +22,3 @@ void show_bitmap(size_t object_addr) {
         putchar('\n');
     }
 }
-
-void my_assert(int expr) { assert(expr); }
