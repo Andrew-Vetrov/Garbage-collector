@@ -14,6 +14,44 @@ typedef struct {
     StorageCell *thread_node;
 } WrapperArgs;
 
+pthread_t service_thread;
+static pthread_mutex_t gc_mutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_cond_t gc_cond = PTHREAD_COND_INITIALIZER;
+static bool gc_should_run = false;
+
+void service_thread_routine();
+
+__attribute__((constructor))
+void create_service_thread(){
+    pthread_create(&service_thread, NULL, service_thread_routine, NULL);
+}
+
+void call_service_thread() {
+    pthread_mutex_lock(&gc_mutex);
+    gc_should_run = true;
+    pthread_cond_signal(&gc_cond);
+    pthread_mutex_unlock(&gc_mutex);
+}
+
+void service_thread_routine() {
+    pthread_mutex_lock(&gc_mutex);
+
+    while (1) {
+        while (!gc_should_run) {
+            pthread_cond_wait(&gc_cond, &gc_mutex);
+        }
+        gc_should_run = false;
+        pthread_mutex_unlock(&gc_mutex);
+        stop_the_world();
+        mark();
+        sweep();
+        start_the_world();
+        pthread_mutex_lock(&gc_mutex);
+    }
+    pthread_mutex_unlock(&gc_mutex);
+    return NULL;
+}
+
 void *wrap_user_routine(void *arg) {
     WrapperArgs *args = (WrapperArgs *)arg;
 
