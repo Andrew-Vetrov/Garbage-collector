@@ -7,3 +7,5 @@ int __wrap_pthread_create(pthread_t *__restrict__ thread,
                           void *__restrict__ arg);
 
 __attribute__((constructor)) void __init_stop_the_world();
+
+void call_service_thread();
