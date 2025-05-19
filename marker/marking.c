@@ -30,8 +30,8 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
 
 void before_main(void) {
     stack = create_stack();
-    StorageCell* thread_node = create_cell_for_thread();
-    thread_node->thread = pthread_self();
+    //StorageCell* thread_node = create_cell_for_thread();
+    //thread_node->thread = pthread_self();
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
