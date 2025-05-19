@@ -30,6 +30,8 @@ const char REGISTERS[REGISTER_AMOUNT][REGISTER_NAME_SIZE] = {
 
 void before_main(void) {
     stack = create_stack();
+    StorageCell* thread_node = create_cell_for_thread();
+    thread_node->thread = pthread_self();
     asm volatile("mov %%rsp, %0" : "=r" (start_rsp_value));
 }
 
@@ -107,12 +109,12 @@ void mark() {
     pthread_mutex_lock(get_storage_lock());
     start_threads_storage_traverse();
     pthread_t now_thread = get_next_thread();
-    if (now_thread == 0) {
+    /*if (now_thread == 0) {
         pthread_getattr_np(pthread_self(), &attr);
         pthread_attr_getstack(&attr, &stack_addr, &stack_size);
         segment_traverse(stack_addr, (char*)stack_addr + stack_size);
     }
-    else {
+    else {*/
         while (now_thread != 0) {
             pthread_getattr_np(now_thread, &attr);
             pthread_attr_getstack(&attr, &stack_addr, &stack_size);
@@ -120,7 +122,7 @@ void mark() {
             now_thread = get_next_thread();
         }
 
-    }
+    /*}*/
     pthread_mutex_unlock(get_storage_lock());
 
     segment_traverse((size_t)&__data_start, (size_t)&edata);
