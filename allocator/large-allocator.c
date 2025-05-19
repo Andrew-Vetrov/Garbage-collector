@@ -100,6 +100,8 @@ void __destroy_large_allocator() {
     free(TREENODES_LIST);
     free(START_BIG_ALLOCATOR_HEAP);
     free(END_BIG_ALLOCATOR_HEAP);
+
+    pthread_mutex_destroy(&global_lock);
 }
 
 size_t allocate_large_object(size_t object_size) {
