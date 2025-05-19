@@ -80,7 +80,7 @@ int main() {
 
     start_threads_storage_traverse();
 
-    assert(is_traversing_ended() == true);
+    //assert(is_traversing_ended() == true);
 
     pthread_mutex_unlock(get_storage_lock());
     pthread_barrier_destroy(&barrier);

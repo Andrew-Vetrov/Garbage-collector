@@ -24,7 +24,10 @@ void handler(int sig) {
     pthread_sigmask(SIG_SETMASK, &old_sigset, NULL);
 }
 
+__attribute__((constructor))
 void __init_stop_the_world() {
+    StorageCell* thread_node = create_cell_for_thread();
+    thread_node->thread = pthread_self();
     sigfillset(&all_sig_set);
     sem_init(&waiting_point, 0, 0);
     signal(SIG_TO_STOP, handler);
