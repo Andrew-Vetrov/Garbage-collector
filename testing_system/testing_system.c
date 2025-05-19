@@ -64,6 +64,11 @@ int main() {
 		else {
 			int status = 0;
 			waitpid(pid, &status, 0);
+			int signal = WTERMSIG(status);
+			if (signal == 10) {
+				fprintf(stderr, "\n\033[1;42mExecuted successfully\033[0m\n");
+				continue;
+			}
 			if (WIFEXITED(status)) {
                 if (WEXITSTATUS(status) == 0) {
                     fprintf(stderr, "\n\033[1;42mExecuted successfully\033[0m\n");

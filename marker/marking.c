@@ -63,7 +63,6 @@ void closure() {
     }
 }
 
-
 void push_registers_to_stack() {
     char reg[REGISTER_NAME_SIZE];
     for (int i = 0; i < REGISTER_AMOUNT; i++) {
@@ -100,7 +99,13 @@ void mark() {
     log(MARK, START);
     push_registers_to_stack();
     asm volatile("mov %%rsp, %0" : "=r"(end_rsp_value));
-    segment_traverse(end_rsp_value, start_rsp_value);
+    //segment_traverse(end_rsp_value, start_rsp_value);
+    pthread_attr_t attr;
+    void* stack_addr;
+    size_t stack_size;
+    pthread_getattr_np(pthread_self(), &attr);
+    pthread_attr_getstack(&attr, &stack_addr, &stack_size);
+    segment_traverse(stack_addr, (char*)stack_addr + stack_size);
     segment_traverse((size_t)&__data_start, (size_t)&edata);
     segment_traverse((size_t)&__bss_start, (size_t)&end);
     log(MARK, OK);
