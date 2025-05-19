@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
+#include <threads.h>
 
 #include "../logging/log.h"
 #include "allocator.h"
@@ -28,9 +29,7 @@ void clear_cache() {
     }
 }
 
-void lock_empty_list() {
-    my_assert(pthread_mutex_lock(&empty_list_lock) == 0);
-}
+void lock_empty_list() { my_assert(pthread_mutex_lock(&empty_list_lock) == 0); }
 
 void unlock_empty_list() {
     my_assert(pthread_mutex_unlock(&empty_list_lock) == 0);
@@ -42,18 +41,6 @@ void lock_segreg_list(size_t object_size) {
 
 void unlock_segreg_list(size_t object_size) {
     my_assert(pthread_mutex_unlock(&segreg_lists_locks[object_size]) == 0);
-}
-
-void lock_all_segreg_lists() {
-    for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
-        my_assert(pthread_mutex_lock(&segreg_lists_locks[i]) == 0);
-    }
-}
-
-void unlock_all_segreg_lists() {
-    for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
-        my_assert(pthread_mutex_unlock(&segreg_lists_locks[i]) == 0);
-    }
 }
 
 void __init_small_allocator() {
@@ -112,6 +99,8 @@ void init_header(Node* entry, size_t object_size) {
     size_t bitmap_addr = GET_BITMAP_ADDR(block_addr);
     size_t curr_bytes_addr = bitmap_addr;
 
+    *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) = block_addr + BLOCK_HEADER_SIZE;
+
     for (int j = 0; j < BITMAP_BYTES_COUNT / sizeof(size_t); j++) {
         *(size_t*)curr_bytes_addr = 0;
         curr_bytes_addr += sizeof(size_t);
@@ -151,7 +140,6 @@ Node* allocate_new_block() {
     }
 }
 
-/* find a block in segreg list with the required available space */
 Node* get_block_from_segreg_list(size_t object_size) {
     lock_segreg_list(object_size);
     Node* curr_entry = SEGREG_LIST[object_size];
@@ -190,7 +178,6 @@ size_t allocate_small_object(size_t object_size) {
             }
         }
 
-
         size_t block_addr = curr_entry->block_addr;
         slider_position = *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr);
         size_t next_block_addr = block_addr + BLOCK_SIZE;
@@ -204,7 +191,7 @@ size_t allocate_small_object(size_t object_size) {
                 break;
             } else {
                 set_bit_by_address(slider_position, 0);
-                slider_position = slider_position + object_size_with_alignment;
+                slider_position += object_size_with_alignment;
             }
         }
 
@@ -221,7 +208,7 @@ size_t allocate_small_object(size_t object_size) {
         *(size_t*)GET_SLIDER_POSITION_ADDR(curr_entry->block_addr);
 
     size_t new_slider_position = slider_position + object_size_with_alignment;
-    if (new_slider_position > curr_entry->block_addr + BLOCK_SIZE) {
+    if (new_slider_position >= curr_entry->block_addr + BLOCK_SIZE) {
         nodes_cache[object_size] = NULL;
     } else {
         nodes_cache[object_size] = curr_entry;

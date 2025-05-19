@@ -46,7 +46,3 @@ void lock_empty_list();
 void unlock_empty_list();
 
 void clear_cache();
-
-void lock_all_segreg_lists();
-
-void unlock_all_segreg_lists();

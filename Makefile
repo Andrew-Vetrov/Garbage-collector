@@ -2,7 +2,7 @@ LIB_NAME = libgc.a
 
 CC = gcc
 
-CFLAGS = -w -lpthread -std=gnu2x
+CFLAGS = -w -lpthread
 
 SRC_DIRS = allocator marker logging mt-safety sweeper
 SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) gc.c
@@ -31,3 +31,6 @@ run_tests: all
 
 logs: CFLAGS += -DLOG
 logs: clean all
+
+debug: CFLAGS += -g -DDEBUG
+debug: clean all
