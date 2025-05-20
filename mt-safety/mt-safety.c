@@ -14,6 +14,13 @@ typedef struct {
     StorageCell *thread_node;
 } WrapperArgs;
 
+__attribute__((constructor))
+void __add_main_thread_to_storage() {
+    pthread_t thread_id = pthread_self();
+    StorageCell* thread_node = create_cell_for_thread();
+    thread_node->thread = thread;
+}
+
 void *wrap_user_routine(void *arg) {
     WrapperArgs *args = (WrapperArgs *)arg;
 
