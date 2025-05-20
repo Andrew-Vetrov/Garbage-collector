@@ -217,55 +217,6 @@ size_t allocate_small_object(size_t object_size) {
         new_slider_position;
     log(ALLOCATE_NEW_OBJECT, OK);
     return slider_position;
-    /*
-    size_t block_addr;
-    size_t slider_position;
-    size_t next_block_addr;
-    size_t object_size_with_alignment =
-    GET_SIZE_WITH_ALIGNMENT(object_size);
-
-    while (curr_entry != NULL) {
-        block_addr = curr_entry->block_addr;
-        slider_position = *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr);
-        next_block_addr = block_addr + BLOCK_SIZE;
-
-        while (slider_position + object_size_with_alignment <=
-               next_block_addr) {
-            if (get_bit_by_address(slider_position) == 0) {
-                *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) =
-                    slider_position + object_size_with_alignment;
-                log(ALLOCATE_NEW_OBJECT, OK);
-                return slider_position;
-            } else {
-                set_bit_by_address(slider_position, 0);
-                slider_position = slider_position +
-    object_size_with_alignment;
-            }
-        }
-
-        *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) = slider_position;
-
-        curr_entry = curr_entry->next_node;
-        SEGREG_LIST[object_size] = curr_entry;
-    }
-
-    curr_entry = allocate_new_block();
-    SEGREG_LIST[object_size] = curr_entry;
-    if (curr_entry == NULL) {
-        fill_all_bitmaps_with_zeros();
-        return (size_t)NULL;
-    } else {
-        init_header(curr_entry, object_size);
-
-        block_addr = curr_entry->block_addr;
-        slider_position = *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr);
-
-        *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) =
-            slider_position + object_size_with_alignment;
-        log(ALLOCATE_NEW_OBJECT, OK);
-        return slider_position;
-    }
-    */
 }
 
 /* getters */

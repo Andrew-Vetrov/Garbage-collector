@@ -2,7 +2,7 @@ LIB_NAME = libgc.a
 
 CC = gcc
 
-CFLAGS = -w -lpthread
+CFLAGS = -w -pthread
 
 SRC_DIRS = allocator marker logging mt-safety sweeper memops
 SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) gc.c
