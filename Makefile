@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -w -lpthread
 
-SRC_DIRS = allocator marker logging mt-safety sweeper
+SRC_DIRS = allocator marker logging mt-safety sweeper memops
 SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) gc.c
 
 OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC))
