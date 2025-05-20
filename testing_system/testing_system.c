@@ -31,11 +31,10 @@ int main() {
 	printf("Tests count : %d\n", match_counter);
 	for (int i = 0; i < match_counter; i++) {
 		int flag = 0;
-		char command[BUFSIZ] = "gcc ";
 		fprintf(stderr, "\nTesting %s\n", matched_names[i]);
 		pid_t pid = fork();
 		if (pid == 0) {
-			char command[BUFSIZ] = "gcc ";
+			char command[BUFSIZ] = "gcc -pthread ";
 			strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
 			
 			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {

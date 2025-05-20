@@ -1,7 +1,8 @@
+#include <assert.h>
 #include <stdlib.h>
 
-#include "small-allocator.h"
 #include "bitmap.h"
+#include "small-allocator.h"
 
 size_t end_rsp_value;
 

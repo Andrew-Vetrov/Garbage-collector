@@ -5,8 +5,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "threads-storage.h"
 #include "stop-the-world.h"
+#include "threads-storage.h"
 
 typedef struct {
     void *(*user_routine)(void *);
