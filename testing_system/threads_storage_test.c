@@ -8,6 +8,7 @@
 #include <unistd.h>
 #define CREATORS_COUNT (10)
 #define THREADS_COUNT (100)
+#define ALL_THRDS_COUNT (CREATORS_COUNT * THREADS_COUNT + CREATORS_COUNT + 1)
 #include "../mt-safety/mt-safety.h"
 #include "../mt-safety/threads-storage.h"
 
@@ -50,12 +51,16 @@ int main() {
     start_threads_storage_traverse();
 
     int threads_proccessed = 0;
+    bool is_main_catched = false;
 
     while (!is_traversing_ended()) {
         pthread_t thread = get_next_thread();
-        assert(++threads_proccessed <=
-               CREATORS_COUNT * THREADS_COUNT + CREATORS_COUNT);
-
+        assert(++threads_proccessed <= ALL_THRDS_COUNT);
+        if (pthread_equal(thread, pthread_self())) {
+            assert(is_main_catched == false);
+            is_main_catched = true;
+            continue;
+        }
         for (int i = 0; i < CREATORS_COUNT * THREADS_COUNT; i++) {
             if (pthread_equal(ths[i], thread)) {
                 is_thread_catched[i] = true;
@@ -66,6 +71,7 @@ int main() {
 
     pthread_mutex_unlock(get_storage_lock());
 
+    assert(is_main_catched);
     for (int i = 0; i < CREATORS_COUNT * THREADS_COUNT; i++) {
         assert(is_thread_catched[i] == true);
     }
@@ -79,7 +85,8 @@ int main() {
     pthread_mutex_lock(get_storage_lock());
 
     start_threads_storage_traverse();
-
+    pthread_t main_thrd = get_next_thread();
+    assert(pthread_equal(main_thrd, pthread_self()));
     assert(is_traversing_ended() == true);
 
     pthread_mutex_unlock(get_storage_lock());
