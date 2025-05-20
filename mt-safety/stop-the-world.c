@@ -2,6 +2,7 @@
 #include <semaphore.h>
 #include <signal.h>
 
+#include "../allocator/small-allocator.h"
 #include "../marker/marking.h"
 #include "mt-safety-control.h"
 #include "threads-storage.h"
@@ -18,6 +19,7 @@ void handler(int sig) {
     }
     sigset_t old_sigset;
     pthread_sigmask(SIG_SETMASK, &all_sig_set, &old_sigset);
+    clear_cache();
     push_registers_to_stack();
     pthread_barrier_wait(&barrier);
     sem_wait(&waiting_point);

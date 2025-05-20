@@ -5,8 +5,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "threads-storage.h"
 #include "stop-the-world.h"
+#include "threads-storage.h"
 
 typedef struct {
     void *(*user_routine)(void *);
@@ -23,8 +23,6 @@ void __add_main_thread_to_storage() {
 
 void *wrap_user_routine(void *arg) {
     WrapperArgs *args = (WrapperArgs *)arg;
-
-    prepare_thread_to_stop();
 
     void *result = args->user_routine(args->arg);
 
