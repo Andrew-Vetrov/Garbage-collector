@@ -30,13 +30,19 @@ size_t gc_calloc(size_t size) {
 }
 
 size_t gc_realloc(void* memblock, size_t size) {
+
+    if (memblock == NULL) {
+        return gc_malloc(size);
+    }
+
     Object obj;
-    if (get_object(memblock, &obj) != 0) {
+    if (get_object((size_t)memblock, &obj) != 0) {
         return NULL;
     }
     size_t res = gc_malloc(size);
     if (res != NULL) {
         gc_memcpy((void*) res, obj, get_object_size(obj));
+    } else {
     }
 
     return res;

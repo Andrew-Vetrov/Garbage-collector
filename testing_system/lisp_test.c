@@ -110,7 +110,7 @@ static YLispValue deferred_call;
 
 static YLispValue *ylisp_value(YLispValueType type)
 {
-	YLispValue *result = calloc(1, sizeof(YLispValue));
+	YLispValue *result = gc_calloc(sizeof(YLispValue));
 	assert(result != NULL);
 	result->type = type;
 	result->next = values; values = result;
@@ -295,7 +295,7 @@ YLispValue *ylisp_symbol_for_name(const char *name, size_t name_len)
 	result = ylisp_value(YLISP_SYMBOL);
 	result->v.symname = string_from_data(name, name_len);
 
-	symbols = realloc(symbols, sizeof(*symbols) * (num_symbols + 1));
+	symbols = gc_realloc(symbols, sizeof(*symbols) * (num_symbols + 1));
 	assert(symbols != NULL);
 	return symbols[num_symbols++] = result;
 }

@@ -23,7 +23,7 @@ $(BUILD_DIR)/%.o: %.c
 clean:
 	rm -rf $(BUILD_DIR)
 
-lisp_test: CFLAGS += -DHEAP_SIZE=65536
+lisp_test: CFLAGS += -DDEBUG -DHEAP_SIZE=4718592 # 4.5 MB
 lisp_test: all
 
 run_tests: all
