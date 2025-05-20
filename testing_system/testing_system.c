@@ -40,7 +40,7 @@ int main() {
 			
 			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {
 				flag = 1;
-				system("make clean lisp_test");
+				system("make lisp_test");
 				//strncat(command, " -DLISP=1 ", 9);
 			}
 
@@ -55,8 +55,7 @@ int main() {
 			fprintf(stderr, "\033[1;42mCompiled successfully\033[0m\n");
 			//alarm(10);
 			if (flag) {
-				system("make clean");
-				system("make");
+				system("make clean all");
 			}
 			if (execl("./test", "./test", (char*)NULL) == -1) {
                 perror("execl() failed");

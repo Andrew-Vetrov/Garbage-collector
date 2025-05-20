@@ -24,9 +24,9 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 lisp_test: CFLAGS += -DDEBUG -DHEAP_SIZE=4718592 # 4.5 MB
-lisp_test: all
+lisp_test: clean all
 
-run_tests: all
+run_tests: clean all
 	gcc testing_system/testing_system.c -o ${BUILD_DIR}/run_tests -DDEBUG && ./${BUILD_DIR}/run_tests
 
 logs: CFLAGS += -DLOG
