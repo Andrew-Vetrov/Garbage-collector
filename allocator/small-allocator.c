@@ -1,6 +1,7 @@
 #include "small-allocator.h"
 
 #include <assert.h>
+#include <bits/pthreadtypes.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,8 +21,8 @@ static Node NODES_LIST[BLOCKS_COUNT];
 static Node* EMPTY_LIST_HEAD = 0;
 
 thread_local Node* nodes_cache[OBJECT_SIZE_UPPER_BOUND] = {0};
-static pthread_mutex_t empty_list_lock;
-static pthread_mutex_t segreg_lists_locks[OBJECT_SIZE_UPPER_BOUND];
+static pthread_spinlock_t empty_list_lock;
+static pthread_spinlock_t segreg_lists_locks[OBJECT_SIZE_UPPER_BOUND];
 
 void clear_cache() {
     for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
@@ -29,18 +30,18 @@ void clear_cache() {
     }
 }
 
-void lock_empty_list() { my_assert(pthread_mutex_lock(&empty_list_lock) == 0); }
+void lock_empty_list() { my_assert(pthread_spin_lock(&empty_list_lock) == 0); }
 
 void unlock_empty_list() {
-    my_assert(pthread_mutex_unlock(&empty_list_lock) == 0);
+    my_assert(pthread_spin_unlock(&empty_list_lock) == 0);
 }
 
 void lock_segreg_list(size_t object_size) {
-    my_assert(pthread_mutex_lock(&segreg_lists_locks[object_size]) == 0);
+    my_assert(pthread_spin_lock(&segreg_lists_locks[object_size]) == 0);
 }
 
 void unlock_segreg_list(size_t object_size) {
-    my_assert(pthread_mutex_unlock(&segreg_lists_locks[object_size]) == 0);
+    my_assert(pthread_spin_unlock(&segreg_lists_locks[object_size]) == 0);
 }
 
 void __init_small_allocator() {
@@ -67,15 +68,12 @@ void __init_small_allocator() {
 
     EMPTY_LIST_HEAD = &NODES_LIST[0];
 
-    pthread_mutexattr_t mutex_attr;
-    pthread_mutexattr_init(&mutex_attr);
-    pthread_mutexattr_settype(&mutex_attr, PTHREAD_MUTEX_ERRORCHECK);
-    my_assert(pthread_mutex_init(&empty_list_lock, &mutex_attr) == 0);
+    my_assert(pthread_spin_init(&empty_list_lock, 0) == 0);
 
     for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
-        my_assert(pthread_mutex_init(&segreg_lists_locks[i], &mutex_attr) == 0);
+        my_assert(pthread_spin_init(&segreg_lists_locks[i],
+                                    PTHREAD_PROCESS_PRIVATE) == 0);
     }
-    pthread_mutexattr_destroy(&mutex_attr);
 }
 
 void __destroy_small_allocator() {
@@ -83,10 +81,10 @@ void __destroy_small_allocator() {
         log(DESTROY_ALLOCATOR, ERROR);
     }
 
-    pthread_mutex_destroy(&empty_list_lock);
+    pthread_spin_destroy(&empty_list_lock);
 
     for (int i = 0; i < OBJECT_SIZE_UPPER_BOUND; i++) {
-        pthread_mutex_destroy(&segreg_lists_locks[i]);
+        pthread_spin_destroy(&segreg_lists_locks[i]);
     }
 }
 
@@ -99,7 +97,8 @@ void init_header(Node* entry, size_t object_size) {
     size_t bitmap_addr = GET_BITMAP_ADDR(block_addr);
     size_t curr_bytes_addr = bitmap_addr;
 
-    *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) = block_addr + BLOCK_HEADER_SIZE;
+    *(size_t*)GET_SLIDER_POSITION_ADDR(block_addr) =
+        block_addr + BLOCK_HEADER_SIZE;
 
     for (int j = 0; j < BITMAP_BYTES_COUNT / sizeof(size_t); j++) {
         *(size_t*)curr_bytes_addr = 0;
