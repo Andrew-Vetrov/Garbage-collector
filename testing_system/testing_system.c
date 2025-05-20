@@ -28,7 +28,7 @@ int main() {
 			match_counter++;
 		}
 	}
-	printf("CONTER %d\n", match_counter);
+	printf("Tests count : %d\n", match_counter);
 	for (int i = 0; i < match_counter; i++) {
 		int flag = 0;
 		char command[BUFSIZ] = "gcc ";
@@ -40,13 +40,12 @@ int main() {
 			
 			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {
 				flag = 1;
-				system("make clean");
-				system("make lisp_test");
+				system("make clean lisp_test");
 				//strncat(command, " -DLISP=1 ", 9);
 			}
 
 			strncat(command, " -L./ -l:build/libgc.a", 23);
-			strncat(command, " -o build/test -w", 18);
+			strncat(command, " -o test -w", 18);
 			printf("Command %s\n", command);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
@@ -59,7 +58,10 @@ int main() {
 				system("make clean");
 				system("make");
 			}
-			execl("./build/test", "./build/test", (char*)NULL);
+			if (execl("./test", "./test", (char*)NULL) == -1) {
+                perror("execl() failed");
+                exit(EXIT_FAILURE);
+            }
 		}
 		else {
 			int status = 0;
@@ -88,7 +90,7 @@ int main() {
             
 		}
 	}
-	system("rm build/test");
+	system("rm test");
 	closedir(directory);
 
 	fprintf(stderr, "\nENDED SUCCESSFULLY\n");
