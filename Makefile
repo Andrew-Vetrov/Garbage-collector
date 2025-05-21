@@ -1,7 +1,7 @@
 LIB_NAME = libgc.so
 
 CC = gcc
-CFLAGS = -w -pthread -fPIC
+CFLAGS = -Wl,--no-undefined -w -pthread -fPIC
 LDFLAGS = -shared
 
 SRC_DIRS = allocator marker logging mt-safety sweeper memops
