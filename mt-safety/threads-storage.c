@@ -12,8 +12,6 @@ pthread_mutex_t storage_lock =
 
 static volatile unsigned int thread_count = 0;
 
-pthread_mutex_t *get_storage_lock() { return &storage_lock; }
-
 StorageCell *create_cell_for_thread() {
     StorageCell *new_node = (StorageCell *)calloc(1, sizeof(StorageCell));
 
@@ -75,9 +73,9 @@ unsigned int get_threads_storage_size() {
     return result;
 }
 
-// Start of storage traversing API
+// Start of storage multithread UNSAFE traversing API
 
-StorageCell *current_node_of_traversing = NULL;  // bad for mutlithread reading
+StorageCell *current_node_of_traversing = NULL;
 
 void start_threads_storage_traverse() {
     current_node_of_traversing = created_threads_list;

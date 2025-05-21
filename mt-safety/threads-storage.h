@@ -6,7 +6,6 @@ typedef struct StorageCell_t {
     struct StorageCell_t *next, *prev;
 } StorageCell;
 
-pthread_mutex_t* get_storage_lock();
 StorageCell* create_cell_for_thread();
 void destroy_cell(StorageCell* cell);
 __attribute__((destructor)) void __destroy_storage();
