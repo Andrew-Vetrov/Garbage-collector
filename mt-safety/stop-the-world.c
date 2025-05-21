@@ -28,8 +28,6 @@ void handler(int sig) {
 
 __attribute__((constructor))
 void __init_stop_the_world() {
-    StorageCell* thread_node = create_cell_for_thread();
-    thread_node->thread = pthread_self();
     sigfillset(&all_sig_set);
     sem_init(&waiting_point, 0, 0);
     signal(SIG_TO_STOP, handler);

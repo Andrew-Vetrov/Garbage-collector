@@ -22,6 +22,7 @@ static pthread_barrier_t signal_barrier;
 static pthread_mutex_t service_thrd_call_lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_spinlock_t signal_delivery_lock;
 static bool is_gc_called = false;
+static bool kill_service_thread = false;
 
 void *service_thread_routine(void *);
 
@@ -32,6 +33,8 @@ __attribute__((constructor)) void __init_mt_safety() {
 }
 
 __attribute__((destructor)) void __destroy_mt_safety() {
+    kill_service_thread = true;
+    pthread_barrier_wait(&signal_barrier);
     pthread_barrier_destroy(&signal_barrier);
     pthread_mutex_destroy(&service_thrd_call_lock);
     pthread_spin_destroy(&signal_delivery_lock);
@@ -52,8 +55,11 @@ void *service_thread_routine(void *) {
     while (1) {
         pthread_spin_lock(&signal_delivery_lock);
         pthread_barrier_wait(&signal_barrier);
-        pthread_spin_unlock(&signal_delivery_lock);
+        if (kill_service_thread) {
+            return NULL;
+        }
         lock_allocation();
+        pthread_spin_unlock(&signal_delivery_lock);
         stop_the_world();
         mark();
         sweep();
