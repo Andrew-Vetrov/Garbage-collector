@@ -95,14 +95,6 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
     closure();
 }
 
-void mark() {
-    log(MARK, START);
-    threads_stacks_marking();
-    segment_traverse((size_t)&__data_start, (size_t)&edata);
-    segment_traverse((size_t)&__bss_start, (size_t)&end);
-    log(MARK, OK);
-}
-
 void threads_stacks_marking() {
     pthread_attr_t thread_attr;
     void* thread_stack_addr;
@@ -120,4 +112,12 @@ void threads_stacks_marking() {
     }
 
     pthread_mutex_unlock(get_storage_lock());
+}
+
+void mark() {
+    log(MARK, START);
+    threads_stacks_marking();
+    segment_traverse((size_t)&__data_start, (size_t)&edata);
+    segment_traverse((size_t)&__bss_start, (size_t)&end);
+    log(MARK, OK);
 }
