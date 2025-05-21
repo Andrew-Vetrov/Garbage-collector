@@ -9,3 +9,5 @@ int __wrap_pthread_create(pthread_t *__restrict__ thread,
 __attribute__((constructor)) void __init_stop_the_world();
 
 void call_service_thread();
+
+__attribute__((constructor)) void __add_main_thread_to_storage();

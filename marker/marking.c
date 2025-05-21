@@ -95,34 +95,32 @@ void segment_traverse(size_t segment_start, size_t segment_end) {
     closure();
 }
 
-void mark() {
-    log(MARK, START);
-    push_registers_to_stack();
-    asm volatile("mov %%rsp, %0" : "=r"(end_rsp_value));
-    //segment_traverse(end_rsp_value, start_rsp_value);
-    pthread_attr_t attr;
-    void* stack_addr;
-    size_t stack_size;
+void threads_stacks_marking() {
+    pthread_attr_t thread_attr;
+    void* thread_stack_addr;
+    size_t thread_stack_size;
 
     pthread_mutex_lock(get_storage_lock());
     start_threads_storage_traverse();
-    pthread_t now_thread = get_next_thread();
-    /*if (now_thread == 0) {
-        pthread_getattr_np(pthread_self(), &attr);
-        pthread_attr_getstack(&attr, &stack_addr, &stack_size);
-        segment_traverse(stack_addr, (char*)stack_addr + stack_size);
-    }
-    else {*/
-        while (now_thread != 0) {
-            pthread_getattr_np(now_thread, &attr);
-            pthread_attr_getstack(&attr, &stack_addr, &stack_size);
-            segment_traverse(stack_addr, (char*)stack_addr + stack_size);
-            now_thread = get_next_thread();
-        }
+    pthread_t now_thread;
 
-    /*}*/
+    while (!is_storage_empty()) {
+        now_thread = get_next_thread();
+        pthread_getattr_np(now_thread, &thread_attr);
+        pthread_attr_getstack(&thread_attr, &thread_stack_addr, &thread_stack_size);
+        segment_traverse((size_t)thread_stack_addr, (size_t)thread_stack_addr + thread_stack_size);
+    }
+
     pthread_mutex_unlock(get_storage_lock());
 
+    segment_traverse((size_t)&__data_start, (size_t)&edata);
+    segment_traverse((size_t)&__bss_start, (size_t)&end);
+    log(MARK, OK);
+}
+
+void mark() {
+    log(MARK, START);
+    threads_stacks_marking();
     segment_traverse((size_t)&__data_start, (size_t)&edata);
     segment_traverse((size_t)&__bss_start, (size_t)&end);
     log(MARK, OK);

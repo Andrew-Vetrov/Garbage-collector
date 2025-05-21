@@ -2,6 +2,7 @@
 #include <semaphore.h>
 #include <signal.h>
 
+#include "../allocator/small-allocator.h"
 #include "../marker/marking.h"
 #include "mt-safety-control.h"
 #include "threads-storage.h"
@@ -18,6 +19,7 @@ void handler(int sig) {
     }
     sigset_t old_sigset;
     pthread_sigmask(SIG_SETMASK, &all_sig_set, &old_sigset);
+    clear_cache();
     push_registers_to_stack();
     pthread_barrier_wait(&barrier);
     sem_wait(&waiting_point);
@@ -41,7 +43,7 @@ void stop_the_world() {
     threads_stopped = get_threads_storage_size();
     pthread_barrier_init(&barrier, NULL, threads_stopped + 1);
     start_threads_storage_traverse();
-    while (!is_traversing_ended()) {
+    while (!is_storage_empty()) {
         pthread_kill(get_next_thread(), SIG_TO_STOP);
     }
     pthread_barrier_wait(&barrier);

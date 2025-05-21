@@ -14,4 +14,4 @@ unsigned int get_threads_storage_size();
 
 void start_threads_storage_traverse();
 pthread_t get_next_thread();
-bool is_traversing_ended();
+bool is_storage_empty();

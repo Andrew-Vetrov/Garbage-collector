@@ -94,6 +94,6 @@ pthread_t get_next_thread() {
     return result;
 }
 
-bool is_traversing_ended() {
+bool is_storage_empty() {
     return (current_node_of_traversing == NULL) ? true : false;
 }

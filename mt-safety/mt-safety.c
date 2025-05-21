@@ -5,8 +5,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "threads-storage.h"
 #include "stop-the-world.h"
+#include "threads-storage.h"
 
 typedef struct {
     void *(*user_routine)(void *);
@@ -50,6 +50,13 @@ void service_thread_routine() {
     }
     pthread_mutex_unlock(&gc_mutex);
     return NULL;
+}
+
+__attribute__((constructor))
+void __add_main_thread_to_storage() {
+    pthread_t thread_id = pthread_self();
+    StorageCell* thread_node = create_cell_for_thread();
+    thread_node->thread = thread_id;
 }
 
 void *wrap_user_routine(void *arg) {
