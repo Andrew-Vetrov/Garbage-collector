@@ -17,3 +17,7 @@ __attribute__((constructor)) void __init_allocator();
 __attribute__((destructor)) void __destroy_allocator();
 
 size_t allocate_new_object(size_t size);
+
+void lock_allocation();
+
+void unlock_allocation();

@@ -15,7 +15,6 @@ size_t gc_malloc(size_t size) {
     res = allocate_new_object(size);
     if (res == NULL) {
         call_service_thread();
-        sleep(1);
         res = allocate_new_object(size);
     }
     return res;
