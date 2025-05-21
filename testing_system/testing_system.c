@@ -34,7 +34,7 @@ int main() {
 		fprintf(stderr, "\nTesting %s\n", matched_names[i]);
 		pid_t pid = fork();
 		if (pid == 0) {
-			char command[BUFSIZ] = "gcc -pthread ";
+			char command[BUFSIZ] = "gcc -pthread -Wl,--no-undefined ";
 			strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
 			
 			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {
@@ -43,7 +43,7 @@ int main() {
 				//strncat(command, " -DLISP=1 ", 9);
 			}
 
-			strncat(command, " -L./ -l:build/libgc.a", 23);
+			strncat(command, " -L./ -l:build/libgc.so", 24);
 			strncat(command, " -o test -w", 18);
 			printf("Command %s\n", command);
 			compilation_result = system(command);

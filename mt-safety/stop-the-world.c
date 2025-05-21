@@ -40,7 +40,7 @@ void stop_the_world() {
     threads_stopped = get_threads_storage_size();
     pthread_barrier_init(&barrier, NULL, threads_stopped + 1);
     start_threads_storage_traverse();
-    while (!is_traversing_ended()) {
+    while (!is_storage_empty()) {
         pthread_kill(get_next_thread(), SIG_TO_STOP);
     }
     pthread_barrier_wait(&barrier);

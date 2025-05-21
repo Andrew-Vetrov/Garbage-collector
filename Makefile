@@ -1,8 +1,8 @@
-LIB_NAME = libgc.a
+LIB_NAME = libgc.so
 
 CC = gcc
-
-CFLAGS = -w -pthread
+CFLAGS = -w -pthread -fPIC
+LDFLAGS = -shared
 
 SRC_DIRS = allocator marker logging mt-safety sweeper memops
 SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) gc.c
@@ -14,8 +14,8 @@ BUILD_DIR = build
 all: $(LIB_NAME)
 
 $(LIB_NAME): $(OBJ)
-	ar rcs ${BUILD_DIR}/$@ $^
-
+	$(CC) $(LDFLAGS) -o $(BUILD_DIR)/$@ $^
+	
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	$(CC) -c $< $(CFLAGS) -o $@

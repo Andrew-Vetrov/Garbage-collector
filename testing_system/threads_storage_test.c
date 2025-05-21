@@ -53,7 +53,7 @@ int main() {
     int threads_proccessed = 0;
     bool is_main_catched = false;
 
-    while (!is_traversing_ended()) {
+    while (!is_storage_empty()) {
         pthread_t thread = get_next_thread();
         assert(++threads_proccessed <= ALL_THRDS_COUNT);
         if (pthread_equal(thread, pthread_self())) {
@@ -87,7 +87,7 @@ int main() {
     start_threads_storage_traverse();
     pthread_t main_thrd = get_next_thread();
     assert(pthread_equal(main_thrd, pthread_self()));
-    assert(is_traversing_ended() == true);
+    assert(is_storage_empty() == true);
 
     pthread_mutex_unlock(get_storage_lock());
     pthread_barrier_destroy(&barrier);
