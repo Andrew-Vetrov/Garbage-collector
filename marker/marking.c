@@ -118,3 +118,11 @@ void mark() {
     segment_traverse((size_t)&__bss_start, (size_t)&end);
     log(MARK, OK);
 }
+
+void mark() {
+    log(MARK, START);
+    threads_stacks_marking();
+    segment_traverse((size_t)&__data_start, (size_t)&edata);
+    segment_traverse((size_t)&__bss_start, (size_t)&end);
+    log(MARK, OK);
+}
