@@ -38,7 +38,7 @@ void addNeighbor(Node* node, Node* neighbor) {
 }
 
 void createBigGraph() {
-    printf("Creating big graph (~1 GB)...\n");
+    printf("Creating big graph (~256 Mb)...\n");
     bigGraph = createNode(0);
 
     int nodeCount = BIG_GRAPH_SIZE / sizeof(Node);

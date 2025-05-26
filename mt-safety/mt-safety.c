@@ -5,6 +5,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "../allocator/allocator.h"
+#include "../marker/marking.h"
+#include "../sweeper/sweep.h"
 #include "stop-the-world.h"
 #include "threads-storage.h"
 
@@ -14,10 +17,64 @@ typedef struct {
     StorageCell *thread_node;
 } WrapperArgs;
 
-__attribute__((constructor))
-void __add_main_thread_to_storage() {
+pthread_t service_thread;
+static pthread_barrier_t signal_barrier;
+static pthread_mutex_t service_thrd_call_lock = PTHREAD_MUTEX_INITIALIZER;
+pthread_spinlock_t signal_delivery_lock;
+static bool is_gc_called = false;
+static bool kill_service_thread = false;
+
+void *service_thread_routine(void *);
+
+__attribute__((constructor)) void __init_mt_safety() {
+    pthread_spin_init(&signal_delivery_lock, 0);
+    pthread_barrier_init(&signal_barrier, NULL, 2);
+    pthread_create(&service_thread, NULL, service_thread_routine, NULL);
+}
+
+__attribute__((destructor)) void __destroy_mt_safety() {
+    kill_service_thread = true;
+    pthread_barrier_wait(&signal_barrier);
+    pthread_barrier_destroy(&signal_barrier);
+    pthread_mutex_destroy(&service_thrd_call_lock);
+    pthread_spin_destroy(&signal_delivery_lock);
+}
+
+void call_service_thread() {
+    pthread_mutex_lock(&service_thrd_call_lock);
+    if (!is_gc_called) {
+        is_gc_called = true;
+        pthread_barrier_wait(&signal_barrier);
+        pthread_spin_lock(&signal_delivery_lock);
+        pthread_spin_unlock(&signal_delivery_lock);
+    }
+    pthread_mutex_unlock(&service_thrd_call_lock);
+}
+
+void *service_thread_routine(void *) {
+    while (1) {
+        pthread_spin_lock(&signal_delivery_lock);
+        pthread_barrier_wait(&signal_barrier);
+        if (kill_service_thread) {
+            return NULL;
+        }
+        lock_allocation();
+        pthread_spin_unlock(&signal_delivery_lock);
+        stop_the_world();
+        mark();
+        sweep();
+        start_the_world();
+        pthread_mutex_lock(&service_thrd_call_lock);
+        is_gc_called = false;
+        pthread_mutex_unlock(&service_thrd_call_lock);
+        unlock_allocation();
+    }
+    return NULL;
+}
+
+__attribute__((constructor)) void __add_main_thread_to_storage() {
     pthread_t thread_id = pthread_self();
-    StorageCell* thread_node = create_cell_for_thread();
+    StorageCell *thread_node = create_cell_for_thread();
     thread_node->thread = thread_id;
 }
 
