@@ -1,7 +1,6 @@
 #include "small-allocator.h"
 
 #include <assert.h>
-#include <bits/pthreadtypes.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
