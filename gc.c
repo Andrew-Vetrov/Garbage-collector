@@ -23,7 +23,7 @@ size_t gc_malloc(size_t size) {
 }
 
 size_t gc_calloc(size_t nelem, size_t elsize) {
-    if (elsize > SIZE_MAX / nelem) {
+    if (nelem != 0 && elsize > SIZE_MAX / nelem) {
         return NULL;
     }
 
