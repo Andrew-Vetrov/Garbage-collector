@@ -110,7 +110,7 @@ static YLispValue deferred_call;
 
 static YLispValue *ylisp_value(YLispValueType type)
 {
-	YLispValue *result = gc_calloc(sizeof(YLispValue));
+	YLispValue *result = gc_calloc(1, sizeof(YLispValue));
 	assert(result != NULL);
 	result->type = type;
 	result->next = values; values = result;
