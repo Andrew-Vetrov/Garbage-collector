@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fnmatch.h>
-#include <signal.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -16,7 +15,6 @@ int main() {
 	int compilation_result;
 	int runtime_result;
 	directory = opendir("./testing_system");
-	char OBJ[] = " ./allocator/allocator.o ./scanner/marking.o ./scanner/stack.o ./logging/log.o";
 	while (1) {
 		inp = readdir(directory);
 		if (inp == NULL) {
@@ -30,48 +28,64 @@ int main() {
 			match_counter++;
 		}
 	}
-	printf("CONTER %d\n", match_counter);
+	printf("Tests count : %d\n", match_counter);
 	for (int i = 0; i < match_counter; i++) {
 		int flag = 0;
-		char command[BUFSIZ] = "gcc ";
 		fprintf(stderr, "\nTesting %s\n", matched_names[i]);
 		pid_t pid = fork();
 		if (pid == 0) {
-			char command[BUFSIZ] = "gcc ";
+			char command[BUFSIZ] = "gcc -pthread -Wl,--no-undefined ";
 			strncat(command, matched_names[i], strlen(matched_names[i]) + 1);
 			
 			if (strcmp(matched_names[i], "./testing_system/lisp_test.c") == 0) {
 				flag = 1;
-				system("make clean");
-				system("make -f testing_system/Makefile1");
+				system("make lisp_test");
 				//strncat(command, " -DLISP=1 ", 9);
 			}
 
-			strncat(command, " -L./ -l:lib.a", 22);
-			strncat(command, " -o test -w", 13);
+			strncat(command, " -L./ -l:build/libgc.so", 24);
+			strncat(command, " -o test -w", 18);
 			printf("Command %s\n", command);
 			compilation_result = system(command);
 			if (compilation_result == 256) {
 				fprintf(stderr, "\033[1;41mCompilation failed\033[0m\n");
 				return 1;
 			}
-			fprintf(stderr, "\033[1;42mCompiled successfuly\033[0m\n");
+			fprintf(stderr, "\033[1;42mCompiled successfully\033[0m\n");
 			//alarm(10);
 			if (flag) {
-				system("make clean");
-				system("make");
+				system("make clean all");
 			}
-			execl("./test", "./test", (char*)NULL);
+			if (execl("./test", "./test", (char*)NULL) == -1) {
+                perror("execl() failed");
+                exit(EXIT_FAILURE);
+            }
 		}
 		else {
-			int status;
+			int status = 0;
 			waitpid(pid, &status, 0);
-			if (WEXITSTATUS(status) == 0) {
-				fprintf(stderr, "\n\033[1;42mExecuted successfuly\033[0m\n");
+			int signal = WTERMSIG(status);
+			if (signal == 10) {
+				fprintf(stderr, "\n\033[1;42mExecuted successfully\033[0m\n");
 				continue;
 			}
-			fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
-			return 1;
+			if (WIFEXITED(status)) {
+                if (WEXITSTATUS(status) == 0) {
+                    fprintf(stderr, "\n\033[1;42mExecuted successfully\033[0m\n");
+                    continue;
+                } else {
+                    fprintf(stderr, "\n\033[1;41mAn error occured while runtime\033[0m\n");
+                    return 1;           
+                }
+            } else if (WIFSIGNALED(status)) {
+                int signal = WTERMSIG(status);
+                fprintf(stderr, "\n\033[1;41mProcess terminated by signal %d\033[0m\n", signal);
+                return 1;
+            } else {
+                fprintf(stderr, "\n\033[1;41mAn unknown error occurred\033[0m\n");
+                return 1;
+            }
+            
 		}
 	}
 	system("rm test");

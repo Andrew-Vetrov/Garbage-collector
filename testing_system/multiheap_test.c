@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../allocator/object.h"
 #include "../allocator/allocator.h"
 #include "../gc.h"
-#include "../scanner/marking.h"
+#include "../marker/marking.h"
+#include "../sweeper/sweep.h"
 
 typedef struct Node_t {
     struct Node_t **left_array, **right_array;
@@ -35,7 +37,7 @@ void multiheap_relation_test() {
         }
     }
 
-    full_marking();
+    mark();
 
     Object object;
     assert(get_object((size_t)root_array, &object) == 0);
@@ -65,7 +67,7 @@ void multiheap_relation_test() {
     }
 
     sweep();
-    full_marking();
+    mark();
 
     for (size_t i = 1; i < MAX_OBJECT_SIZE + 1; i += 2) {
         assert(get_object((size_t)root_array[i], &object) == 0);

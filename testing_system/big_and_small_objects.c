@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../allocator/allocator.h"
+#include "../allocator/object.h"
 #include "../gc.h"
-#include "../scanner/marking.h"
+#include "../marker/marking.h"
 
 #define SIZE 1000
 
@@ -26,7 +26,7 @@ int main() {
         assert(array[i] != NULL);
     }
 
-    full_marking();
+    mark();
 
     assert(is_marked((Object)array) == true);
 

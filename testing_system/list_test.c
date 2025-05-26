@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include "../gc.h"
 // ��������� ���� ����������� ������
@@ -11,6 +12,7 @@ typedef struct Node {
 
 Node* create_node(int data) {
     Node* new_node = (Node*)gc_malloc(sizeof(Node));
+    assert(new_node != NULL);
     new_node->data = data;
     new_node->prev = NULL;
     new_node->next = NULL;

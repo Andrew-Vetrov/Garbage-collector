@@ -27,7 +27,7 @@ CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <string.h>
 #include <assert.h>
 #include <dirent.h>
-#include "../allocator/allocator.h"
+#include "../gc.h"
 
 //#define GC_DEBUG
 
@@ -110,7 +110,7 @@ static YLispValue deferred_call;
 
 static YLispValue *ylisp_value(YLispValueType type)
 {
-	YLispValue *result = calloc(1, sizeof(YLispValue));
+	YLispValue *result = gc_calloc(1, sizeof(YLispValue));
 	assert(result != NULL);
 	result->type = type;
 	result->next = values; values = result;
@@ -295,7 +295,7 @@ YLispValue *ylisp_symbol_for_name(const char *name, size_t name_len)
 	result = ylisp_value(YLISP_SYMBOL);
 	result->v.symname = string_from_data(name, name_len);
 
-	symbols = realloc(symbols, sizeof(*symbols) * (num_symbols + 1));
+	symbols = gc_realloc(symbols, sizeof(*symbols) * (num_symbols + 1));
 	assert(symbols != NULL);
 	return symbols[num_symbols++] = result;
 }
@@ -769,7 +769,7 @@ static char *read_file(char *filename)
 	unsigned int file_size;
 
 
-	FILE *fs = fopen("./testing_system/file", "r");
+	FILE *fs = fopen("./testing_system/test_lisp_program", "r");
 	if (fs == NULL) {
 		perror("fopen");
 		exit(-1);
@@ -818,7 +818,7 @@ int main(int argc, char *argv[])
 
 	process_file("stdlib.l");
 	for (int i = 0; i < size; i++) {
-		process_file("file");
+		process_file("test_lisp_program");
 		//printf("loop %d\n", i);
 	}
 	return 0;

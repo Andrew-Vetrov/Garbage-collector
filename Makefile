@@ -1,23 +1,36 @@
-
-LIB_NAME = lib.a
+LIB_NAME = libgc.so
 
 CC = gcc
+CFLAGS = -Wl,--no-undefined -w -pthread -fPIC
+LDFLAGS = -shared
 
-CFLAGS = -w
+SRC_DIRS = allocator marker logging mt-safety sweeper memops
+SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) gc.c
 
-SRC = allocator/allocator.c scanner/marking.c scanner/stack.c logging/log.c
-
-OBJ = $(SRC:.c=.o)
+OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC))
 
 BUILD_DIR = build
 
 all: $(LIB_NAME)
 
 $(LIB_NAME): $(OBJ)
-	ar rcs $@ $^
-
-%.o: %.c
-	$(CC) -c $^ $(CFLAGS) -o $@
+	$(CC) $(LDFLAGS) -o $(BUILD_DIR)/$@ $^
+	
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) -c $< $(CFLAGS) -o $@
 
 clean:
-	rm $(OBJ) $(LIB_NAME)
+	rm -rf $(BUILD_DIR)
+
+lisp_test: CFLAGS += -DDEBUG -DHEAP_SIZE=4718592 # 4.5 MB
+lisp_test: clean all
+
+run_tests: clean all
+	gcc testing_system/testing_system.c -o ${BUILD_DIR}/run_tests -DDEBUG && ./${BUILD_DIR}/run_tests
+
+logs: CFLAGS += -DLOG -DFL
+logs: clean all
+
+debug: CFLAGS += -g -DDEBUG
+debug: clean all

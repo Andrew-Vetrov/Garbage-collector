@@ -1,6 +1,8 @@
 #include <stdlib.h>
 
 size_t gc_malloc(size_t size);
+size_t gc_calloc(size_t nelem, size_t elsize);
+size_t gc_realloc(void* memblock, size_t size);
 
 __attribute__((constructor))
 void __init_allocator();
